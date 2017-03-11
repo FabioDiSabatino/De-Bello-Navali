@@ -1,0 +1,46 @@
+
+html {
+    height: 100%;
+}
+body {
+    height: 100%;
+}
+
+.columnFleet{
+    border:solid 3px;
+    border-color: #2e6da4;
+}
+
+.columnGrid{
+    border-color: #ac2925;
+    border:solid 3px;
+}
+
+.contentMain{
+    padding: 0px;
+}
+.navHeader{
+    margin-bottom: 0px !important;
+}
+.contentRow{
+    height: calc(100% - 50px);
+    margin: 0px;
+}
+.contentBox{
+        height: 100%;
+}
+
+.gridRow{
+    height:80%;
+}
+
+.timerRow{
+    height: 20%;
+    border: solid 3px;
+    border-color: #ac2925;
+}
+
+
+
+
+
