@@ -7,13 +7,13 @@ body {
 }
 
 .columnFleet{
-    border:solid 3px;
-    border-color: #2e6da4;
+    border:solid 1px;
+    padding: 0px;
 }
 
 .columnGrid{
     border-color: #ac2925;
-    border:solid 3px;
+    border:solid 1px;
 }
 
 .contentMain{
@@ -36,8 +36,28 @@ body {
 
 .timerRow{
     height: 20%;
-    border: solid 3px;
-    border-color: #ac2925;
+    border: solid 1px;
+}
+
+.flagBanner{
+    height: 20%;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    border:none;
+}
+.flagImg{
+    width:100%;
+    height: 110px;
+}
+.fleetName{
+    text-align: center;
+    font-family: Serif;
+    font-size: 1.2em;
+    height: 20px;
+}
+.listShip{
+    height: 80%;
 }
 
 
