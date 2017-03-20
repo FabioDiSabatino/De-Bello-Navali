@@ -1,0 +1,39 @@
+.shipCard{
+    margin: 0px;
+ border: 1px solid;
+    border-color: #0f0f0f;
+}
+.shipName{
+    font-family: fantasy;
+    font-size: large;
+    text-align: center;
+    height:8%;
+    margin-top: 1%;
+    margin-bottom: 2%;
+
+}
+.shipInfo{
+  height: 100%;
+}
+.shipImgContainer{
+    height: 60%;
+}
+.shipImg{
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.shipWeightContainer{
+    height: 20%;
+}
+
+.shipWeightImg{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.shipWeightText{
+    text-align: center;
+}
