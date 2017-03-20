@@ -3,8 +3,8 @@
  */
 
 metaData={
-    fleet:"Roman's Fleet",
-    flagBanner:"../placeShipUI/img/roman/romanflag.png",
+    fleetName:"Roman's Fleet",
+    flagCivilitazion:"../placeShipUI/img/roman/romanflag.png",
     numberShip:3,
     ship:[
         ship2='Bireme',

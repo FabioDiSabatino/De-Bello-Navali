@@ -1,4 +1,4 @@
-<div class="row shipCard">
+<div class="row shipCard panel panel-default ">
 <div class="shipName">
     {{shipName}}
      <img class="shipInfo pull-right" src="../placeShipUI/img/info.png">

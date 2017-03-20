@@ -12,6 +12,7 @@
 
         setFlagBanner();
         setShipList();
+        setGridZone();
 
 
 
@@ -23,8 +24,9 @@
 }());
 
 var setFlagBanner=function () {
-    $('.flagBanner').append("<p class='fleetName '>"+metaData.fleet+"</p>");
-    $('.flagBanner').append("<img class='flagImg img-circle' src="+metaData.flagBanner+">");
+    $('.navbar-brand').append(" <img class='flagCivilization' alt='Brand' src="+metaData.flagCivilitazion+">");
+    $('.navbar-header').append("<p class='fleetName navbar-text'>"+metaData.fleetName+"</p>");
+
 }
 
 var setShipList= function () {
@@ -51,6 +53,19 @@ var setShipList= function () {
 
 
             });
+
+}
+
+var setGridZone=function () {
+
+    var heightText=$('.fleetWeight').height();
+    var padding=(heightText-20)/20;
+    $('.weightProgress').css("padding-top",padding);
+    console.log("height:"+heightText);
+
+    console.log("padding:"+padding);
+
+
 
 
 }
