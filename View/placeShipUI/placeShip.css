@@ -36,11 +36,11 @@ body {
 }
 
 .grid{
-    height:80%;
+    height:88%;
 }
 
 .timerRow{
-    height: 20%;
+    height: 12%;
     border: solid 1px;
 }
 
@@ -87,29 +87,101 @@ text-align: center;
     padding-bottom: 10px;
     padding-left: 5%;
     padding-right: 5%;
+    padding-top: 10px;
 
 }
 .rowGrid{
-    border: 1px solid;
-    border-bottom: 0px;
     margin: 0px;
     height: 12.5%;
 }
 .colGrid{
     border: 1px solid;
     border-right: 0px;
+    border-bottom: 0px;
     width: 12.5%;
     height:100%;
     padding: 0px;
+
 }
 .fleetWeightContainer{
     margin:0px;
     padding-left: 5%;
+    padding-right: 5%;
     height: 10%;
 }
 
 .iconWeight{
     padding: 0px;
+}
+
+.progress{
+    margin-top: 15px;
+    margin-bottom: 0px;
+}
+
+.lastRow{
+    border-bottom: 1px solid;
+}
+.lastColumn{
+    border-right: 1px solid;
+}
+
+.randomButton{
+    text-align: center;
+    padding-top: 15px;
+}
+.timer{
+    zoom: 0.5;
+    -moz-transform: scale(0.5);
+    margin: 0px !important;
+text-align: start !important;
+
+}
+.textTimer{
+    font-size: xx-large;
+}
+.flip-clock-label{
+    font-size: large;
+}
+.timerZoneColumn{
+    padding: 0px;
+    margin: 0px;
+}
+.surrender{
+margin-left: 10px;
+    margin-top: 25px;
+}
+.startBattle{
+    margin-right: 10px;
+    margin-top: 25px;
+
+}
+@media screen and (max-width: 805px){
+    .timer{
+        margin-left: 8% !important;
+    }
+    .textTimer{
+        margin-left: 35%;
+    }
+
+
+}
+
+@media screen and (min-width: 806px){
+    .timer{
+        margin-left: 16% !important;
+    }
+    .textTimer{
+        margin-left: 20%;
+    }
+}
+
+
+@media screen and (min-width: 1035px){
+
+    .textTimer{
+        margin-left: 16%;
+    }
 }
 
 
