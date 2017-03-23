@@ -8,9 +8,15 @@
 
 namespace Model;
 
+use Model\Weapon\Weapon;
+
 
 abstract class WeaponFactory {
 
+    function createSimpleWeapon() { return new Weapon(1); } // dovrà essere l'arma da 1
+
     abstract function createWeaponShip2();
     abstract function createWeaponShip3();
+    abstract function createWeaponShip4();
+
 }

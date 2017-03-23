@@ -8,7 +8,23 @@
 
 namespace Model\Weapon;
 
+use Model\WeaponFactory;
 
-class BretoniWeaponFactory {
 
+class BretoniWeaponFactory extends WeaponFactory {
+
+    function createWeaponShip2() {
+
+        // TODO: Implement createWeaponShip2() method.
+    }
+
+    function createWeaponShip3() {
+
+        // TODO: Implement createWeaponShip3() method.
+    }
+
+    function createWeaponShip4() {
+
+        // TODO: Implement createWeaponShip4() method.
+    }
 }

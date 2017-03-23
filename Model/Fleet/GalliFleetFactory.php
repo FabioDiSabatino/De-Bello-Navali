@@ -6,32 +6,25 @@
  * Time: 22.41
  */
 
-namespace Model;
+namespace Model\Fleet;
+
+use Model\FleetFactory;
 
 
 class GalliFleetFactory extends FleetFactory {
 
-    /**
-     * @return mixed
-     */
-    protected function createShip2()
-    {
+    protected function createShip2() {
+
         // TODO: Implement createShip2() method.
     }
 
-    /**
-     * @return mixed
-     */
-    protected function createShip3()
-    {
+    protected function createShip3() {
+
         // TODO: Implement createShip3() method.
     }
 
-    /**
-     * @return mixed
-     */
-    protected function createShip4()
-    {
+    protected function createShip4() {
+
         // TODO: Implement createShip4() method.
     }
 }

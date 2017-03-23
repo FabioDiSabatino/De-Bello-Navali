@@ -11,4 +11,8 @@ namespace Model\Weapon;
 
 class Weapon {
 
+    public function __construct($i) {
+        return "ciao!";
+    }
+
 }

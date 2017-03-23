@@ -11,66 +11,44 @@ namespace Model;
 
 class Ship {
 
-    private $shipID = null;
-    private $position = null;
+    private $shipID = null;         // Identifies the single Ship Object
+    private $position = null;       // The position of the upper-left most Square of the Ship
     private $orientation = null;
 
-    /**
-     * Ship constructor.
-     * @param null $position
-     * @param null $orientation
-     */
-    public function __construct($position, $orientation)
-    {
+
+    public function __construct($position, $orientation) {
+
         $this->position = $position;
         $this->orientation = $orientation;
     }
 
-    /**
-     * @return null
-     */
-    public function getShipID()
-    {
+    public function getShipID() {
+
         return $this->shipID;
     }
 
-    /**
-     * @param null $shipID
-     */
-    public function setShipID($shipID)
-    {
+    public function setShipID($shipID) {
+
         $this->shipID = $shipID;
     }
 
-    /**
-     * @return null
-     */
-    public function getPosition()
-    {
+    public function getPosition() {
+
         return $this->position;
     }
 
-    /**
-     * @param null $position
-     */
-    public function setPosition($position)
-    {
+    public function setPosition($position) {
+
         $this->position = $position;
     }
 
-    /**
-     * @return null
-     */
-    public function getOrientation()
-    {
+    public function getOrientation() {
+
         return $this->orientation;
     }
 
-    /**
-     * @param null $orientation
-     */
-    public function setOrientation($orientation)
-    {
+    public function setOrientation($orientation) {
+
         $this->orientation = $orientation;
     }
 
