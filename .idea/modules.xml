@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/De Bello Navali.iml" filepath="$PROJECT_DIR$/De Bello Navali.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../ProvaJSON/.idea/ProvaJSON.iml" filepath="$PROJECT_DIR$/../ProvaJSON/.idea/ProvaJSON.iml" />
+    </modules>
+  </component>
+</project>
