@@ -8,60 +8,96 @@
 
 namespace Model;
 
+use Model\Fleet\Ship;
+
 
 class Battlefield {
 
-    private $idField;
+    private $fleet;
+    private $field;
     private $fleetWeight;
-    private $squareList;
+    private $shipWeight;    // ?
+
+    /* Funzioni di classe */
 
     /**
-     * @return mixed
+     * @param int $shipWeight
+     * @return boolean
      */
-    public function getIdField()
-    {
-        return $this->idField;
+    public function isPlaceable($shipWeight) {
+
+        return ($this->fleetWeight >= $shipWeight);
     }
 
     /**
-     * @param mixed $idField
+     * @param string $shipName
+     * @param Square $position
+     * @param int $orientation
+     * @return int $id
      */
-    public function setIdField($idField)
-    {
-        $this->idField = $idField;
+    public function placeShip($shipName, $position, $orientation) {
+
+        //TODO: implementare placeShip
+        $id = 0;
+        return $id;
+    }
+
+    public function updateFleetWeight() {
+
     }
 
     /**
-     * @return mixed
+     * @param int $shipId
+     * @param int $weaponID
+     * @param Square $position
      */
-    public function getFleetWeight()
-    {
-        return $this->fleetWeight;
+    public function attack($shipId, $weaponID, $position) {
+
     }
 
     /**
-     * @param mixed $fleetWeight
+     * @param Square $position
      */
-    public function setFleetWeight($fleetWeight)
-    {
-        $this->fleetWeight = $fleetWeight;
+    public function receiveAttack($position) {
+        /*TODO: questa classe dovrà prendere come parametro una classe che modella
+        il RANGE dell'arma o comunque bisogna trovare un modo di codificare il range */
     }
-
+    /* Getter */
     /**
-     * @return mixed
+     * @return Ship[]
      */
-    public function getSquareList()
-    {
-        return $this->squareList;
-    }
-
+    public function getFleet() { return $this->fleet; }
     /**
-     * @param mixed $squareList
+     * @return Square[]
      */
-    public function setSquareList($squareList)
-    {
-        $this->squareList = $squareList;
-    }
+    public function getField() { return $this->field;}
+    /**
+     * @return int
+     */
+    public function getFleetWeight() { return $this->fleetWeight; }
+    /**
+     * @return int[]
+     */
+    public function getShipWeight() { return $this->shipWeight; }
+
+    /* Setter */
+    /**
+     * @param Ship[] $fleet
+     */
+    public function setFleet($fleet) { $this->fleet = $fleet; }
+    /**
+     * @param Square[] $field
+     */
+    public function setField($field) { $this->field = $field; }
+    /**
+     * @param int $fleetWeight
+     */
+    public function setFleetWeight($fleetWeight) { $this->fleetWeight = $fleetWeight; }
+    /**
+     * @param int[] $shipWeight
+     */
+    public function setShipWeight($shipWeight) { $this->shipWeight = $shipWeight; }
+
 
 
 }

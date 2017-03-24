@@ -8,8 +8,6 @@
 
 namespace Model\Fleet;
 
-use Model\FleetFactory;
-
 
 class BretoniFleetFactory extends FleetFactory {
 

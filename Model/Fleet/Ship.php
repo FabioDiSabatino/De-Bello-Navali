@@ -6,7 +6,7 @@
  * Time: 22.55
  */
 
-namespace Model;
+namespace Model\Fleet;
 
 
 class Ship {

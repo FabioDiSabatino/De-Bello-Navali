@@ -8,8 +8,6 @@
 
 namespace Model\Weapon;
 
-use Model\WeaponFactory;
-
 
 class GalliWeaponFactory extends WeaponFactory {
 

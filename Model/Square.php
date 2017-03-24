@@ -6,7 +6,7 @@
  * Time: 22.52
  */
 
-namespace Model\Turn;
+namespace Model;
 
 
 class Square {
