@@ -41,10 +41,11 @@ var setShipList= function () {
                 for(var i=0;i<numberShip;i++)
                 {
                     var data={
-                        shipName:metaData.ship[i],
+                        shipName:metaData.ship[i].substring(2),
                         shipImg:metaData.shipImg[i],
                         shipWeightImg:metaData.shipWeightImg[i],
-                        shipWeight:metaData.shipWeight[i]
+                        shipWeight:metaData.shipWeight[i],
+                        shipDim: metaData.ship[i].substring(0,1)
 
                     }
                 console.log(data);
@@ -53,10 +54,60 @@ var setShipList= function () {
                 }
                 $(".shipCard").css("height",divider+"%");
 
+                setDragable();
 
-            });
+
+})};
+
+var setDragable=function () {
+    $( ".shipImg" ).draggable({
+        addClasses: false,
+        revert:true
+    });
+
+    $( ".colGrid" ).droppable({
+        out:function (event,ui) {
+            console.log("fuori");
+            var id=parseInt($(this).attr('id'));
+            var dim=$(ui.draggable).attr("data-dim");
+            $( this ).removeClass( "over" );
+            var cursor=this;
+            for(i=1;i<dim;i++){
+                $(cursor).next().removeClass( "over" );
+                cursor=$(cursor).next();
+            }
+
+        },
+        over:function (event,ui) {
+
+            console.log("sopra");
+            var id=parseInt($(this).attr('id'));
+            var dim=$(ui.draggable).attr("data-dim");
+            $( this ).addClass( "over" );
+            var cursor=this;
+            for(i=1;i<dim;i++){
+                $(cursor).next().addClass( "over" );
+                cursor=$(cursor).next();
+
+            }
+
+        },
+
+        drop: function( event, ui ) {
+            var id=parseInt($(this).attr('id'));
+            var dim=$(ui.draggable).attr("data-dim");
+            $( this ).addClass( "placed ui-state-highlight" ).removeClass( "over" );
+            var cursor=this;
+            for(i=1;i<dim;i++){
+                $(cursor).next().addClass( "placed ui-state-highlight" ).removeClass( "over" );
+                cursor=$(cursor).next();
+            }
+        }
+    });
+
 
 }
+
 
 var setGridZone=function () {
 
