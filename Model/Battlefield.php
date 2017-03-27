@@ -18,7 +18,7 @@ class Battlefield {
 
     public function __construct() {
 
-        // devo costruire la griglia!
+        $this->field = $this->buildField();
 
 
     }
@@ -104,10 +104,22 @@ class Battlefield {
     public function setShipWeight($shipWeight) { $this->shipWeight = $shipWeight; }
 
 
-    // preferisco usare una funzione ad-hoc che inserire tutto nel costruttore
+    /**
+     * @return array A matrix made of 64 squares, which indexes go from A to H and from 0 to 7;
+     */
     private function buildField() {
 
+        $battleField = array();
+        for($i='A'; $i<'H'; $i++) {
+            for($j=0; $j<8; $j++) {
+                $battleField[$i][$j] = new Square();
+            }
+        }
+        var_dump($battleField);
+        return $battleField;
     }
+
+
 
 
 }
