@@ -6,7 +6,7 @@
  * Time: 22.43
  */
 
-namespace Model\Fleet;
+namespace Model\Factories;
 
 
 class RomaniFleetFactory extends FleetFactory {

@@ -8,15 +8,20 @@
 
 namespace Model;
 
-use Model\Fleet\Ship;
-
 
 class Battlefield {
 
     private $fleet;
     private $field;
     private $fleetWeight;
-    private $shipWeight;    // ?
+    private $shipWeight;    //?
+
+    public function __construct() {
+
+        // devo costruire la griglia!
+
+
+    }
 
     /* Funzioni di classe */
 
@@ -25,7 +30,6 @@ class Battlefield {
      * @return boolean
      */
     public function isPlaceable($shipWeight) {
-
         return ($this->fleetWeight >= $shipWeight);
     }
 
@@ -43,7 +47,8 @@ class Battlefield {
     }
 
     public function updateFleetWeight() {
-
+        //TODO: Questo metodo dovrebbe capire se una nave è stata posizionata o tolta e calcolare il nuovo fleetWeight di conseguenza
+        // Potrebbe quindi avere bisogno di due parametri di input (nave + azione)
     }
 
     /**
@@ -98,6 +103,11 @@ class Battlefield {
      */
     public function setShipWeight($shipWeight) { $this->shipWeight = $shipWeight; }
 
+
+    // preferisco usare una funzione ad-hoc che inserire tutto nel costruttore
+    private function buildField() {
+
+    }
 
 
 }

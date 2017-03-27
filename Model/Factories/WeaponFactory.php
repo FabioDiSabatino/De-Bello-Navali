@@ -6,7 +6,9 @@
  * Time: 10.19
  */
 
-namespace Model\Weapon;
+namespace Model\Factories;
+
+use Model\Weapon\Weapon;
 
 
 abstract class WeaponFactory {

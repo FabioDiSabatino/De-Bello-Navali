@@ -6,7 +6,7 @@
  * Time: 22.39
  */
 
-namespace Model\Fleet;
+namespace Model\Factories;
 
 
 abstract class FleetFactory {

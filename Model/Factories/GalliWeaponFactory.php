@@ -6,7 +6,7 @@
  * Time: 11.29
  */
 
-namespace Model\Weapon;
+namespace Model\Factories;
 
 
 class GalliWeaponFactory extends WeaponFactory {

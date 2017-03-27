@@ -6,7 +6,7 @@
  * Time: 11.56
  */
 
-namespace Model\Weapon;
+namespace Model\Factories;
 
 
 class BretoniWeaponFactory extends WeaponFactory {
