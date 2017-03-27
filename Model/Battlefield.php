@@ -18,6 +18,7 @@ class Battlefield {
 
     public function __construct() {
 
+        $this->setFleet(array());
         $this->field = $this->buildField();
 
 
@@ -110,12 +111,12 @@ class Battlefield {
     private function buildField() {
 
         $battleField = array();
-        for($i='A'; $i<'H'; $i++) {
+        for($i='A'; $i<'I'; $i++) {
             for($j=0; $j<8; $j++) {
                 $battleField[$i][$j] = new Square();
             }
         }
-        var_dump($battleField);
+
         return $battleField;
     }
 
