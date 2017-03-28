@@ -11,6 +11,7 @@ namespace Model;
 
 class Battlefield {
 
+    private static $shipIdCounter = 1;
     private $fleet;
     private $field;
     private $fleetWeight;
@@ -19,7 +20,7 @@ class Battlefield {
     public function __construct() {
 
         $this->setFleet(array());
-        $this->field = $this->buildField();
+        $this->setField($this->buildField());
 
 
     }
@@ -43,6 +44,11 @@ class Battlefield {
     public function placeShip($shipName, $position, $orientation) {
 
         //TODO: implementare placeShip
+        // Controlli sullo shipWeight
+        // Controlli sulla posizione e l'orientamento della nave appena inserita
+
+        // In questo caso dovrei ricavare il descrittore della nave da catalogo usando $shipName per ricavarne il peso e la dimensione.
+
         $id = 0;
         return $id;
     }
@@ -105,13 +111,13 @@ class Battlefield {
     public function setShipWeight($shipWeight) { $this->shipWeight = $shipWeight; }
 
 
-    /**
-     * @return array A matrix made of 64 squares, which indexes go from A to H and from 0 to 7;
+    /** Builds a matrix made of 64 Squares, which represents the battlefield
+     * @return array A matrix made of 64 Squares
      */
     private function buildField() {
 
         $battleField = array();
-        for($i='A'; $i<'I'; $i++) {
+        for($i=0; $i<8; $i++) {
             for($j=0; $j<8; $j++) {
                 $battleField[$i][$j] = new Square();
             }
