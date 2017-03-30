@@ -7,9 +7,8 @@
 */
 
     function __autoload($class) {
-
+        // considerazioni sulle prestazioni: usando i namespaces si evita di inserire informazioni relative ai path relativi delle singole classi
         $class = str_replace('\\','/',$class);
-        //echo $class;
         require $class . '.php';
 
     }

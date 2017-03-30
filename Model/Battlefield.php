@@ -12,6 +12,7 @@ namespace Model;
 class Battlefield {
 
     private static $shipIdCounter = 1;
+    /** @var  Ship[] */
     private $fleet;
     private $field;
     private $fleetWeight;
@@ -41,16 +42,16 @@ class Battlefield {
      * @param int $orientation
      * @return int $id
      */
-    public function placeShip($shipName, $position, $orientation) {
+    public function placeShip($shipName, $position, $orientation) { // per ora l'unica cosa che fa questo metodo è creare una Ship con uno shipID incrementale!
 
-        //TODO: implementare placeShip
-        // Controlli sullo shipWeight
-        // Controlli sulla posizione e l'orientamento della nave appena inserita
-
-        // In questo caso dovrei ricavare il descrittore della nave da catalogo usando $shipName per ricavarne il peso e la dimensione.
-
-        $id = 0;
-        return $id;
+        //TODO: ricavare, dallo shipName, le informazioni relative alla nave inserita (specialmente la weaponList)
+        //TODO: gestire la modifica delle Square sulle quali viene inserita la Ship
+        $shipID = $this::$shipIdCounter;
+        $ship = new Ship($shipID);
+        if(array_push($this->fleet, $ship) == 1) {     // se è diverso da 1 vuol dire che c'è stato un errore nell'aggiunta della ship all'array fleet
+            $this->increaseShipCounter();
+        }
+        return $shipID;
     }
 
     public function updateFleetWeight() {
@@ -127,6 +128,8 @@ class Battlefield {
     }
 
 
+
+    private function increaseShipCounter() { $this::$shipIdCounter++; }
 
 
 }

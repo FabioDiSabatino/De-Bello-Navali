@@ -12,17 +12,25 @@ namespace Model;
 class Ship {
 
     private $shipID = null;         // Identifies the single Ship Object
-    private $position = null;       // The position of the upper-left most Square of the Ship
-    private $orientation = null;    // The orientation of the ship (horizontal or vertical)
-    private $integrity = null;       // The integrity of the ship, used to establish whether the ship can or cannot use its special weapon
+    private $integrity = null;      // The integrity of the ship, used to establish whether the ship can or cannot use its special weapon
+    private $weaponList = array();  // A list of Weapons on the Ship
 
 
-    public function __construct($position, $orientation, $integrity = 100) {
+    public function __construct($id, $integrity = 100) {
         // gestire lo shipID
-        $this->setPosition($position);
-        $this->setOrientation($orientation);
+        $this->setShipID($id);
         $this->setIntegrity($integrity);
     }
+
+    public function getWeaponList() {
+        return $this->weaponList;
+    }
+
+    public function setWeaponList($weaponList) {
+        $this->weaponList = $weaponList;
+    }
+
+
 
     public function getShipID() {
         return $this->shipID;
@@ -30,22 +38,6 @@ class Ship {
 
     public function setShipID($shipID) {
         $this->shipID = $shipID;
-    }
-
-    public function getPosition() {
-        return $this->position;
-    }
-
-    public function setPosition($position) {
-        $this->position = $position;
-    }
-
-    public function getOrientation() {
-        return $this->orientation;
-    }
-
-    public function setOrientation($orientation) {
-        $this->orientation = $orientation;
     }
 
     public function getIntegrity() {

@@ -10,6 +10,10 @@
     use Model\Battlefield;
 
     $batt = new Battlefield();
+    $squareList = $batt->getField();
+    $square = $squareList[3][2];
+    $batt->placeShip("ciao",$square,1);
+    var_dump($batt->getFleet());
 
 
 ?>
