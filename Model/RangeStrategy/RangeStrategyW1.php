@@ -35,19 +35,19 @@ class RangeStrategyW1 implements IRangeStrategy {
         $this->setDimensionY($dimensionY);
     }
 
-    private function setDimensionX($dimensionX) {
+    public function setDimensionX($dimensionX) {
         self::$dimensionX = $dimensionX;
     }
 
-    private function getDimensionX() {
+    public function getDimensionX() {
         return self::$dimensionX;
     }
 
-    private function setDimensionY($dimensionY) {
+    public function setDimensionY($dimensionY) {
         self::$dimensionY = $dimensionY;
     }
 
-    private function getDimensionY() {
+    public function getDimensionY() {
         return self::$dimensionY;
     }
 
