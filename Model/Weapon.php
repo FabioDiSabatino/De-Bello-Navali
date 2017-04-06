@@ -17,6 +17,8 @@ class Weapon {
     private $reloadTime;
     /** @var int */
     private $maxReloadTime;
+    /** @var  IRangeStrategy */
+    private $rangeStrategy;
 
     public function __construct($maxReload) {
         // bisognerebbe ricavare il descrittore e creare la weapon di conseguenza
