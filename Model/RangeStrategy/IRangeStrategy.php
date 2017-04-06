@@ -22,4 +22,9 @@ interface IRangeStrategy {
 
     public static function getInstance();
 
+    public function setDimensionX($dimensionX);
+    public function getDimensionX();
+    public function setDimensionY($dimensionY);
+    public function getDimensionY();
+
 }

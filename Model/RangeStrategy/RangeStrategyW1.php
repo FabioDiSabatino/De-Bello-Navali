@@ -27,17 +27,31 @@ class RangeStrategyW1 implements IRangeStrategy {
 
     /** @var IRangeStrategy Our RangeStrategy Singleton instance  */
     private static $instance = null;
-    private static $dimension = 0;
+    private static $dimensionX = 0;
+    private static $dimensionY = 0;
 
-    private function __construct($dimension = 7) {
-        $this->setDimension($dimension);
+    private function __construct($dimensionX = 7, $dimensionY = 7) {
+        $this->setDimensionX($dimensionX);
+        $this->setDimensionY($dimensionY);
     }
 
-    private function setDimension($dimension) {
-        self::$dimension = $dimension;
+    private function setDimensionX($dimensionX) {
+        self::$dimensionX = $dimensionX;
     }
 
-    /**
+    private function getDimensionX() {
+        return self::$dimensionX;
+    }
+
+    private function setDimensionY($dimensionY) {
+        self::$dimensionY = $dimensionY;
+    }
+
+    private function getDimensionY() {
+        return self::$dimensionY;
+    }
+
+    /** Calculates the coordinates of the squares hit by the attack
      * @param $x int The x coordinate of the attack
      * @param $y int The y coordinate of the attack
      * @return int[] A list of Square objects hit by the attack

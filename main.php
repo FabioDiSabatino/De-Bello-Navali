@@ -17,7 +17,7 @@
     $weapon = new Weapon(1);
     $weapon->setRange($range1);
 
-    $arr = $weapon->attack(7,1);
+    $arr = $weapon->attack(1,1);
 
 
 
