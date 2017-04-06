@@ -9,18 +9,41 @@
 namespace Model\Factories\RangeStrategyFactory;
 
 
+use Model\RangeStrategy\IRangeStrategy;
+use Model\RangeStrategy\RangeStrategyW1;
+use Model\RangeStrategy\RangeStrategyW2;
+use Model\RangeStrategy\RangeStrategyW3;
+
+/**
+ * Class RangeStrategyFactory creates RangeStrategy objects to be put inside Weapon objects.
+ * @package Model\Factories\RangeStrategyFactory
+ */
 class RangeStrategyFactory {
 
-    public function createStrategyRange($rangeName) {
+    /**
+     * @param $rangeName
+     * @return IRangeStrategy|null
+     */
+    public static function createStrategyRange($rangeName) {
 
         $functionName = "createStrategy$rangeName";
-        if(function_exists($functionName)) {
-            return call_user_func($functionName);
+
+        if(method_exists(self::class, $functionName)) {
+            return call_user_func(array(self::class, $functionName));
         }
         return null;
     }
 
-    private function createStrategyW1() {}
-    private function createStrategyW2() {}
-    private function createStrategyW3() {}
+    private function createStrategyW1() {
+        return RangeStrategyW1::getInstance();
+    }
+
+    private function createStrategyW2() {
+        return RangeStrategyW2::getInstance();
+    }
+
+    private function createStrategyW3() {
+        return RangeStrategyW3::getInstance();
+    }
+
 }
