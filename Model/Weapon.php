@@ -45,10 +45,13 @@ class Weapon {
      * Weapon constructor.
      * @param $maxReload
      */
-    public function __construct($maxReload) {
+    public function __construct($maxReload, $rangeName) {
         // bisognerebbe ricavare il descrittore e creare la weapon di conseguenza (impostare tutti i suoi attributi)
         $this->setMaxReloadTime($maxReload);
-        $this->setRange(RangeStrategyFactory::createStrategyRange($this->rangeName));
+        $this->setRangeName($rangeName);
+
+        $rangeStrategyFactory = RangeStrategyFactory::getInstance();
+        $this->setRange($rangeStrategyFactory->createStrategyRange($this->rangeName));
     }
 
 

@@ -14,15 +14,10 @@
 
 
     $rangeFactory = RangeStrategyFactory::getInstance();
-    var_dump($rangeFactory);
-    $range1 = $rangeFactory->createStrategyRange('W2');
 
-    $weapon = new Weapon(1);
-    $weapon->setRange($range1);
+    $weapon = new Weapon(1,'W3');
 
     $arr = $weapon->attack(1,1);
-
-
 
     foreach ($arr as $squareHit) {
         echo "Ho colpito la casella x=".$squareHit["x"].", y=".$squareHit["y"]."<br>";

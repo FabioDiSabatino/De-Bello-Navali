@@ -26,26 +26,26 @@ class RangeStrategyFactory {
      * @param $rangeName
      * @return IRangeStrategy|null
      */
-    public function createStrategyRange($rangeName) {
+    public function createStrategyRange($rangeName, $dimensionX = 7, $dimensionY = 7) {
 
         $functionName = "createStrategy$rangeName";
 
         if(method_exists(self::class, $functionName)) {
-            return call_user_func(array(self::class, $functionName));
+            return call_user_func(array(self::class, $functionName),$dimensionX, $dimensionY);
         }
         return null;
     }
 
-    private function createStrategyW1() {
-        return RangeStrategyW1::getInstance();
+    private function createStrategyW1($dimensionX, $dimensionY) {
+        return RangeStrategyW1::getInstance($dimensionX, $dimensionY);
     }
 
-    private function createStrategyW2() {
-        return RangeStrategyW2::getInstance();
+    private function createStrategyW2($dimensionX, $dimensionY) {
+        return RangeStrategyW2::getInstance($dimensionX, $dimensionY);
     }
 
-    private function createStrategyW3() {
-        return RangeStrategyW3::getInstance();
+    private function createStrategyW3($dimensionX, $dimensionY) {
+        return RangeStrategyW3::getInstance($dimensionX, $dimensionY);
     }
 
     /**

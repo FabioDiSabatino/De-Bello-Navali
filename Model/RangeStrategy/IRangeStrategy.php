@@ -13,17 +13,18 @@ use Model\Square;
 
 interface IRangeStrategy {
 
-    /**
-     * @param $x int The x coordinate of the attack
-     * @param $y int The y coordinate of the attack
-     * @return int[] A list of Square objects hit by the attack
+    /** Computes which Squares are hit by the attack
+     * @param $x int The x coordinate of the center of attack
+     * @param $y int The y coordinate of the center of  attack
+     * @return int[] A list of coordinates of Squares hit by the attack
      */
     public function attack($x, $y);
 
-    public static function getInstance();
+    public static function getInstance($dimensionX, $dimensionY);
 
     public function setDimensionX($dimensionX);
     public function getDimensionX();
+
     public function setDimensionY($dimensionY);
     public function getDimensionY();
 

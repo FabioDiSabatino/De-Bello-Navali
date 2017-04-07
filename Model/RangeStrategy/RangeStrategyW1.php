@@ -11,7 +11,7 @@ namespace Model\RangeStrategy;
 
 /**
  * Class RangeStrategyW1 models the single Square attack.
- *
+ * <code>
  *         x
  *   +---+---+---+
  *   |   |   |   |
@@ -20,41 +20,13 @@ namespace Model\RangeStrategy;
  *   +---+---+---+
  *   |   |   |   |
  *   +---+---+---+
- *
+ * </code>
  * @package Model\RangeStrategy
  */
-class RangeStrategyW1 implements IRangeStrategy {
+class RangeStrategyW1 extends AbstractRangeStrategy implements IRangeStrategy {
 
     /** @var IRangeStrategy Our RangeStrategy Singleton instance  */
     private static $instance = null;
-    /** @var int Measures how many horizontal Squares there are in the battlefield */
-    private static $dimensionX = 0;
-    /** @var int Measures how many vertical Squares there are in the battlefield */
-    private static $dimensionY = 0;
-
-    private function __construct($dimensionX = 7, $dimensionY = 7) {
-        $this->setDimensionX($dimensionX);
-        $this->setDimensionY($dimensionY);
-    }
-
-    /** Sets the number of horizontal Squares
-     * @param int $dimensionX
-     */
-    public function setDimensionX($dimensionX) {
-        self::$dimensionX = $dimensionX;
-    }
-
-    public function getDimensionX() {
-        return self::$dimensionX;
-    }
-
-    public function setDimensionY($dimensionY) {
-        self::$dimensionY = $dimensionY;
-    }
-
-    public function getDimensionY() {
-        return self::$dimensionY;
-    }
 
     /** Calculates the coordinates of the squares hit by the attack
      * @param $x int The x coordinate of the attack
@@ -71,7 +43,7 @@ class RangeStrategyW1 implements IRangeStrategy {
     /**
      * @return IRangeStrategy
      */
-    public static function getInstance() {
+    public static function getInstance($dimensionX, $dimensionY) {
 
         $class = __CLASS__;
         if(self::$instance == null) {

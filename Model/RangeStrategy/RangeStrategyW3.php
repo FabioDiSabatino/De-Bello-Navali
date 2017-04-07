@@ -11,7 +11,7 @@ namespace Model\RangeStrategy;
 
 /**
  * Class RangeStrategyW1 models the four Square squared attack.
- *
+ * <code>
  *         x
  *   +---+---+---+
  *   |   |   |   |
@@ -20,36 +20,13 @@ namespace Model\RangeStrategy;
  *   +---+---+---+
  *   |   | H | H |
  *   +---+---+---+
- *
+ * </code>
  * @package Model\RangeStrategy
  */
-class RangeStrategyW3 implements IRangeStrategy {
+class RangeStrategyW3 extends AbstractRangeStrategy implements IRangeStrategy {
 
     /** @var IRangeStrategy Our RangeStrategy Singleton instance  */
     private static $instance = null;
-    private static $dimensionX = 0;
-    private static $dimensionY = 0;
-
-    private function __construct($dimensionX = 7, $dimensionY = 7) {
-        $this->setDimensionX($dimensionX);
-        $this->setDimensionY($dimensionY);
-    }
-
-    public function setDimensionX($dimensionX) {
-        self::$dimensionX = $dimensionX;
-    }
-
-    public function getDimensionX() {
-        return self::$dimensionX;
-    }
-
-    public function setDimensionY($dimensionY) {
-        self::$dimensionY = $dimensionY;
-    }
-
-    public function getDimensionY() {
-        return self::$dimensionY;
-    }
 
     /** Calculates the coordinates of the squares hit by the attack
      * @param $x int The x coordinate of the center of the attack
@@ -82,7 +59,7 @@ class RangeStrategyW3 implements IRangeStrategy {
     /**
      * @return IRangeStrategy
      */
-    public static function getInstance() {
+    public static function getInstance($dimensionX, $dimensionY) {
 
         $class = __CLASS__;
         if(self::$instance == null) {
