@@ -20,11 +20,13 @@ use Model\RangeStrategy\RangeStrategyW3;
  */
 class RangeStrategyFactory {
 
+    private static $instance = null;
+
     /**
      * @param $rangeName
      * @return IRangeStrategy|null
      */
-    public static function createStrategyRange($rangeName) {
+    public function createStrategyRange($rangeName) {
 
         $functionName = "createStrategy$rangeName";
 
@@ -45,5 +47,19 @@ class RangeStrategyFactory {
     private function createStrategyW3() {
         return RangeStrategyW3::getInstance();
     }
+
+    /**
+     * @return RangeStrategyFactory
+     */
+    public static function getInstance() {
+
+        $class = __CLASS__;
+        if(self::$instance == null) {
+            self::$instance = new $class;
+        }
+
+        return self::$instance;
+    }
+
 
 }

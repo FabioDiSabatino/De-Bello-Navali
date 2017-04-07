@@ -27,7 +27,9 @@ class RangeStrategyW1 implements IRangeStrategy {
 
     /** @var IRangeStrategy Our RangeStrategy Singleton instance  */
     private static $instance = null;
+    /** @var int Measures how many horizontal Squares there are in the battlefield */
     private static $dimensionX = 0;
+    /** @var int Measures how many vertical Squares there are in the battlefield */
     private static $dimensionY = 0;
 
     private function __construct($dimensionX = 7, $dimensionY = 7) {
@@ -35,6 +37,9 @@ class RangeStrategyW1 implements IRangeStrategy {
         $this->setDimensionY($dimensionY);
     }
 
+    /** Sets the number of horizontal Squares
+     * @param int $dimensionX
+     */
     public function setDimensionX($dimensionX) {
         self::$dimensionX = $dimensionX;
     }

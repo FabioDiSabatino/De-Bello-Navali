@@ -6,7 +6,7 @@
  * Time: 22.41
  */
 
-namespace Model\Factories;
+namespace Model\Factories\FleetFactory;
 
 
 class GalliFleetFactory extends FleetFactory {
