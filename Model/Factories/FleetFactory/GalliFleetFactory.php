@@ -3,13 +3,13 @@
  * Created by PhpStorm.
  * User: Michele Iessi
  * Date: 17/03/17
- * Time: 22.43
+ * Time: 22.41
  */
 
-namespace Model\Factories;
+namespace Model\Factories\FleetFactory;
 
 
-class RomaniFleetFactory extends FleetFactory {
+class GalliFleetFactory extends FleetFactory {
 
     protected function createShip2() {
 

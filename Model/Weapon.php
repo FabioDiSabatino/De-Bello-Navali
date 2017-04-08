@@ -6,79 +6,147 @@
  * Time: 11.40
  */
 
+/**
+ * The Weapon class models a Weapon object mounted on a Ship. A Weapon can perform attacks, and has a RangeStrategy
+ * that specifies how it hits the Battlefield. It also has a current reload time (used to check if the Weapon is ready
+ * to fire) and a maximum reload time.
+ */
 namespace Model;
 
+use Model\Factories\RangeStrategyFactory\RangeStrategyFactory;
+use Model\RangeStrategy\IRangeStrategy;
 
+
+/**
+ * The Weapon class models a Weapon object mounted on a Ship. A Weapon can perform attacks, and has a RangeStrategy
+ * that specifies how it hits the Battlefield. It also has a current reload time (used to check if the Weapon is ready
+ * to fire) and a maximum reload time.
+ *
+ * @package Model
+ */
 class Weapon {
 
-    /** @var int */
+    /** @var int The identifier of the Weapon object */
     private $weaponID;
-    /** @var int */
+    /** @var int The current remaining reload time of the Weapon object */
     private $reloadTime;
-    /** @var int */
+    /** @var int The maximum reload time of the Weapon object*/
     private $maxReloadTime;
+    /** @var  IRangeStrategy The RangeStrategy object indicates how the Weapon performs its attacks */
+    private $range;
+    /** @var  string The name of the RangeStrategy of the Weapon object */
+    private $rangeName;
 
-    public function __construct($maxReload) {
-        // bisognerebbe ricavare il descrittore e creare la weapon di conseguenza
-        $this->maxReloadTime = $maxReload;
-    }
+
+    /* -- Constructor -- */
+
 
     /**
-     * @return int
+     * Weapon constructor.
+     * @param $maxReload
+     */
+    public function __construct($maxReload, $rangeName) {
+        // bisognerebbe ricavare il descrittore e creare la weapon di conseguenza (impostare tutti i suoi attributi)
+        $this->setMaxReloadTime($maxReload);
+        $this->setRangeName($rangeName);
+
+        $rangeStrategyFactory = RangeStrategyFactory::getInstance();
+        $this->setRange($rangeStrategyFactory->createStrategyRange($this->rangeName));
+    }
+
+
+    /* -- Getter & Setter Methods -- */
+
+
+    /** Returns the identifier of the Weapon object
+     * @return int The Weapon ID of the Weapon object
      */
     public function getWeaponID() {
         return $this->weaponID;
     }
 
-    /**
-     * @param int $weaponID
+    /** Sets the identifier of the Weapon object to the given parameter
+     * @param int $weaponID The Weapon ID to be set on the Weapon object
      */
     public function setWeaponID($weaponID) {
         $this->weaponID = $weaponID;
     }
 
-    /**
-     * @return int
+    /** Returns the (current) remaining reload time of the Weapon object. It returns 0 if the Weapon is ready to fire
+     * @return int The remaining reload time of the Weapon object
      */
     public function getReloadTime() {
         return $this->reloadTime;
     }
 
-    /**
-     * @param int $reloadTime
+    /** Sets the remaining reload time of the Weapon object to the given parameter
+     * @param int $reloadTime The (current) reload time to be set on the Weapon object
      */
     public function setReloadTime($reloadTime) {
         $this->reloadTime = $reloadTime;
     }
 
-    /**
-     * @return int
+    /** Returns the maximum reload time of the Weapon object. This does not depend on the Weapon object itself, it depends on his descriptor
+     * @return int The maximum reload time of the Weapon object
      */
     public function getMaxReloadTime() {
         return $this->maxReloadTime;
     }
 
-    /**
-     * @param int $maxReloadTime
+    /** Sets the maximum reload time of the Weapon object to the given parameter
+     * @param int $maxReloadTime The maximimum
      */
     public function setMaxReloadTime($maxReloadTime) {
         $this->maxReloadTime = $maxReloadTime;
     }
 
-    /**
-     * @return mixed
+    /** Returns the RangeStrategy of the Weapon object
+     * @return IRangeStrategy The RangeStrategy object of the Weapon
      */
-    public function getWeaponRange() {
-        return $this->weaponRange;
+    public function getRange() {
+        return $this->range;
     }
 
-    /**
-     * @param mixed $weaponRange
+    /** Sets the RangeStrategy of the Weapon object to the given parameter
+     * @param IRangeStrategy $range The RangeStrategy to be set on the Weapon object
      */
-    public function setWeaponRange($weaponRange) {
-        $this->weaponRange = $weaponRange;
+    public function setRange($range) {
+        $this->range = $range;
     }
 
+    /** Returns the name of the RangeStrategy of the Weapon object
+     * @return string The name of the RangeStrategy of the Weapon object
+     */
+    public function getRangeName() {
+        return $this->rangeName;
+    }
+
+    /** Sets the name of the RangeStrategy of the Weapon object to the given parameter
+     * @param string $rangeName The name to be set on the RangeStrategy of the Weapon object
+     */
+    public function setRangeName($rangeName) {
+        $this->rangeName = $rangeName;
+    }
+
+
+    /* -- Class Specific Methods -- */
+
+
+    public function isFirable() {
+        // Questa funzione dovrebbe stabilire se l'arma è pronta a sparare: dovrebbe perciò vedere se è pronta
+        // (reloadTime > 0) e se ci sono colpi disponibili (chiedere all'AmmoStorage)
+
+    }
+
+    /** Performs an attack
+     * @param $x int The x coordinate of the attack
+     * @param $y int The y coordinate of the attack
+     * @return int[] A list of Square objects hit by the attack
+     */
+    public function attack($x, $y) {
+
+        return $this->getRange()->attack($x, $y); // by Strategy pattern
+    }
 
 
 }

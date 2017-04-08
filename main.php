@@ -7,13 +7,22 @@
  */
 
     include("./Util/Autoloader.php");
-    use Model\Battlefield;
 
-    $batt = new Battlefield();
-    $squareList = $batt->getField();
-    $square = $squareList[3][2];
-    $batt->placeShip("ciao",$square,1);
-    var_dump($batt->getFleet());
+    use Model\Weapon;
+    use Model\Factories\RangeStrategyFactory\RangeStrategyFactory;
+    use Model\Factories\FleetFactory\RomaniFleetFactory;
 
+
+    $rangeFactory = RangeStrategyFactory::getInstance();
+
+    $weapon = new Weapon(1,'W3');
+
+    $arr = $weapon->attack(1,1);
+
+    foreach ($arr as $squareHit) {
+        echo "Ho colpito la casella x=".$squareHit["x"].", y=".$squareHit["y"]."<br>";
+    }
+
+    $fleet = new RomaniFleetFactory();
 
 ?>

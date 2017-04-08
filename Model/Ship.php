@@ -30,8 +30,6 @@ class Ship {
         $this->weaponList = $weaponList;
     }
 
-
-
     public function getShipID() {
         return $this->shipID;
     }

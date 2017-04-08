@@ -6,7 +6,7 @@
  * Time: 22.44
  */
 
-namespace Model\Factories;
+namespace Model\Factories\FleetFactory;
 
 
 class BretoniFleetFactory extends FleetFactory {
