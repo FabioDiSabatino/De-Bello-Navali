@@ -8,21 +8,19 @@
 
     include("./Util/Autoloader.php");
 
-    use Model\Weapon;
-    use Model\Factories\RangeStrategyFactory\RangeStrategyFactory;
-    use Model\Factories\FleetFactory\RomaniFleetFactory;
+    use Model\Factories\UtilityFactory\GameFactory;
 
 
-    $rangeFactory = RangeStrategyFactory::getInstance();
+    $gameFactory = new GameFactory();
+    $ammoStorage = $gameFactory->createAmmoStorage();
+    $ammoStorage->insertAmmo("Ciao");
+    $ammoStorage->insertAmmo("bulabula");
 
-    $weapon = new Weapon(1,'W3');
+    var_dump($ammoStorage->getAmmo());
 
-    $arr = $weapon->attack(1,1);
+    $ammoStorage->decreaseAmmo("Ciao");
 
-    foreach ($arr as $squareHit) {
-        echo "Ho colpito la casella x=".$squareHit["x"].", y=".$squareHit["y"]."<br>";
-    }
+    var_dump($ammoStorage->getAmmo());
 
-    $fleet = new RomaniFleetFactory();
 
 ?>

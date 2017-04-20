@@ -36,6 +36,8 @@ class RangeStrategyFactory {
         return null;
     }
 
+    /* Strategy creators */
+
     private function createStrategyW1($dimensionX, $dimensionY) {
         return RangeStrategyW1::getInstance($dimensionX, $dimensionY);
     }
@@ -48,7 +50,7 @@ class RangeStrategyFactory {
         return RangeStrategyW3::getInstance($dimensionX, $dimensionY);
     }
 
-    /**
+    /** Returns a RangeStrategyFactory object
      * @return RangeStrategyFactory
      */
     public static function getInstance() {

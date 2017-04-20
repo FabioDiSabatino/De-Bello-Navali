@@ -11,6 +11,8 @@ namespace Model\Factories\FleetFactory;
 
 class GalliFleetFactory extends FleetFactory {
 
+    private static $instance = null;
+
     protected function createShip2() {
 
         // TODO: Implement createShip2() method.
@@ -25,4 +27,18 @@ class GalliFleetFactory extends FleetFactory {
 
         // TODO: Implement createShip4() method.
     }
+
+    /** Returns a GalliFleetFactory object
+     * @return GalliFleetFactory
+     */
+    public static function getInstance() {
+
+        $class = __CLASS__;
+        if(self::$instance == null) {
+            self::$instance = new $class;
+        }
+
+        return self::$instance;
+    }
+
 }
