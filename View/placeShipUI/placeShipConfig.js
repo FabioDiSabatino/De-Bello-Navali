@@ -66,21 +66,8 @@ var setDragable=function () {
     });
 
     $( ".colGrid" ).droppable({
-        out:function (event,ui) {
-            console.log("fuori");
-            var id=parseInt($(this).attr('id'));
-            var dim=$(ui.draggable).attr("data-dim");
-            $( this ).removeClass( "over" );
-            var cursor=this;
-            for(i=1;i<dim;i++){
-                $(cursor).next().removeClass( "over" );
-                cursor=$(cursor).next();
-            }
 
-        },
         over:function (event,ui) {
-
-            console.log("sopra");
             var id=parseInt($(this).attr('id'));
             var dim=$(ui.draggable).attr("data-dim");
             $( this ).addClass( "over" );
@@ -92,15 +79,83 @@ var setDragable=function () {
             }
 
         },
+        out:function (event,ui) {
+            var id=parseInt($(this).attr('id'));
+            var dim=$(ui.draggable).attr("data-dim");
+            var cursor=this;
+            if($(cursor).prev().hasClass("over"))
+            {
+                //spostamento a sx
+                cursor=$(cursor).next();
+                for(i=1;i<dim;i++){
+                    $(cursor).removeClass( "over" );
+                    cursor=$(cursor).next();
+                }
+
+
+            }
+            else
+            {
+                //spostamento a dx
+                $( cursor ).removeClass( "over" );
+
+                for(i=1;i<dim;i++){
+                    $(cursor).next().removeClass( "over" );
+                    cursor=$(cursor).next();
+                }
+            }
+
+
+
+        },
 
         drop: function( event, ui ) {
             var id=parseInt($(this).attr('id'));
             var dim=$(ui.draggable).attr("data-dim");
-            $( this ).addClass( "placed ui-state-highlight" ).removeClass( "over" );
+            var shipWeight=20;
+            var position=parseInt($(this).attr('id'));
+            var actualWeight=parseInt($('.progress-bar').attr("aria-valuenow"));
             var cursor=this;
-            for(i=1;i<dim;i++){
-                $(cursor).next().addClass( "placed ui-state-highlight" ).removeClass( "over" );
+            var valid=true;
+            for(i=0;i<dim;i++){
+                $(cursor).removeClass( "over" );
+                if ($(cursor).hasClass("placed ui-state-highlight"))
+                {
+                    valid=false;
+                }
+
                 cursor=$(cursor).next();
+            }
+            if(valid )
+            {
+
+
+                if(actualWeight+shipWeight<=100)
+                {
+                    $(".progress-bar")
+                        .css("width",actualWeight+20+"%")
+                        .attr("aria-valuenow",actualWeight+20)
+                        .text(actualWeight+shipWeight+"%");
+                    //posizione valida
+                    cursor= $(this);
+                    $(this).addClass( "placed ui-state-highlight" );
+                    for(i=1;i<dim;i++){
+                        $(cursor).next().addClass( "placed ui-state-highlight" );
+                        cursor=$(cursor).next();
+                    }
+                    placeShipController.addShip(dim,position);
+
+                }
+                else
+                {
+                    alert("Attention ship too heavy!! ")
+                }
+
+
+            }
+            else
+            {
+                alert("Attention please! It's impossible to place a ship here square not empty...")
             }
         }
     });

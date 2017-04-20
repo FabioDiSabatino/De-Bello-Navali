@@ -5,8 +5,20 @@ html {
 body {
     height: 100%;
 }
+.contentBox{
+    height: 100% !important;
+}
+
+.gridContainer{
+    height: 80%;
+    margin: 0px;
+    padding-bottom: 10px;
+    padding-left: 5%;
+    padding-right: 5%;
+    padding-top: 10px;
+}
 .mainPage{
-    padding-top:5px;
+    padding:0px;
 }
 .pageTitle {
 
@@ -16,6 +28,16 @@ body {
     border:1px solid black;
     padding-right:0px;
 }
+
+.gridRow{
+    margin: 0px;
+    height: 12.5%;
+}
+
+.gridRow1{
+
+}
+
 .myFleetTitle {
     background-color: #d9edf7;
     text-align: center;
@@ -74,13 +96,16 @@ body {
     border-right:inherit;
     border-bottom: inherit;
     width: 12.5%;
+    padding:0px;
 }
+
 .cellEnemy{
     height:50px;
     border:1px solid black;
     border-right:inherit;
     border-bottom: inherit;
     width: 12.5%;
+    padding: 0px;
 }
 .lastColumn{
     border-right:1px solid black;
@@ -102,7 +127,7 @@ body {
     border:1px solid black;
     height: 100px;
     margin: 30px;
-    margin-top: 420px;
+    margin-top: 30px;
 }
 .gameInfo{
     border:1px solid black;
@@ -112,7 +137,6 @@ body {
     margin-top: 13px !important;
     width: 150px;
     height: 45px;
-    background: #404040;
     color: lightgrey;
 }
 .turn{
@@ -134,3 +158,63 @@ body {
     margin-left: 165px;
     margin-top: 18px;
 }
+
+@media screen and (max-width: 1034px){
+    .timer{
+        margin-left: 8% !important;
+    }
+    .textTimer{
+        margin-left: 35%;
+    }
+     .surrender{
+        width: 90px;
+        height:45px;
+    }
+    .turn{
+    margin-top:18px;
+    font-size:50px;
+    padding-left: 65px;
+}
+
+}
+
+@media screen and (min-width: 806px){
+    .timer{
+        margin-left: 16% !important;
+    }
+    .textTimer{
+        margin-left: 20%;
+    }
+  
+}
+@media screen and (max-width: 806px){
+    .timer{
+        margin-left: 16% !important;
+    }
+    .textTimer{
+        margin-left: 20%;
+    }
+}
+ .turn{
+    margin-top:18px;
+    font-size:small;
+    padding-left: 65px;
+}
+  
+}
+
+
+@media screen and (min-width: 1035px){
+
+    .textTimer{
+        margin-left: 16%;
+    }
+        .turn{
+            margin-top:18px;
+            font-size:40px;
+            padding-left: 65px;
+}
+
+}
+
+
