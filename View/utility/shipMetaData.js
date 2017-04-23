@@ -27,7 +27,4 @@ metaData={
         ship4='../placeShipUI/img/weightS.png'
     ],
 
-
-
-
 }
