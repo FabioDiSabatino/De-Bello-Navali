@@ -33,19 +33,13 @@ var moduleShipList=(function () {
                 if($(cursor).prev().hasClass("over"))
                 {
                     //spostamento a sx
-                    cursor=$(cursor).next();
-                    for(i=1;i<dim;i++){
-                        $(cursor).removeClass( "over" );
-                        cursor=$(cursor).next();
-                    }
-
-
+                    cursor=$(cursor).next().next();
+                    $(cursor).removeClass( "over" );
                 }
                 else
                 {
                     //spostamento a dx
                     $( cursor ).removeClass( "over" );
-
                     for(i=1;i<dim;i++){
                         $(cursor).next().removeClass( "over" );
                         cursor=$(cursor).next();
@@ -59,9 +53,10 @@ var moduleShipList=(function () {
             drop: function( event, ui ) {
                 var id=parseInt($(this).attr('id'));
                 var dim=$(ui.draggable).attr("data-dim");
-                var shipWeight=20;
                 var position=parseInt($(this).attr('id'));
                 var actualWeight=parseInt($('.progress-bar').attr("aria-valuenow"));
+                var shipWeight=parseInt($(ui.draggable).parent().next().attr("data-weight"));
+                console.log($(ui.draggable).parent().next().attr("data-weight"));
                 var cursor=this;
                 var valid=true;
                 for(i=0;i<dim;i++){
@@ -80,7 +75,7 @@ var moduleShipList=(function () {
                     if(actualWeight+shipWeight<=100)
                     {
                         $(".progress-bar")
-                            .css("width",actualWeight+20+"%")
+                            .css("width",actualWeight+shipWeight+"%")
                             .attr("aria-valuenow",actualWeight+20)
                             .text(actualWeight+shipWeight+"%");
                         //posizione valida
@@ -125,7 +120,6 @@ var moduleShipList=(function () {
                         shipDim: metaData.ship[i].substring(0, 1)
 
                     }
-                    console.log(data);
                     var tpl = Mustache.to_html(template, data);
                     $(".listShip").append(tpl);
                 }
