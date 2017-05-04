@@ -8,19 +8,10 @@
 
     include("./Util/Autoloader.php");
 
-    use Model\Factories\UtilityFactory\GameFactory;
+    use Model\Factories\FleetFactory\BretoniFleetFactory;
 
 
-    $gameFactory = new GameFactory();
-    $ammoStorage = $gameFactory->createAmmoStorage();
-    $ammoStorage->insertAmmo("Ciao");
-    $ammoStorage->insertAmmo("bulabula");
-
-    var_dump($ammoStorage->getAmmo());
-
-    $ammoStorage->decreaseAmmo("Ciao");
-
-    var_dump($ammoStorage->getAmmo());
+    $fleetFactory = \Model\Factories\FleetFactory\GalliFleetFactory::getInstance();
 
 
 ?>

@@ -12,7 +12,7 @@ namespace Model;
 class Square {
 
     private $hit = false;
-    private $empty = false;
+    private $empty = true;
     private $shipReference = 0;
 
 

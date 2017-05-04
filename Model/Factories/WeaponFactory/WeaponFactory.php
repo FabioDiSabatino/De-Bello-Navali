@@ -6,14 +6,14 @@
  * Time: 10.19
  */
 
-namespace Model\Factories;
+namespace Model\Factories\WeaponFactory;
 
-use Model\Weapon\Weapon;
+use Model\Weapon;
 
 
 abstract class WeaponFactory {
 
-    function createSimpleWeapon() { return new Weapon(1); } // dovrà essere l'arma da 1
+    function createSimpleWeapon() { return new Weapon('W1'); } // dovrà essere l'arma da 1
 
     abstract function createWeaponShip2();
     abstract function createWeaponShip3();

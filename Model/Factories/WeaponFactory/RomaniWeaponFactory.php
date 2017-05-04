@@ -6,7 +6,7 @@
  * Time: 11.43
  */
 
-namespace Model\Factories;
+namespace Model\Factories\WeaponFactory;
 
 
 class RomaniWeaponFactory extends WeaponFactory {

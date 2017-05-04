@@ -8,10 +8,19 @@
 
 namespace Model\Factories\FleetFactory;
 
+use Model\Factories\WeaponFactory\BretoniWeaponFactory;
+
 
 class BretoniFleetFactory extends FleetFactory {
 
     private static $instance = null;
+    private $weaponFactory = null;
+
+    private function __construct() {
+        $weaponFactoryName = str_replace('Fleet','Weapon',__CLASS__);
+        $this->weaponFactory = new $weaponFactoryName;
+        var_dump($this->weaponFactory);
+    }
 
     protected function createShip2() {
 
