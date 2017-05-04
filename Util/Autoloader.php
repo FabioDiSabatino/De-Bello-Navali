@@ -6,9 +6,11 @@
 * Time: 18.10
 */
 
-    function __autoload($class) {
-        // considerazioni sulle prestazioni: usando i namespaces si evita di inserire informazioni relative ai path relativi delle singole classi
+    function myAutoload($class) {
         $class = str_replace('\\','/',$class);
         require $class . '.php';
-
     }
+
+    spl_autoload_register('myAutoload');
+
+    ?>

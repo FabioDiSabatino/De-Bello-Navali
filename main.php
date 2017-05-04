@@ -6,12 +6,27 @@
  * Time: 17.52
  */
 
-    include("./Util/Autoloader.php");
 
-    use Model\Factories\FleetFactory\BretoniFleetFactory;
+    require_once("vendor/autoload.php");
+    require_once("generated-conf/config.php");
 
+    include("Util/Autoloader.php");
 
-    $fleetFactory = \Model\Factories\FleetFactory\GalliFleetFactory::getInstance();
+    use Model\Catalogs\WeaponDescription;
 
+    $weaponDescription = new WeaponDescription();
 
-?>
+    \Persistence\WeaponDescriptionPersistence\WeaponDescriptionQuery::create()->doDeleteAll();
+
+    $weaponDescription->setWeaponName('WeaponName');
+    $weaponDescription->setRangeName('RangeName');
+    $weaponDescription->setAmmo(1);
+    $weaponDescription->setReloadTime(4);
+
+    $weaponDescription->save();
+
+    $weapon = \Persistence\WeaponDescriptionPersistence\WeaponDescriptionQuery::create()->findPk('WeaponName');
+
+    echo $weapon->getWeaponName();
+
+    ?>
