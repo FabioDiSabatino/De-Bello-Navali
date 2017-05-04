@@ -9,6 +9,9 @@ body {
     height: 100% !important;
 }
 
+.colLat{
+    padding:0px;
+}
 .gridContainer{
     height: 80%;
     margin: 0px;
@@ -46,12 +49,14 @@ body {
     border:1px solid black;
     border-top:inherit;
     border-right:inherit;
+    border-left: 0px;
 }
 .shipGeneralInfo {
     border:1px solid black;
     border-right:inherit;
     border-top:inherit;
     height: 80px;
+    border-left: 0px;
 }
 
 .shipWeapons{
@@ -94,7 +99,7 @@ body {
     height:30px;
     border:1px solid black;
     border-right:inherit;
-    border-bottom: inherit;
+    border-bottom: 0px;
     width: 12.5%;
     padding:0px;
 }
@@ -103,7 +108,7 @@ body {
     height:50px;
     border:1px solid black;
     border-right:inherit;
-    border-bottom: inherit;
+    border-bottom: 0px;
     width: 12.5%;
     padding: 0px;
 }
@@ -119,6 +124,7 @@ body {
     border-top:inherit;
     height:580px;
     padding:0px;
+    border-right: 0px;
 }
 .enemyField {
     margin: 30px;
@@ -132,6 +138,7 @@ body {
 .gameInfo{
     border:1px solid black;
     height:70px;
+    border-right: 0px;
 }
 .surrender{
     margin-top: 13px !important;
@@ -143,6 +150,7 @@ body {
     margin-top:18px;
     font-size:x-large;
     padding-left: 65px;
+    text-align: center;
 }
 .timer{
     zoom: 0.5;
@@ -159,6 +167,8 @@ body {
     margin-top: 18px;
 }
 
+
+
 @media screen and (max-width: 1034px){
     .timer{
         margin-left: 8% !important;
@@ -174,7 +184,7 @@ body {
     margin-top:18px;
     font-size:50px;
     padding-left: 65px;
-}
+    }
 
 }
 
@@ -185,8 +195,13 @@ body {
     .textTimer{
         margin-left: 20%;
     }
+    .turn{
+        font-size: large;
+    }
   
 }
+
+
 @media screen and (max-width: 806px){
     .timer{
         margin-left: 16% !important;
@@ -194,12 +209,12 @@ body {
     .textTimer{
         margin-left: 20%;
     }
-}
+
  .turn{
     margin-top:18px;
-    font-size:small;
+    font-size:large;
     padding-left: 65px;
-}
+    }
   
 }
 
@@ -211,9 +226,9 @@ body {
     }
         .turn{
             margin-top:18px;
-            font-size:40px;
+            font-size:x-large;
             padding-left: 65px;
-}
+        }
 
 }
 
