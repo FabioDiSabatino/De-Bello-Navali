@@ -9,10 +9,27 @@
 namespace Model\Factories\FleetFactory;
 
 
+use Model\Ship;
+use Persistence\ShipDescriptionPersistence\ShipDescription;
+
 abstract class FleetFactory {
 
-    abstract protected function createShip2();
-    abstract protected function createShip3();
-    abstract protected function createShip4();
+    /**
+     * @param ShipDescription $dimension
+     * @return Ship
+     */
+    abstract public function createShip($shipDescription);
+    /**
+     * @return Ship
+     */
+    abstract protected function createShip2($shipDescription);
+    /**
+     * @return Ship
+     */
+    abstract protected function createShip3($shipDescription);
+    /**
+     * @return Ship
+     */
+    abstract protected function createShip4($shipDescription);
 
 }

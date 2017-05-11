@@ -4,6 +4,11 @@ namespace Persistence\WeaponDescriptionPersistence\Base;
 
 use \Exception;
 use \PDO;
+use Persistence\ShipDescriptionPersistence\ShipDescription;
+use Persistence\ShipDescriptionPersistence\ShipDescriptionQuery;
+use Persistence\ShipDescriptionPersistence\Base\ShipDescription as BaseShipDescription;
+use Persistence\ShipDescriptionPersistence\Map\ShipDescriptionTableMap;
+use Persistence\WeaponDescriptionPersistence\WeaponDescription as ChildWeaponDescription;
 use Persistence\WeaponDescriptionPersistence\WeaponDescriptionQuery as ChildWeaponDescriptionQuery;
 use Persistence\WeaponDescriptionPersistence\Map\WeaponDescriptionTableMap;
 use Propel\Runtime\Propel;
@@ -11,6 +16,7 @@ use Propel\Runtime\ActiveQuery\Criteria;
 use Propel\Runtime\ActiveQuery\ModelCriteria;
 use Propel\Runtime\ActiveRecord\ActiveRecordInterface;
 use Propel\Runtime\Collection\Collection;
+use Propel\Runtime\Collection\ObjectCollection;
 use Propel\Runtime\Connection\ConnectionInterface;
 use Propel\Runtime\Exception\BadMethodCallException;
 use Propel\Runtime\Exception\LogicException;
@@ -88,12 +94,48 @@ abstract class WeaponDescription implements ActiveRecordInterface
     protected $reloadtime;
 
     /**
+     * @var        ObjectCollection|ShipDescription[] Collection to store aggregation of ShipDescription objects.
+     */
+    protected $collShipDescriptionsRelatedByWeapon1;
+    protected $collShipDescriptionsRelatedByWeapon1Partial;
+
+    /**
+     * @var        ObjectCollection|ShipDescription[] Collection to store aggregation of ShipDescription objects.
+     */
+    protected $collShipDescriptionsRelatedByWeapon2;
+    protected $collShipDescriptionsRelatedByWeapon2Partial;
+
+    /**
+     * @var        ObjectCollection|ShipDescription[] Collection to store aggregation of ShipDescription objects.
+     */
+    protected $collShipDescriptionsRelatedByWeapon3;
+    protected $collShipDescriptionsRelatedByWeapon3Partial;
+
+    /**
      * Flag to prevent endless save loop, if this object is referenced
      * by another object which falls in this transaction.
      *
      * @var boolean
      */
     protected $alreadyInSave = false;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var ObjectCollection|ShipDescription[]
+     */
+    protected $shipDescriptionsRelatedByWeapon1ScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var ObjectCollection|ShipDescription[]
+     */
+    protected $shipDescriptionsRelatedByWeapon2ScheduledForDeletion = null;
+
+    /**
+     * An array of objects scheduled for deletion.
+     * @var ObjectCollection|ShipDescription[]
+     */
+    protected $shipDescriptionsRelatedByWeapon3ScheduledForDeletion = null;
 
     /**
      * Initializes internal state of Persistence\WeaponDescriptionPersistence\Base\WeaponDescription object.
@@ -556,6 +598,12 @@ abstract class WeaponDescription implements ActiveRecordInterface
 
         if ($deep) {  // also de-associate any related objects?
 
+            $this->collShipDescriptionsRelatedByWeapon1 = null;
+
+            $this->collShipDescriptionsRelatedByWeapon2 = null;
+
+            $this->collShipDescriptionsRelatedByWeapon3 = null;
+
         } // if (deep)
     }
 
@@ -668,6 +716,59 @@ abstract class WeaponDescription implements ActiveRecordInterface
                     $affectedRows += $this->doUpdate($con);
                 }
                 $this->resetModified();
+            }
+
+            if ($this->shipDescriptionsRelatedByWeapon1ScheduledForDeletion !== null) {
+                if (!$this->shipDescriptionsRelatedByWeapon1ScheduledForDeletion->isEmpty()) {
+                    \Persistence\ShipDescriptionPersistence\ShipDescriptionQuery::create()
+                        ->filterByPrimaryKeys($this->shipDescriptionsRelatedByWeapon1ScheduledForDeletion->getPrimaryKeys(false))
+                        ->delete($con);
+                    $this->shipDescriptionsRelatedByWeapon1ScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collShipDescriptionsRelatedByWeapon1 !== null) {
+                foreach ($this->collShipDescriptionsRelatedByWeapon1 as $referrerFK) {
+                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
+            if ($this->shipDescriptionsRelatedByWeapon2ScheduledForDeletion !== null) {
+                if (!$this->shipDescriptionsRelatedByWeapon2ScheduledForDeletion->isEmpty()) {
+                    foreach ($this->shipDescriptionsRelatedByWeapon2ScheduledForDeletion as $shipDescriptionRelatedByWeapon2) {
+                        // need to save related object because we set the relation to null
+                        $shipDescriptionRelatedByWeapon2->save($con);
+                    }
+                    $this->shipDescriptionsRelatedByWeapon2ScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collShipDescriptionsRelatedByWeapon2 !== null) {
+                foreach ($this->collShipDescriptionsRelatedByWeapon2 as $referrerFK) {
+                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
+            }
+
+            if ($this->shipDescriptionsRelatedByWeapon3ScheduledForDeletion !== null) {
+                if (!$this->shipDescriptionsRelatedByWeapon3ScheduledForDeletion->isEmpty()) {
+                    foreach ($this->shipDescriptionsRelatedByWeapon3ScheduledForDeletion as $shipDescriptionRelatedByWeapon3) {
+                        // need to save related object because we set the relation to null
+                        $shipDescriptionRelatedByWeapon3->save($con);
+                    }
+                    $this->shipDescriptionsRelatedByWeapon3ScheduledForDeletion = null;
+                }
+            }
+
+            if ($this->collShipDescriptionsRelatedByWeapon3 !== null) {
+                foreach ($this->collShipDescriptionsRelatedByWeapon3 as $referrerFK) {
+                    if (!$referrerFK->isDeleted() && ($referrerFK->isNew() || $referrerFK->isModified())) {
+                        $affectedRows += $referrerFK->save($con);
+                    }
+                }
             }
 
             $this->alreadyInSave = false;
@@ -811,10 +912,11 @@ abstract class WeaponDescription implements ActiveRecordInterface
      *                    Defaults to TableMap::TYPE_PHPNAME.
      * @param     boolean $includeLazyLoadColumns (optional) Whether to include lazy loaded columns. Defaults to TRUE.
      * @param     array $alreadyDumpedObjects List of objects to skip to avoid recursion
+     * @param     boolean $includeForeignObjects (optional) Whether to include hydrated related objects. Default to FALSE.
      *
      * @return array an associative array containing the field names (as keys) and field values
      */
-    public function toArray($keyType = TableMap::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array())
+    public function toArray($keyType = TableMap::TYPE_PHPNAME, $includeLazyLoadColumns = true, $alreadyDumpedObjects = array(), $includeForeignObjects = false)
     {
 
         if (isset($alreadyDumpedObjects['WeaponDescription'][$this->hashCode()])) {
@@ -833,6 +935,53 @@ abstract class WeaponDescription implements ActiveRecordInterface
             $result[$key] = $virtualColumn;
         }
         
+        if ($includeForeignObjects) {
+            if (null !== $this->collShipDescriptionsRelatedByWeapon1) {
+                
+                switch ($keyType) {
+                    case TableMap::TYPE_CAMELNAME:
+                        $key = 'shipDescriptions';
+                        break;
+                    case TableMap::TYPE_FIELDNAME:
+                        $key = 'shipDescriptions';
+                        break;
+                    default:
+                        $key = 'ShipDescriptions';
+                }
+        
+                $result[$key] = $this->collShipDescriptionsRelatedByWeapon1->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collShipDescriptionsRelatedByWeapon2) {
+                
+                switch ($keyType) {
+                    case TableMap::TYPE_CAMELNAME:
+                        $key = 'shipDescriptions';
+                        break;
+                    case TableMap::TYPE_FIELDNAME:
+                        $key = 'shipDescriptions';
+                        break;
+                    default:
+                        $key = 'ShipDescriptions';
+                }
+        
+                $result[$key] = $this->collShipDescriptionsRelatedByWeapon2->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+            if (null !== $this->collShipDescriptionsRelatedByWeapon3) {
+                
+                switch ($keyType) {
+                    case TableMap::TYPE_CAMELNAME:
+                        $key = 'shipDescriptions';
+                        break;
+                    case TableMap::TYPE_FIELDNAME:
+                        $key = 'shipDescriptions';
+                        break;
+                    default:
+                        $key = 'ShipDescriptions';
+                }
+        
+                $result[$key] = $this->collShipDescriptionsRelatedByWeapon3->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
+            }
+        }
 
         return $result;
     }
@@ -1059,6 +1208,32 @@ abstract class WeaponDescription implements ActiveRecordInterface
         $copyObj->setRangeName($this->getRangeName());
         $copyObj->setAmmo($this->getAmmo());
         $copyObj->setReloadTime($this->getReloadTime());
+
+        if ($deepCopy) {
+            // important: temporarily setNew(false) because this affects the behavior of
+            // the getter/setter methods for fkey referrer objects.
+            $copyObj->setNew(false);
+
+            foreach ($this->getShipDescriptionsRelatedByWeapon1() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addShipDescriptionRelatedByWeapon1($relObj->copy($deepCopy));
+                }
+            }
+
+            foreach ($this->getShipDescriptionsRelatedByWeapon2() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addShipDescriptionRelatedByWeapon2($relObj->copy($deepCopy));
+                }
+            }
+
+            foreach ($this->getShipDescriptionsRelatedByWeapon3() as $relObj) {
+                if ($relObj !== $this) {  // ensure that we don't try to copy a reference to ourselves
+                    $copyObj->addShipDescriptionRelatedByWeapon3($relObj->copy($deepCopy));
+                }
+            }
+
+        } // if ($deepCopy)
+
         if ($makeNew) {
             $copyObj->setNew(true);
         }
@@ -1084,6 +1259,703 @@ abstract class WeaponDescription implements ActiveRecordInterface
         $this->copyInto($copyObj, $deepCopy);
 
         return $copyObj;
+    }
+
+
+    /**
+     * Initializes a collection based on the name of a relation.
+     * Avoids crafting an 'init[$relationName]s' method name
+     * that wouldn't work when StandardEnglishPluralizer is used.
+     *
+     * @param      string $relationName The name of the relation to initialize
+     * @return void
+     */
+    public function initRelation($relationName)
+    {
+        if ('ShipDescriptionRelatedByWeapon1' == $relationName) {
+            return $this->initShipDescriptionsRelatedByWeapon1();
+        }
+        if ('ShipDescriptionRelatedByWeapon2' == $relationName) {
+            return $this->initShipDescriptionsRelatedByWeapon2();
+        }
+        if ('ShipDescriptionRelatedByWeapon3' == $relationName) {
+            return $this->initShipDescriptionsRelatedByWeapon3();
+        }
+    }
+
+    /**
+     * Clears out the collShipDescriptionsRelatedByWeapon1 collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return void
+     * @see        addShipDescriptionsRelatedByWeapon1()
+     */
+    public function clearShipDescriptionsRelatedByWeapon1()
+    {
+        $this->collShipDescriptionsRelatedByWeapon1 = null; // important to set this to NULL since that means it is uninitialized
+    }
+
+    /**
+     * Reset is the collShipDescriptionsRelatedByWeapon1 collection loaded partially.
+     */
+    public function resetPartialShipDescriptionsRelatedByWeapon1($v = true)
+    {
+        $this->collShipDescriptionsRelatedByWeapon1Partial = $v;
+    }
+
+    /**
+     * Initializes the collShipDescriptionsRelatedByWeapon1 collection.
+     *
+     * By default this just sets the collShipDescriptionsRelatedByWeapon1 collection to an empty array (like clearcollShipDescriptionsRelatedByWeapon1());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param      boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initShipDescriptionsRelatedByWeapon1($overrideExisting = true)
+    {
+        if (null !== $this->collShipDescriptionsRelatedByWeapon1 && !$overrideExisting) {
+            return;
+        }
+
+        $collectionClassName = ShipDescriptionTableMap::getTableMap()->getCollectionClassName();
+
+        $this->collShipDescriptionsRelatedByWeapon1 = new $collectionClassName;
+        $this->collShipDescriptionsRelatedByWeapon1->setModel('\Persistence\ShipDescriptionPersistence\ShipDescription');
+    }
+
+    /**
+     * Gets an array of ShipDescription objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this ChildWeaponDescription is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      ConnectionInterface $con optional connection object
+     * @return ObjectCollection|ShipDescription[] List of ShipDescription objects
+     * @throws PropelException
+     */
+    public function getShipDescriptionsRelatedByWeapon1(Criteria $criteria = null, ConnectionInterface $con = null)
+    {
+        $partial = $this->collShipDescriptionsRelatedByWeapon1Partial && !$this->isNew();
+        if (null === $this->collShipDescriptionsRelatedByWeapon1 || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collShipDescriptionsRelatedByWeapon1) {
+                // return empty collection
+                $this->initShipDescriptionsRelatedByWeapon1();
+            } else {
+                $collShipDescriptionsRelatedByWeapon1 = ShipDescriptionQuery::create(null, $criteria)
+                    ->filterByWeaponDescriptionRelatedByWeapon1($this)
+                    ->find($con);
+
+                if (null !== $criteria) {
+                    if (false !== $this->collShipDescriptionsRelatedByWeapon1Partial && count($collShipDescriptionsRelatedByWeapon1)) {
+                        $this->initShipDescriptionsRelatedByWeapon1(false);
+
+                        foreach ($collShipDescriptionsRelatedByWeapon1 as $obj) {
+                            if (false == $this->collShipDescriptionsRelatedByWeapon1->contains($obj)) {
+                                $this->collShipDescriptionsRelatedByWeapon1->append($obj);
+                            }
+                        }
+
+                        $this->collShipDescriptionsRelatedByWeapon1Partial = true;
+                    }
+
+                    return $collShipDescriptionsRelatedByWeapon1;
+                }
+
+                if ($partial && $this->collShipDescriptionsRelatedByWeapon1) {
+                    foreach ($this->collShipDescriptionsRelatedByWeapon1 as $obj) {
+                        if ($obj->isNew()) {
+                            $collShipDescriptionsRelatedByWeapon1[] = $obj;
+                        }
+                    }
+                }
+
+                $this->collShipDescriptionsRelatedByWeapon1 = $collShipDescriptionsRelatedByWeapon1;
+                $this->collShipDescriptionsRelatedByWeapon1Partial = false;
+            }
+        }
+
+        return $this->collShipDescriptionsRelatedByWeapon1;
+    }
+
+    /**
+     * Sets a collection of ShipDescription objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param      Collection $shipDescriptionsRelatedByWeapon1 A Propel collection.
+     * @param      ConnectionInterface $con Optional connection object
+     * @return $this|ChildWeaponDescription The current object (for fluent API support)
+     */
+    public function setShipDescriptionsRelatedByWeapon1(Collection $shipDescriptionsRelatedByWeapon1, ConnectionInterface $con = null)
+    {
+        /** @var ShipDescription[] $shipDescriptionsRelatedByWeapon1ToDelete */
+        $shipDescriptionsRelatedByWeapon1ToDelete = $this->getShipDescriptionsRelatedByWeapon1(new Criteria(), $con)->diff($shipDescriptionsRelatedByWeapon1);
+
+        
+        $this->shipDescriptionsRelatedByWeapon1ScheduledForDeletion = $shipDescriptionsRelatedByWeapon1ToDelete;
+
+        foreach ($shipDescriptionsRelatedByWeapon1ToDelete as $shipDescriptionRelatedByWeapon1Removed) {
+            $shipDescriptionRelatedByWeapon1Removed->setWeaponDescriptionRelatedByWeapon1(null);
+        }
+
+        $this->collShipDescriptionsRelatedByWeapon1 = null;
+        foreach ($shipDescriptionsRelatedByWeapon1 as $shipDescriptionRelatedByWeapon1) {
+            $this->addShipDescriptionRelatedByWeapon1($shipDescriptionRelatedByWeapon1);
+        }
+
+        $this->collShipDescriptionsRelatedByWeapon1 = $shipDescriptionsRelatedByWeapon1;
+        $this->collShipDescriptionsRelatedByWeapon1Partial = false;
+
+        return $this;
+    }
+
+    /**
+     * Returns the number of related BaseShipDescription objects.
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct
+     * @param      ConnectionInterface $con
+     * @return int             Count of related BaseShipDescription objects.
+     * @throws PropelException
+     */
+    public function countShipDescriptionsRelatedByWeapon1(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
+    {
+        $partial = $this->collShipDescriptionsRelatedByWeapon1Partial && !$this->isNew();
+        if (null === $this->collShipDescriptionsRelatedByWeapon1 || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collShipDescriptionsRelatedByWeapon1) {
+                return 0;
+            }
+
+            if ($partial && !$criteria) {
+                return count($this->getShipDescriptionsRelatedByWeapon1());
+            }
+
+            $query = ShipDescriptionQuery::create(null, $criteria);
+            if ($distinct) {
+                $query->distinct();
+            }
+
+            return $query
+                ->filterByWeaponDescriptionRelatedByWeapon1($this)
+                ->count($con);
+        }
+
+        return count($this->collShipDescriptionsRelatedByWeapon1);
+    }
+
+    /**
+     * Method called to associate a ShipDescription object to this object
+     * through the ShipDescription foreign key attribute.
+     *
+     * @param  ShipDescription $l ShipDescription
+     * @return $this|\Persistence\WeaponDescriptionPersistence\WeaponDescription The current object (for fluent API support)
+     */
+    public function addShipDescriptionRelatedByWeapon1(ShipDescription $l)
+    {
+        if ($this->collShipDescriptionsRelatedByWeapon1 === null) {
+            $this->initShipDescriptionsRelatedByWeapon1();
+            $this->collShipDescriptionsRelatedByWeapon1Partial = true;
+        }
+
+        if (!$this->collShipDescriptionsRelatedByWeapon1->contains($l)) {
+            $this->doAddShipDescriptionRelatedByWeapon1($l);
+
+            if ($this->shipDescriptionsRelatedByWeapon1ScheduledForDeletion and $this->shipDescriptionsRelatedByWeapon1ScheduledForDeletion->contains($l)) {
+                $this->shipDescriptionsRelatedByWeapon1ScheduledForDeletion->remove($this->shipDescriptionsRelatedByWeapon1ScheduledForDeletion->search($l));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param ShipDescription $shipDescriptionRelatedByWeapon1 The ShipDescription object to add.
+     */
+    protected function doAddShipDescriptionRelatedByWeapon1(ShipDescription $shipDescriptionRelatedByWeapon1)
+    {
+        $this->collShipDescriptionsRelatedByWeapon1[]= $shipDescriptionRelatedByWeapon1;
+        $shipDescriptionRelatedByWeapon1->setWeaponDescriptionRelatedByWeapon1($this);
+    }
+
+    /**
+     * @param  ShipDescription $shipDescriptionRelatedByWeapon1 The ShipDescription object to remove.
+     * @return $this|ChildWeaponDescription The current object (for fluent API support)
+     */
+    public function removeShipDescriptionRelatedByWeapon1(ShipDescription $shipDescriptionRelatedByWeapon1)
+    {
+        if ($this->getShipDescriptionsRelatedByWeapon1()->contains($shipDescriptionRelatedByWeapon1)) {
+            $pos = $this->collShipDescriptionsRelatedByWeapon1->search($shipDescriptionRelatedByWeapon1);
+            $this->collShipDescriptionsRelatedByWeapon1->remove($pos);
+            if (null === $this->shipDescriptionsRelatedByWeapon1ScheduledForDeletion) {
+                $this->shipDescriptionsRelatedByWeapon1ScheduledForDeletion = clone $this->collShipDescriptionsRelatedByWeapon1;
+                $this->shipDescriptionsRelatedByWeapon1ScheduledForDeletion->clear();
+            }
+            $this->shipDescriptionsRelatedByWeapon1ScheduledForDeletion[]= clone $shipDescriptionRelatedByWeapon1;
+            $shipDescriptionRelatedByWeapon1->setWeaponDescriptionRelatedByWeapon1(null);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Clears out the collShipDescriptionsRelatedByWeapon2 collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return void
+     * @see        addShipDescriptionsRelatedByWeapon2()
+     */
+    public function clearShipDescriptionsRelatedByWeapon2()
+    {
+        $this->collShipDescriptionsRelatedByWeapon2 = null; // important to set this to NULL since that means it is uninitialized
+    }
+
+    /**
+     * Reset is the collShipDescriptionsRelatedByWeapon2 collection loaded partially.
+     */
+    public function resetPartialShipDescriptionsRelatedByWeapon2($v = true)
+    {
+        $this->collShipDescriptionsRelatedByWeapon2Partial = $v;
+    }
+
+    /**
+     * Initializes the collShipDescriptionsRelatedByWeapon2 collection.
+     *
+     * By default this just sets the collShipDescriptionsRelatedByWeapon2 collection to an empty array (like clearcollShipDescriptionsRelatedByWeapon2());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param      boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initShipDescriptionsRelatedByWeapon2($overrideExisting = true)
+    {
+        if (null !== $this->collShipDescriptionsRelatedByWeapon2 && !$overrideExisting) {
+            return;
+        }
+
+        $collectionClassName = ShipDescriptionTableMap::getTableMap()->getCollectionClassName();
+
+        $this->collShipDescriptionsRelatedByWeapon2 = new $collectionClassName;
+        $this->collShipDescriptionsRelatedByWeapon2->setModel('\Persistence\ShipDescriptionPersistence\ShipDescription');
+    }
+
+    /**
+     * Gets an array of ShipDescription objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this ChildWeaponDescription is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      ConnectionInterface $con optional connection object
+     * @return ObjectCollection|ShipDescription[] List of ShipDescription objects
+     * @throws PropelException
+     */
+    public function getShipDescriptionsRelatedByWeapon2(Criteria $criteria = null, ConnectionInterface $con = null)
+    {
+        $partial = $this->collShipDescriptionsRelatedByWeapon2Partial && !$this->isNew();
+        if (null === $this->collShipDescriptionsRelatedByWeapon2 || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collShipDescriptionsRelatedByWeapon2) {
+                // return empty collection
+                $this->initShipDescriptionsRelatedByWeapon2();
+            } else {
+                $collShipDescriptionsRelatedByWeapon2 = ShipDescriptionQuery::create(null, $criteria)
+                    ->filterByWeaponDescriptionRelatedByWeapon2($this)
+                    ->find($con);
+
+                if (null !== $criteria) {
+                    if (false !== $this->collShipDescriptionsRelatedByWeapon2Partial && count($collShipDescriptionsRelatedByWeapon2)) {
+                        $this->initShipDescriptionsRelatedByWeapon2(false);
+
+                        foreach ($collShipDescriptionsRelatedByWeapon2 as $obj) {
+                            if (false == $this->collShipDescriptionsRelatedByWeapon2->contains($obj)) {
+                                $this->collShipDescriptionsRelatedByWeapon2->append($obj);
+                            }
+                        }
+
+                        $this->collShipDescriptionsRelatedByWeapon2Partial = true;
+                    }
+
+                    return $collShipDescriptionsRelatedByWeapon2;
+                }
+
+                if ($partial && $this->collShipDescriptionsRelatedByWeapon2) {
+                    foreach ($this->collShipDescriptionsRelatedByWeapon2 as $obj) {
+                        if ($obj->isNew()) {
+                            $collShipDescriptionsRelatedByWeapon2[] = $obj;
+                        }
+                    }
+                }
+
+                $this->collShipDescriptionsRelatedByWeapon2 = $collShipDescriptionsRelatedByWeapon2;
+                $this->collShipDescriptionsRelatedByWeapon2Partial = false;
+            }
+        }
+
+        return $this->collShipDescriptionsRelatedByWeapon2;
+    }
+
+    /**
+     * Sets a collection of ShipDescription objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param      Collection $shipDescriptionsRelatedByWeapon2 A Propel collection.
+     * @param      ConnectionInterface $con Optional connection object
+     * @return $this|ChildWeaponDescription The current object (for fluent API support)
+     */
+    public function setShipDescriptionsRelatedByWeapon2(Collection $shipDescriptionsRelatedByWeapon2, ConnectionInterface $con = null)
+    {
+        /** @var ShipDescription[] $shipDescriptionsRelatedByWeapon2ToDelete */
+        $shipDescriptionsRelatedByWeapon2ToDelete = $this->getShipDescriptionsRelatedByWeapon2(new Criteria(), $con)->diff($shipDescriptionsRelatedByWeapon2);
+
+        
+        $this->shipDescriptionsRelatedByWeapon2ScheduledForDeletion = $shipDescriptionsRelatedByWeapon2ToDelete;
+
+        foreach ($shipDescriptionsRelatedByWeapon2ToDelete as $shipDescriptionRelatedByWeapon2Removed) {
+            $shipDescriptionRelatedByWeapon2Removed->setWeaponDescriptionRelatedByWeapon2(null);
+        }
+
+        $this->collShipDescriptionsRelatedByWeapon2 = null;
+        foreach ($shipDescriptionsRelatedByWeapon2 as $shipDescriptionRelatedByWeapon2) {
+            $this->addShipDescriptionRelatedByWeapon2($shipDescriptionRelatedByWeapon2);
+        }
+
+        $this->collShipDescriptionsRelatedByWeapon2 = $shipDescriptionsRelatedByWeapon2;
+        $this->collShipDescriptionsRelatedByWeapon2Partial = false;
+
+        return $this;
+    }
+
+    /**
+     * Returns the number of related BaseShipDescription objects.
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct
+     * @param      ConnectionInterface $con
+     * @return int             Count of related BaseShipDescription objects.
+     * @throws PropelException
+     */
+    public function countShipDescriptionsRelatedByWeapon2(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
+    {
+        $partial = $this->collShipDescriptionsRelatedByWeapon2Partial && !$this->isNew();
+        if (null === $this->collShipDescriptionsRelatedByWeapon2 || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collShipDescriptionsRelatedByWeapon2) {
+                return 0;
+            }
+
+            if ($partial && !$criteria) {
+                return count($this->getShipDescriptionsRelatedByWeapon2());
+            }
+
+            $query = ShipDescriptionQuery::create(null, $criteria);
+            if ($distinct) {
+                $query->distinct();
+            }
+
+            return $query
+                ->filterByWeaponDescriptionRelatedByWeapon2($this)
+                ->count($con);
+        }
+
+        return count($this->collShipDescriptionsRelatedByWeapon2);
+    }
+
+    /**
+     * Method called to associate a ShipDescription object to this object
+     * through the ShipDescription foreign key attribute.
+     *
+     * @param  ShipDescription $l ShipDescription
+     * @return $this|\Persistence\WeaponDescriptionPersistence\WeaponDescription The current object (for fluent API support)
+     */
+    public function addShipDescriptionRelatedByWeapon2(ShipDescription $l)
+    {
+        if ($this->collShipDescriptionsRelatedByWeapon2 === null) {
+            $this->initShipDescriptionsRelatedByWeapon2();
+            $this->collShipDescriptionsRelatedByWeapon2Partial = true;
+        }
+
+        if (!$this->collShipDescriptionsRelatedByWeapon2->contains($l)) {
+            $this->doAddShipDescriptionRelatedByWeapon2($l);
+
+            if ($this->shipDescriptionsRelatedByWeapon2ScheduledForDeletion and $this->shipDescriptionsRelatedByWeapon2ScheduledForDeletion->contains($l)) {
+                $this->shipDescriptionsRelatedByWeapon2ScheduledForDeletion->remove($this->shipDescriptionsRelatedByWeapon2ScheduledForDeletion->search($l));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param ShipDescription $shipDescriptionRelatedByWeapon2 The ShipDescription object to add.
+     */
+    protected function doAddShipDescriptionRelatedByWeapon2(ShipDescription $shipDescriptionRelatedByWeapon2)
+    {
+        $this->collShipDescriptionsRelatedByWeapon2[]= $shipDescriptionRelatedByWeapon2;
+        $shipDescriptionRelatedByWeapon2->setWeaponDescriptionRelatedByWeapon2($this);
+    }
+
+    /**
+     * @param  ShipDescription $shipDescriptionRelatedByWeapon2 The ShipDescription object to remove.
+     * @return $this|ChildWeaponDescription The current object (for fluent API support)
+     */
+    public function removeShipDescriptionRelatedByWeapon2(ShipDescription $shipDescriptionRelatedByWeapon2)
+    {
+        if ($this->getShipDescriptionsRelatedByWeapon2()->contains($shipDescriptionRelatedByWeapon2)) {
+            $pos = $this->collShipDescriptionsRelatedByWeapon2->search($shipDescriptionRelatedByWeapon2);
+            $this->collShipDescriptionsRelatedByWeapon2->remove($pos);
+            if (null === $this->shipDescriptionsRelatedByWeapon2ScheduledForDeletion) {
+                $this->shipDescriptionsRelatedByWeapon2ScheduledForDeletion = clone $this->collShipDescriptionsRelatedByWeapon2;
+                $this->shipDescriptionsRelatedByWeapon2ScheduledForDeletion->clear();
+            }
+            $this->shipDescriptionsRelatedByWeapon2ScheduledForDeletion[]= $shipDescriptionRelatedByWeapon2;
+            $shipDescriptionRelatedByWeapon2->setWeaponDescriptionRelatedByWeapon2(null);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Clears out the collShipDescriptionsRelatedByWeapon3 collection
+     *
+     * This does not modify the database; however, it will remove any associated objects, causing
+     * them to be refetched by subsequent calls to accessor method.
+     *
+     * @return void
+     * @see        addShipDescriptionsRelatedByWeapon3()
+     */
+    public function clearShipDescriptionsRelatedByWeapon3()
+    {
+        $this->collShipDescriptionsRelatedByWeapon3 = null; // important to set this to NULL since that means it is uninitialized
+    }
+
+    /**
+     * Reset is the collShipDescriptionsRelatedByWeapon3 collection loaded partially.
+     */
+    public function resetPartialShipDescriptionsRelatedByWeapon3($v = true)
+    {
+        $this->collShipDescriptionsRelatedByWeapon3Partial = $v;
+    }
+
+    /**
+     * Initializes the collShipDescriptionsRelatedByWeapon3 collection.
+     *
+     * By default this just sets the collShipDescriptionsRelatedByWeapon3 collection to an empty array (like clearcollShipDescriptionsRelatedByWeapon3());
+     * however, you may wish to override this method in your stub class to provide setting appropriate
+     * to your application -- for example, setting the initial array to the values stored in database.
+     *
+     * @param      boolean $overrideExisting If set to true, the method call initializes
+     *                                        the collection even if it is not empty
+     *
+     * @return void
+     */
+    public function initShipDescriptionsRelatedByWeapon3($overrideExisting = true)
+    {
+        if (null !== $this->collShipDescriptionsRelatedByWeapon3 && !$overrideExisting) {
+            return;
+        }
+
+        $collectionClassName = ShipDescriptionTableMap::getTableMap()->getCollectionClassName();
+
+        $this->collShipDescriptionsRelatedByWeapon3 = new $collectionClassName;
+        $this->collShipDescriptionsRelatedByWeapon3->setModel('\Persistence\ShipDescriptionPersistence\ShipDescription');
+    }
+
+    /**
+     * Gets an array of ShipDescription objects which contain a foreign key that references this object.
+     *
+     * If the $criteria is not null, it is used to always fetch the results from the database.
+     * Otherwise the results are fetched from the database the first time, then cached.
+     * Next time the same method is called without $criteria, the cached collection is returned.
+     * If this ChildWeaponDescription is new, it will return
+     * an empty collection or the current collection; the criteria is ignored on a new object.
+     *
+     * @param      Criteria $criteria optional Criteria object to narrow the query
+     * @param      ConnectionInterface $con optional connection object
+     * @return ObjectCollection|ShipDescription[] List of ShipDescription objects
+     * @throws PropelException
+     */
+    public function getShipDescriptionsRelatedByWeapon3(Criteria $criteria = null, ConnectionInterface $con = null)
+    {
+        $partial = $this->collShipDescriptionsRelatedByWeapon3Partial && !$this->isNew();
+        if (null === $this->collShipDescriptionsRelatedByWeapon3 || null !== $criteria  || $partial) {
+            if ($this->isNew() && null === $this->collShipDescriptionsRelatedByWeapon3) {
+                // return empty collection
+                $this->initShipDescriptionsRelatedByWeapon3();
+            } else {
+                $collShipDescriptionsRelatedByWeapon3 = ShipDescriptionQuery::create(null, $criteria)
+                    ->filterByWeaponDescriptionRelatedByWeapon3($this)
+                    ->find($con);
+
+                if (null !== $criteria) {
+                    if (false !== $this->collShipDescriptionsRelatedByWeapon3Partial && count($collShipDescriptionsRelatedByWeapon3)) {
+                        $this->initShipDescriptionsRelatedByWeapon3(false);
+
+                        foreach ($collShipDescriptionsRelatedByWeapon3 as $obj) {
+                            if (false == $this->collShipDescriptionsRelatedByWeapon3->contains($obj)) {
+                                $this->collShipDescriptionsRelatedByWeapon3->append($obj);
+                            }
+                        }
+
+                        $this->collShipDescriptionsRelatedByWeapon3Partial = true;
+                    }
+
+                    return $collShipDescriptionsRelatedByWeapon3;
+                }
+
+                if ($partial && $this->collShipDescriptionsRelatedByWeapon3) {
+                    foreach ($this->collShipDescriptionsRelatedByWeapon3 as $obj) {
+                        if ($obj->isNew()) {
+                            $collShipDescriptionsRelatedByWeapon3[] = $obj;
+                        }
+                    }
+                }
+
+                $this->collShipDescriptionsRelatedByWeapon3 = $collShipDescriptionsRelatedByWeapon3;
+                $this->collShipDescriptionsRelatedByWeapon3Partial = false;
+            }
+        }
+
+        return $this->collShipDescriptionsRelatedByWeapon3;
+    }
+
+    /**
+     * Sets a collection of ShipDescription objects related by a one-to-many relationship
+     * to the current object.
+     * It will also schedule objects for deletion based on a diff between old objects (aka persisted)
+     * and new objects from the given Propel collection.
+     *
+     * @param      Collection $shipDescriptionsRelatedByWeapon3 A Propel collection.
+     * @param      ConnectionInterface $con Optional connection object
+     * @return $this|ChildWeaponDescription The current object (for fluent API support)
+     */
+    public function setShipDescriptionsRelatedByWeapon3(Collection $shipDescriptionsRelatedByWeapon3, ConnectionInterface $con = null)
+    {
+        /** @var ShipDescription[] $shipDescriptionsRelatedByWeapon3ToDelete */
+        $shipDescriptionsRelatedByWeapon3ToDelete = $this->getShipDescriptionsRelatedByWeapon3(new Criteria(), $con)->diff($shipDescriptionsRelatedByWeapon3);
+
+        
+        $this->shipDescriptionsRelatedByWeapon3ScheduledForDeletion = $shipDescriptionsRelatedByWeapon3ToDelete;
+
+        foreach ($shipDescriptionsRelatedByWeapon3ToDelete as $shipDescriptionRelatedByWeapon3Removed) {
+            $shipDescriptionRelatedByWeapon3Removed->setWeaponDescriptionRelatedByWeapon3(null);
+        }
+
+        $this->collShipDescriptionsRelatedByWeapon3 = null;
+        foreach ($shipDescriptionsRelatedByWeapon3 as $shipDescriptionRelatedByWeapon3) {
+            $this->addShipDescriptionRelatedByWeapon3($shipDescriptionRelatedByWeapon3);
+        }
+
+        $this->collShipDescriptionsRelatedByWeapon3 = $shipDescriptionsRelatedByWeapon3;
+        $this->collShipDescriptionsRelatedByWeapon3Partial = false;
+
+        return $this;
+    }
+
+    /**
+     * Returns the number of related BaseShipDescription objects.
+     *
+     * @param      Criteria $criteria
+     * @param      boolean $distinct
+     * @param      ConnectionInterface $con
+     * @return int             Count of related BaseShipDescription objects.
+     * @throws PropelException
+     */
+    public function countShipDescriptionsRelatedByWeapon3(Criteria $criteria = null, $distinct = false, ConnectionInterface $con = null)
+    {
+        $partial = $this->collShipDescriptionsRelatedByWeapon3Partial && !$this->isNew();
+        if (null === $this->collShipDescriptionsRelatedByWeapon3 || null !== $criteria || $partial) {
+            if ($this->isNew() && null === $this->collShipDescriptionsRelatedByWeapon3) {
+                return 0;
+            }
+
+            if ($partial && !$criteria) {
+                return count($this->getShipDescriptionsRelatedByWeapon3());
+            }
+
+            $query = ShipDescriptionQuery::create(null, $criteria);
+            if ($distinct) {
+                $query->distinct();
+            }
+
+            return $query
+                ->filterByWeaponDescriptionRelatedByWeapon3($this)
+                ->count($con);
+        }
+
+        return count($this->collShipDescriptionsRelatedByWeapon3);
+    }
+
+    /**
+     * Method called to associate a ShipDescription object to this object
+     * through the ShipDescription foreign key attribute.
+     *
+     * @param  ShipDescription $l ShipDescription
+     * @return $this|\Persistence\WeaponDescriptionPersistence\WeaponDescription The current object (for fluent API support)
+     */
+    public function addShipDescriptionRelatedByWeapon3(ShipDescription $l)
+    {
+        if ($this->collShipDescriptionsRelatedByWeapon3 === null) {
+            $this->initShipDescriptionsRelatedByWeapon3();
+            $this->collShipDescriptionsRelatedByWeapon3Partial = true;
+        }
+
+        if (!$this->collShipDescriptionsRelatedByWeapon3->contains($l)) {
+            $this->doAddShipDescriptionRelatedByWeapon3($l);
+
+            if ($this->shipDescriptionsRelatedByWeapon3ScheduledForDeletion and $this->shipDescriptionsRelatedByWeapon3ScheduledForDeletion->contains($l)) {
+                $this->shipDescriptionsRelatedByWeapon3ScheduledForDeletion->remove($this->shipDescriptionsRelatedByWeapon3ScheduledForDeletion->search($l));
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @param ShipDescription $shipDescriptionRelatedByWeapon3 The ShipDescription object to add.
+     */
+    protected function doAddShipDescriptionRelatedByWeapon3(ShipDescription $shipDescriptionRelatedByWeapon3)
+    {
+        $this->collShipDescriptionsRelatedByWeapon3[]= $shipDescriptionRelatedByWeapon3;
+        $shipDescriptionRelatedByWeapon3->setWeaponDescriptionRelatedByWeapon3($this);
+    }
+
+    /**
+     * @param  ShipDescription $shipDescriptionRelatedByWeapon3 The ShipDescription object to remove.
+     * @return $this|ChildWeaponDescription The current object (for fluent API support)
+     */
+    public function removeShipDescriptionRelatedByWeapon3(ShipDescription $shipDescriptionRelatedByWeapon3)
+    {
+        if ($this->getShipDescriptionsRelatedByWeapon3()->contains($shipDescriptionRelatedByWeapon3)) {
+            $pos = $this->collShipDescriptionsRelatedByWeapon3->search($shipDescriptionRelatedByWeapon3);
+            $this->collShipDescriptionsRelatedByWeapon3->remove($pos);
+            if (null === $this->shipDescriptionsRelatedByWeapon3ScheduledForDeletion) {
+                $this->shipDescriptionsRelatedByWeapon3ScheduledForDeletion = clone $this->collShipDescriptionsRelatedByWeapon3;
+                $this->shipDescriptionsRelatedByWeapon3ScheduledForDeletion->clear();
+            }
+            $this->shipDescriptionsRelatedByWeapon3ScheduledForDeletion[]= $shipDescriptionRelatedByWeapon3;
+            $shipDescriptionRelatedByWeapon3->setWeaponDescriptionRelatedByWeapon3(null);
+        }
+
+        return $this;
     }
 
     /**
@@ -1115,8 +1987,26 @@ abstract class WeaponDescription implements ActiveRecordInterface
     public function clearAllReferences($deep = false)
     {
         if ($deep) {
+            if ($this->collShipDescriptionsRelatedByWeapon1) {
+                foreach ($this->collShipDescriptionsRelatedByWeapon1 as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
+            if ($this->collShipDescriptionsRelatedByWeapon2) {
+                foreach ($this->collShipDescriptionsRelatedByWeapon2 as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
+            if ($this->collShipDescriptionsRelatedByWeapon3) {
+                foreach ($this->collShipDescriptionsRelatedByWeapon3 as $o) {
+                    $o->clearAllReferences($deep);
+                }
+            }
         } // if ($deep)
 
+        $this->collShipDescriptionsRelatedByWeapon1 = null;
+        $this->collShipDescriptionsRelatedByWeapon2 = null;
+        $this->collShipDescriptionsRelatedByWeapon3 = null;
     }
 
     /**

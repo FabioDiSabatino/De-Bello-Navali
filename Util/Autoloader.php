@@ -6,8 +6,12 @@
 * Time: 18.10
 */
 
+    /**
+     * @param string $class
+     */
     function myAutoload($class) {
-        $class = str_replace('\\','/',$class);
+
+        $class = str_replace('\\', '/', $class);
         require $class . '.php';
     }
 

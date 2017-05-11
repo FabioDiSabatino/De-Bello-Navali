@@ -6,27 +6,54 @@
  * Time: 17.52
  */
 
-
     require_once("vendor/autoload.php");
     require_once("generated-conf/config.php");
+    require_once("Util/Autoloader.php");
 
-    include("Util/Autoloader.php");
+    use Model\Factories\UtilityFactory\GameFactory;
+    use Persistence\ShipDescriptionPersistence\ShipCatalog;
+    use Persistence\ShipDescriptionPersistence\ShipDescription;
+    use Persistence\WeaponDescriptionPersistence\WeaponDescription;
+    use Model\Battlefield;
 
-    use Model\Catalogs\WeaponDescription;
+//    Persistence\ShipDescriptionPersistence\ShipDescriptionQuery::create()->doDeleteAll();
+//    Persistence\WeaponDescriptionPersistence\WeaponDescriptionQuery::create()->doDeleteAll();
 
-    $weaponDescription = new WeaponDescription();
+    //startup
+    $battlefield = new Battlefield();
+    $fleetFactory = GameFactory::getInstance()->createFleetFactory('Galli');
 
-    \Persistence\WeaponDescriptionPersistence\WeaponDescriptionQuery::create()->doDeleteAll();
+    $battlefield->setFleetFactory($fleetFactory);
 
-    $weaponDescription->setWeaponName('WeaponName');
-    $weaponDescription->setRangeName('RangeName');
-    $weaponDescription->setAmmo(1);
-    $weaponDescription->setReloadTime(4);
+    $battlefield->addShipToField('Nave McBattelly', 0, 0, 'horizontal');
 
-    $weaponDescription->save();
+    $battlefield->addShipToField('Nave McBattelly', 1, 1, 'vertical');
 
-    $weapon = \Persistence\WeaponDescriptionPersistence\WeaponDescriptionQuery::create()->findPk('WeaponName');
+    $battlefield->addShipToField('Nave McBattelly', 0, 2, 'horizontal');
 
-    echo $weapon->getWeaponName();
+    $battlefield->placeShips();
+
+    var_dump($battlefield->getFleet());
+//    $battlefield->placeShip('Nave McBattelly', 2, 1, 'vertical');
+//    $battlefield->placeShip('Nave McBattelly', 0, 1, 'horizontal');
+//
+//    $weaponDescription = new WeaponDescription();
+//    $weaponDescription->setWeaponName('Colpo singolo');
+//    $weaponDescription->setRangeName('W1');
+//    $weaponDescription->setReloadTime(3);
+//    $weaponDescription->setAmmo(99);
+//
+//    $weaponDescription->save();
+//
+//    $shipDescription = new ShipDescription();
+//
+//    $shipDescription->setCivilization('Bretoni');
+//    $shipDescription->setShipName('Nave McBattelly');
+//    $shipDescription->setDimension(3);
+//    $shipDescription->setShipWeight(16);
+//    $shipDescription->setWeapon1('Colpo singolo');
+//    $shipDescription->setWeapon2('Colpo singolo');
+//
+//    $shipDescription->save();
 
     ?>

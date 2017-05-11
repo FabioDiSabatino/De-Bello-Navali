@@ -152,6 +152,27 @@ class WeaponDescriptionTableMap extends TableMap
      */
     public function buildRelations()
     {
+        $this->addRelation('ShipDescriptionRelatedByWeapon1', '\\Persistence\\ShipDescriptionPersistence\\ShipDescription', RelationMap::ONE_TO_MANY, array (
+  0 =>
+  array (
+    0 => ':weapon1',
+    1 => ':weaponName',
+  ),
+), null, null, 'ShipDescriptionsRelatedByWeapon1', false);
+        $this->addRelation('ShipDescriptionRelatedByWeapon2', '\\Persistence\\ShipDescriptionPersistence\\ShipDescription', RelationMap::ONE_TO_MANY, array (
+  0 =>
+  array (
+    0 => ':weapon2',
+    1 => ':weaponName',
+  ),
+), null, null, 'ShipDescriptionsRelatedByWeapon2', false);
+        $this->addRelation('ShipDescriptionRelatedByWeapon3', '\\Persistence\\ShipDescriptionPersistence\\ShipDescription', RelationMap::ONE_TO_MANY, array (
+  0 =>
+  array (
+    0 => ':weapon3',
+    1 => ':weaponName',
+  ),
+), null, null, 'ShipDescriptionsRelatedByWeapon3', false);
     } // buildRelations()
 
     /**

@@ -9,14 +9,56 @@
 namespace Model\Factories\WeaponFactory;
 
 use Model\Weapon;
+use Persistence\WeaponDescriptionPersistence\WeaponCatalog;
 
 
-abstract class WeaponFactory {
+class WeaponFactory {
 
-    function createSimpleWeapon() { return new Weapon('W1'); } // dovrà essere l'arma da 1
+    private static $instance = null;
 
-    abstract function createWeaponShip2();
-    abstract function createWeaponShip3();
-    abstract function createWeaponShip4();
+    protected static $weaponId = 1;
+
+    /** Creates a Weapon object
+     * @param string $weaponName
+     * @return Weapon
+     */
+    function createWeapon($weaponName) {
+
+        $weaponCatalog = WeaponCatalog::getInstance();
+        $weaponDescription = $weaponCatalog->getWeaponDescription($weaponName);
+
+        $weaponRangeName = $weaponDescription->getRangeName();
+        $weaponReloadTime = $weaponDescription->getReloadTime();
+
+        //TODO: Comunicare con l'ammostorage e inserire informazioni relative alle munizioni (se non sono già presenti)
+
+        $weapon = new Weapon($weaponRangeName, $weaponReloadTime);
+        $weapon->setWeaponID(self::getWeaponID());
+        self::incrementWeaponID();
+
+        return $weapon;
+    }
+
+    protected static function getWeaponID() {
+        return self::$weaponId;
+    }
+
+    protected static function incrementWeaponID() {
+        self::$weaponId += 1;
+    }
+
+    /** Returns a GalliFleetFactory object
+     * @return WeaponFactory
+     */
+    public static function getInstance() {
+
+        $class = __CLASS__;
+        if(self::$instance == null) {
+            self::$instance = new $class;
+        }
+
+        return self::$instance;
+    }
+
 
 }

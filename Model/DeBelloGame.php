@@ -11,4 +11,7 @@ namespace Model;
 
 class DeBelloGame {
 
+    /** @var  string The civilization currently used */
+    private $civilization;
+
 }
