@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/De Bello Navali.iml" filepath="$PROJECT_DIR$/De Bello Navali.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../ProvaJSON/.idea/ProvaJSON.iml" filepath="$PROJECT_DIR$/../ProvaJSON/.idea/ProvaJSON.iml" />
+      <module fileurl="file://C:\Users\Silvia\PhpstormProjects\ProvaJSON\.idea\ProvaJSON.iml" filepath="C:\Users\Silvia\PhpstormProjects\ProvaJSON\.idea\ProvaJSON.iml" />
     </modules>
   </component>
 </project>
