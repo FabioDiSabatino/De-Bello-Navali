@@ -12,7 +12,7 @@
         moduleFlagBanner.initModule();
         moduleShipList.initModule();
         moduleGridZone.initModule();
-        moduleGridZone.initModule();
+        moduleTimerZone.initModule();
 
 
     })
@@ -20,7 +20,4 @@
 
 
 }());
-
-
-
 

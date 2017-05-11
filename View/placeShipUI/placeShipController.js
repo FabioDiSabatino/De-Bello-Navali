@@ -11,6 +11,12 @@ var placeShipController={
     },
 
 
+    removeShip:function (dim,position) {
+
+        cosole.log('Removing ship'+dim+' in position'+position);
+    }
+
+
 
 
 
