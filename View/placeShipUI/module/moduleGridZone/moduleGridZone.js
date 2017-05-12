@@ -47,7 +47,7 @@ var moduleGridZone=(function () {
 
     return {
         initModule:init,
-        isPlaceable:__isPlaceable
+        isPlaceable: __isPlaceable
 
     }
 

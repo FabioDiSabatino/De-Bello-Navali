@@ -10,8 +10,8 @@
         })
 
         moduleFlagBanner.initModule();
-        moduleShipList.initModule();
         moduleGridZone.initModule();
+        moduleShipList.initModule();
         moduleTimerZone.initModule();
 
 
