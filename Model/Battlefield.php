@@ -54,16 +54,16 @@ class Battlefield {
     }
 
     /** Tries to add a Ship to the battlefield. The actual Ship object will be created by method 'placeShips'
-     * @param $shipName
-     * @param $positionX
-     * @param $positionY
-     * @param $orientation
+     * @param string $shipName
+     * @param int $positionX
+     * @param int $positionY
+     * @param string $orientation
      * @return boolean true if the Ship has been added, false otherwise
      */
     public function addShipToField($shipName, $positionX, $positionY, $orientation) {
+
         // è un array di supporto che la funzione userà in caso sia possibile inserire la nave all'interno del campo di battaglia
         /** @var Square[] $squaresToBePlaced */
-        echo "Provo a piazzare una nave " . $shipName . "<br>";
         $squaresToBePlaced = array();
         $shipCatalog = ShipCatalog::getInstance();
         $shipDescription = $shipCatalog->getShipDescriptionByShipname($shipName); // ricavo il descrittore a partire dal nome della nave
@@ -72,41 +72,50 @@ class Battlefield {
         // SE la nave è piazzabile, ossia se c'è abbastanza peso ancora disponibile, allora controllo se è inseribile all'interno del campo di battaglia
         if ($this->isPlaceable($shipWeight)) {
 
-            // ricavo la dimensione della nave da piazzare, ossia il numero di Squares che occupa
+            // ricavo la dimensione della nave da piazzare (il numero di Squares che occupa)
             $shipDimension = $shipDescription->getDimension();
 
+            /* CONTROLLO POSIZIONE */
             // Se l'utente vuole piazzare la nave in orizzontale, controllo le caselle a destra da quella di partenza
+            $field = $this->getField();
+
             if ($orientation == "horizontal") {
-                for ($i = $positionX; $i < $positionX + $shipDimension; $i++) {
-                    $square = $this->getField()[$i][$positionY];
-                    if (!$square->isEmpty()) {
-                        echo "Non posso piazzare la nave " . $shipName . " (dimensione=" . $shipDimension . ")
-                         in posizione (" . $positionX . "," . $positionY . "), c'è "
-                            . "già un'altra nave con id " . $square->getShipReference() . " in (" . $i . "," . $positionY . ")<br>";
-                        $squaresToBePlaced = array();   // svuoto l'array di squares
-                        return false;
-                    } else {
-                        echo "La nave è piazzabile in posizione (" . $i . "," . $positionY . ")<br>";
-                        array_push($squaresToBePlaced, $square);
+                if($positionX + $shipDimension > 8) {
+                    echo "La nave non entra nel campo di battaglia <br>";
+                }
+                else {  // la nave entra nel campo, vedo se è piazzabile
+                    for ($i = $positionX; $i < $positionX + $shipDimension; $i++) {
+                        $square = $field[$positionY][$i];
+                        if (!$square->isEmpty()) {  // La square non è vuota: la nave non è piazzabile in quella posizione
+                            echo "Nave non piazzabile... <br>";
+                            $squaresToBePlaced = array();   // svuoto l'array di squares
+                            return false;
+                        } else { // La square è vuota, piazzo la nave
+                            array_push($squaresToBePlaced, $square);
+                        }
                     }
                 }
             } // Se l'utente vuole piazzare la nave in verticale, controllo le caselle sotto quella di partenza
             else if ($orientation == "vertical") {
-                for ($i = $positionY; $i < $positionY + $shipDimension; $i++) {
-                    $square = $this->getField()[$positionX][$i];
-                    if (!$square->isEmpty()) {
-                        echo "Non posso piazzare la nave " . $shipName . " (dimensione=" . $shipDimension . ") in posizione (" . $positionX . "," . $positionY . "), c'è "
-                            . "già un'altra nave con id " . $square->getShipReference() . " in (" . $positionX . "," . $i . ")<br>";
-                        $squaresToBePlaced = array();
-                        return false;
-                    } else {
-                        echo "La nave è piazzabile in posizione (" . $positionX . "," . $i . ")<br>";
-                        array_push($squaresToBePlaced, $square);
+                if($positionY + $shipDimension > 8) {
+                    echo "La nave non entra nel campo di battaglia <br>";
+                }
+                else {
+                    for ($i = $positionY; $i < $positionY + $shipDimension; $i++) {
+                        $square = $this->getField()[$i][$positionX];
+                        if (!$square->isEmpty()) {
+                            echo "Nave non piazzabile... <br>";
+                            $squaresToBePlaced = array();
+                            return false;
+                        } else {
+                            array_push($squaresToBePlaced, $square);
+                        }
                     }
                 }
             }
+            /* FINE CONTROLLO POSIZIONE */
 
-            // Se arrivo a questo punto vuol dire che i due check sono andati a buon fine. Ora posso aggiungere la Ship al campo di battaglia.
+            // Se arrivo a questo punto vuol dire che i due check sono andati a buon fine. Ora posso aggiungere la Ship al gruppo di ship da piazzare.
             // Modifico gli attributi di ogni Square su cui è stata posizionata la nave
             $shipID = self::$shipIdCounter;
             foreach ($squaresToBePlaced as $square) {
@@ -234,6 +243,21 @@ class Battlefield {
         return $battleField;
     }
 
+    public function disegnaCampo() {
+        $campo = $this->getField();
+
+        for($i = 0; $i<8; $i++) {
+            for($j = 0; $j<8; $j++) {
+                if($campo[$i][$j]->isEmpty()) {
+                    print '0';
+                }
+                else {
+                    print "<b>".$campo[$i][$j]->getShipReference()."</b>";
+                }
+            }
+            print "<br>";
+        }
+    }
 
 
     private function increaseShipCounter() { $this::$shipIdCounter++; }

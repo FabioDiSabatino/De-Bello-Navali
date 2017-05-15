@@ -29,11 +29,13 @@
 
     $battlefield->addShipToField('Nave McBattelly', 1, 1, 'vertical');
 
-    $battlefield->addShipToField('Nave McBattelly', 0, 2, 'horizontal');
+    $battlefield->addShipToField('Nave McBattelly', 2, 5, 'vertical');
 
-    $battlefield->placeShips();
+    $battlefield->addShipToField('Nave McBattelly', 4, 6, 'horizontal');
 
-    var_dump($battlefield->getFleet());
+$battlefield->placeShips();
+
+    $battlefield->disegnaCampo();
 //    $battlefield->placeShip('Nave McBattelly', 2, 1, 'vertical');
 //    $battlefield->placeShip('Nave McBattelly', 0, 1, 'horizontal');
 //
