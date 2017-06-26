@@ -8,9 +8,7 @@ var moduleShipList=(function () {
 
 
 
-    var __rotateShip= function () {
-        
-    }
+
 
     var __initDragable=function () {
         $( ".shipImg" ).draggable({
@@ -21,32 +19,27 @@ var moduleShipList=(function () {
         $( ".colGrid" ).droppable({
 
             over:function (event,ui) {
-                var id=parseInt($(this).attr('id'));
+                var $cursor=$(this);
+                var id=parseInt($cursor.attr('id'));
                 var dim=$(ui.draggable).attr("data-dim");
-                $( this ).addClass( "over" );
-                var cursor=this;
-                for(i=1;i<dim;i++){
-                    $(cursor).next().addClass( "over" );
-                    cursor=$(cursor).next();
+                $cursor.addClass( "over" );
+                moduleGridZone.addClassOver($cursor,dim,0);
 
-                }
 
             },
             out:function (event,ui) {
-                var cursor=$(this);
-                var id=parseInt(cursor.attr('id'));
+                var $cursor=$(this);
+                var id=parseInt($cursor.attr('id'));
                 var dim=$(ui.draggable).attr("data-dim");
-                if(cursor.prev().hasClass("over"))
+                if($cursor.prev().hasClass("over"))
                 {
                     //spostamento a sx
                     var dim=$(ui.draggable).attr("data-dim");
                     for( var i=1;i<dim;i++) {
-                        cursor = cursor.next();
-                        console.log(cursor.attr('id'));
+                        $cursor = $cursor.next();
                     }
 
-                        cursor.removeClass( "over" );
-                        console.log(" sto rimuovendo "+cursor.attr('id'));
+                        $cursor.removeClass( "over" );
 
 
 
@@ -54,19 +47,17 @@ var moduleShipList=(function () {
                 else
                 {
                     //spostamento a dx
-                    $( cursor ).removeClass( "over" );
+                    $cursor.removeClass( "over" );
                     for(i=1;i<dim;i++){
-                        $(cursor).next().removeClass( "over" );
-                        cursor=$(cursor).next();
+                        $cursor.next().removeClass( "over" );
+                        $cursor=$cursor.next();
                     }
                 }
 
 
 
             },
-
             drop: function( event, ui ) {
-
 
                 var id=parseInt($(ui).attr('id'));
                 var dim=$(ui.draggable).attr("data-dim");
@@ -74,23 +65,22 @@ var moduleShipList=(function () {
                 var actualWeight=parseInt($('.progress-bar').attr("aria-valuenow"));
                 var shipWeight=parseInt($(ui.draggable).parent().next().attr("data-weight"));
 
-                var cursor=$(this);
+                var $cursor=$(this);
 
-                    if(moduleGridZone.isPlaceable(cursor,actualWeight,shipWeight,dim))
+
+                moduleGridZone.removeClassOver($cursor,dim,0);
+
+                    if(moduleGridZone.isPlaceable($cursor,actualWeight,shipWeight,dim,0))
                     {
-                        //posizione valida e fleet weight sufficiente
-                        cursor.addClass("placed ui-state-highlight ");
 
-                        for(i=1;i<dim;i++){
-                            cursor=cursor.next();
-                            cursor.addClass( "placed ui-state-highlight noBorder-left" );
-                            console.log(cursor.attr('id'));
-                        }
+                        //Place the ship in horizontal position
+                        moduleGridZone.addClassPlaced($cursor,dim,0);
+                        moduleGridZone.setRotateEvent();
 
-                        //ultima col aggiunge anche il bottore per cambiare orientamento
+                        //aggiorna il fleet weight
 
-                        cursor.append('<span class="glyphicon glyphicon-repeat pull-right rotateIcon" aria-hidden="true"></span>').
-                        addClass("placed ui-state-highlight noBorder-left");
+
+                        moduleGridZone.updateWeight(actualWeight,shipWeight);
 
                         // chiamare il controller per comunicare al server che si è piazzata una nave
                         placeShipController.addShip(dim,position);
@@ -98,13 +88,15 @@ var moduleShipList=(function () {
                     }
                     else
                     {
-                        alert("Attention ship too heavy!! ")
+                        alert("Attention ship too heavy or position not valid")
                     }
 
             }
         });
 
     };
+
+
 
 
 
