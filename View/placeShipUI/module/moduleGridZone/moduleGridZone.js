@@ -50,7 +50,11 @@ var moduleGridZone=(function () {
         }
         else if( orientation==90){
             var idCursor= $cursor.attr("id");
-            var idnext=parseInt(idCursor)-10;
+            var idnext=idCursor-10;
+            if (idnext<10)
+            {
+                idnext="0"+idnext;
+            }
             return $("#"+idnext);
 
         }
@@ -168,11 +172,13 @@ var moduleGridZone=(function () {
     };
 
     var removeClassPlaced= function ($cursor,shipDim,orientation) {
+
         for (var i =0;i<shipDim;i++)
         {
             console.log("remove placed at :"+$cursor.attr("id"));
-            $cursor=__prevCursor($cursor,orientation);
             $cursor.removeClass("placed ui-state-highlight noBorder-left");
+            $cursor=__prevCursor($cursor,orientation);
+
         }
     };
 
