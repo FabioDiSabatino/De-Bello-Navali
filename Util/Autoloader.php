@@ -12,9 +12,23 @@
     function myAutoload($class) {
 
         $class = str_replace('\\', '/', $class);
-        require $class . '.php';
+        if (file_exists($class.".php")){
+            require $class . '.php';
+        }
     }
 
     spl_autoload_register('myAutoload');
 
-    ?>
+
+    function autoload_controller($class) {
+
+    $f = 'Model/Controller/' . $class . '.php';
+    if ( ! file_exists($f))
+    {
+    return FALSE;
+    }
+    include $f;
+    }
+    spl_autoload_register('autoload_controller');
+
+?>

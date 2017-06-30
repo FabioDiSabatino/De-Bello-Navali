@@ -36,6 +36,8 @@
 $battlefield->placeShips();
 
     $battlefield->disegnaCampo();
+
+
 //    $battlefield->placeShip('Nave McBattelly', 2, 1, 'vertical');
 //    $battlefield->placeShip('Nave McBattelly', 0, 1, 'horizontal');
 //
