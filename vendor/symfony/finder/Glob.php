@@ -26,7 +26,7 @@ namespace Symfony\Component\Finder;
  * Glob implements glob(3) style matching that can be used to match
  * against text, rather than fetching names from a filesystem.
  *
- * Based on the Perl Text::Glob module.
+ * Based on the Perl Text::Glob moduleShipList.
  *
  * @author Fabien Potencier <fabien@symfony.com> PHP port
  * @author     Richard Clamp <richardc@unixbeard.net> Perl version

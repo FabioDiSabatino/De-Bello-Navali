@@ -3,7 +3,7 @@
  */
 
 ShipData= {
-    Instance1: [{
+    Instance1= [{
         ShipID: 1,
         Dimension:3,
         Position: [3, 5],
@@ -22,9 +22,9 @@ ShipData= {
             }],
     }],
 
-    Instance2: [{
+    Instance2= [{
         ShipID: 2,
-        Dimension:4,
+        Dimension:2,
         Position: [2, 6],
         Orientation: 'Orizontal',
         Weapon: [{

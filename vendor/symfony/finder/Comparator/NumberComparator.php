@@ -23,7 +23,7 @@ namespace Symfony\Component\Finder\Comparator;
  * with an i use the appropriate 2**n version in accordance with the
  * IEC standard: http://physics.nist.gov/cuu/Units/binary.html
  *
- * Based on the Perl Number::Compare module.
+ * Based on the Perl Number::Compare moduleShipList.
  *
  * @author    Fabien Potencier <fabien@symfony.com> PHP port
  * @author    Richard Clamp <richardc@unixbeard.net> Perl version
