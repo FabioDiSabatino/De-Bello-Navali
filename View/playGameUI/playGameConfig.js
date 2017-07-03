@@ -4,9 +4,15 @@
 (function (metaData) {
     $(document).ready(function () {
 
+        $('.mainPage').matchHeight({
+            property: 'height',
+            target: $("body")
+        })
         setTimerZone();
+        moduleShipListPlayGame.initModule();
 
-    })
+    });
+
 
 }());
 
@@ -36,4 +42,4 @@ var setTimerZone=function () {
     $('.flip-clock-label').remove();
     $('.minutes').remove();
 
-}
+};

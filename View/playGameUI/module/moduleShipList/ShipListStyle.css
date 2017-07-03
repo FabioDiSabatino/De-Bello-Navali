@@ -1,70 +1,77 @@
-.arma{
-    border-right: 1px solid black;
-    text-align: center;
-    height: 100%;
-    bottom:0px;
+
+
+.colLat{
+    height:100%;
 }
 
-.armi{
-    border: 1px solid black;
-    position: absolute !important;
+.shipRow{
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+}
+.shipGeneralInfo {
+    padding: 0px;
+    border-bottom:1px solid black;
+    border-right:1px solid;
+    border-top:inherit;
+    height: 100%;
+    border-left: 0px;
+
+}
+
+.shipImgContainer{
+    height: 60%;
+    margin-top: 30%;
+    margin-left: 13%;
+}
+.ImgNave{
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 57%;
+}
+.weaponShip{
+    padding: 0px;
+}
+.rowWeapon{
+    width: 100%;
+    padding: 0px;
+    border-bottom: 1px solid;
+}
+
+.weaponShip{
+    height: 100%;
+}
+.weaponItem{
+    border:0px;
+    height:100%;
+    border-right: 1px solid;
+}
+.weapons{
+    border-bottom: 1px solid black;
+    border-right:1px solid;
     bottom:0px;
-    height:30%;
-    width:100%;
+    height:100%;
     text-align:left;
 }
-.alt{
-    height:100%;
+
+
+.ammoItem{
+    padding: 0px;
+    height: 100%;
 }
 
-.box_armi{
-    height:100%;
-}
 
 .BoxList{
     width:100%;
     height: 50%;
 }
 
-.cella1{
-    width: 100%;
-    height: 100%;
 
-}
 
-.colpi{
-    text-align: center;
-    height: 100%;
-    bottom:0px;
-
-}
-
-.ImgNave1{
-    width:25%;
-    height:45%;
-}
 
 
 .fleetList{
-    height: 80%;
-}
-
-.nave{
-    border: 1px solid black;
-    height: 200px;
-    text-align: center;
-    min-height: 150px;
-}
-
-.riga{
-    margin-right: -40px;
-    margin-left: -30px;
-}
-
-.tempi_ricarica{
-    border-right: 1px solid black;
-    text-align: center;
-    height: 100%;
-    bottom:0px;
-
+    height: calc(100% - 40px);
 }

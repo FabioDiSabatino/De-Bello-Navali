@@ -2,7 +2,7 @@
  * Created by Silvia on 20/04/2017.
  */
 
-ShipData= {
+/*ShipData= {
     Instance1= [{
         ShipID: 1,
         Dimension:3,
@@ -12,12 +12,12 @@ ShipData= {
                 Weapon1:[{
                     WeaponName: "W1",
                     TimeReload: 0,
-                    Ammo: 'infinity'/*lo lascio perchè decrementabile*/
+                    Ammo: 'infinity'/lo lascio perchè decrementabile/
                 }],
-                Weapon1:[{
+                Weapon2:[{
                     WeaponName: "W2",
                     TimeReload: 2,
-                    Ammo:'3'/*lo lascio perchè decrementabile*/
+                    Ammo:'3'/lo lascio perchè decrementabile/
             }]
             }],
     }],
@@ -31,15 +31,16 @@ ShipData= {
             Weapon1:[{
                 WeaponName: "W1",
                 TimeReload: 0,
-                Ammo: 'infinity'/*lo lascio perchè decrementabile*/
+                Ammo: 'infinity'/lo lascio perchè decrementabile/
             }],
             Weapon5:[{
                 WeaponName: "W5",
                 TimeReload: 3,
-                Ammo:'2'/*lo lascio perchè decrementabile*/
+                Ammo:'2'/lo lascio perchè decrementabile/
             }]
         }],
     }],
 
-}
+};*/
+
 

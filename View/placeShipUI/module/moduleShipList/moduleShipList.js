@@ -120,7 +120,7 @@ var moduleShipList=(function () {
                     var tpl = Mustache.to_html(template, data);
                     $(".listShip").append(tpl);
                 }
-                $(".shipCard").css("height", divider + "px");
+                $(".shipCard").css("height", divider + "%");
 
                 __initDragable();
 

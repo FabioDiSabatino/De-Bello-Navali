@@ -1,8 +1,19 @@
-html {
+body, html {
     height: 100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
 }
-body {
-    height: 100%;
+.pageTitle {
+
+    height:7%;
+    background-color: #c1e2b3;
+    text-align: center;
+    font-size: 30px;
+    border:1px solid black;
+    padding-right:0px;
+}
+.contentMain{
+    height: 93%;
 }
 .contentBox{
     height: 100% !important;
@@ -22,14 +33,7 @@ body {
 .mainPage{
     padding:0px;
 }
-.pageTitle {
 
-    background-color: #c1e2b3;
-    text-align: center;
-    font-size: 30px;
-    border:1px solid black;
-    padding-right:0px;
-}
 
 .gridRow{
     margin: 0px;
@@ -47,13 +51,7 @@ body {
     border-right:inherit;
     border-left: 0px;
 }
-.shipGeneralInfo {
-    border:1px solid black;
-    border-right:inherit;
-    border-top:inherit;
-    height: 80px;
-    border-left: 0px;
-}
+
 
 .shipWeapons{
     padding:0px;
@@ -74,7 +72,7 @@ body {
     border-right:inherit;
 }
 .gameArea {
-    height:calc(100% - 50px);
+    height:100%;
     padding:0px;
 }
 .userArea{
