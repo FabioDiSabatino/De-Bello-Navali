@@ -7,9 +7,10 @@
         $('.mainPage').matchHeight({
             property: 'height',
             target: $("body")
-        })
+        });
         setTimerZone();
         moduleShipListPlayGame.initModule();
+        moduleUserField.initModule();
 
     });
 

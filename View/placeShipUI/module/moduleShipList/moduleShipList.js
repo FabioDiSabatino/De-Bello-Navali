@@ -67,7 +67,6 @@ var moduleShipList=(function () {
 
                 var $cursor=$(this);
 
-
                 moduleGridZone.removeClassOver($cursor,dim,0);
 
                     if(moduleGridZone.isPlaceable($cursor,actualWeight,shipWeight,dim,0))
@@ -75,13 +74,9 @@ var moduleShipList=(function () {
 
                         //Place the ship in horizontal position
                         moduleGridZone.addClassPlaced($cursor,dim,0);
-                        moduleGridZone.setRotateEvent();
-
+                        moduleGridZone.setRotateEvent($cursor,dim);
                         //aggiorna il fleet weight
-
-
                         moduleGridZone.updateWeight(actualWeight,shipWeight);
-
                         // chiamare il controller per comunicare al server che si è piazzata una nave
                         placeShipController.addShip(dim,position);
 

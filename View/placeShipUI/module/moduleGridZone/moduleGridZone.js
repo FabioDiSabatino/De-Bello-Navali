@@ -4,84 +4,16 @@
 var moduleGridZone=(function () {
 
 
-    // return the next cursor of cursor passed as parameter
-    __nextCursor=function ($cursor,orientation) {
-
-
-        if (orientation==0 )
-        {
-              return $cursor.next();
-
-        }
-        else if (orientation == 90){
-
-            var idCursor= $cursor.attr("id");
-            var idnext=idCursor-10;
-            if (idnext<10)
-            {
-                idnext="0"+idnext;
-            }
-            return $("#"+idnext);
-        }
-        else if(orientation==180){
-            return $cursor.next();
-
-        }
-        else if (orientation==270){
-            var idCursor= $cursor.attr("id");
-            var idnext=parseInt(idCursor)+10;
-            return $("#"+idnext);
-        }
-        else if(orientation==360)
-        {
-            return $cursor.prev();
-        }
-
-
-
-
-    };
-
-    __prevCursor=function ($cursor, orientation) {
-
-        if (orientation==0 || orientation==360)
-        {
-            return $cursor.prev();
-        }
-        else if( orientation==90){
-            var idCursor= $cursor.attr("id");
-            var idnext=idCursor-10;
-            if (idnext<10)
-            {
-                idnext="0"+idnext;
-            }
-            return $("#"+idnext);
-
-        }
-        else if (orientation==180){
-            return $cursor.next();
-
-        }
-        else if (orientation==270){
-            var idCursor= $cursor.attr("id");
-            var idnext=parseInt(idCursor)+10;
-            return $("#"+idnext);
-        }
-
-
-    };
-
-
     var __isPlaceable= function ($cursor,actualWeight,shipWeight,shipDim,orientation){
 
-        var $cursor=__nextCursor($cursor,orientation);
+        var $cursor=moduleCursor.getNextCursor($cursor,orientation);
         for(var i=0;i<shipDim-1;i++){
             if ($cursor.hasClass("placed ui-state-highlight") || $cursor.attr("id")==undefined )
             {
                 return false
             }
 
-            $cursor=__nextCursor($cursor,orientation);
+            $cursor=moduleCursor.getNextCursor($cursor,orientation);
         }
 
         if(actualWeight+shipWeight<=100)
@@ -99,15 +31,14 @@ var moduleGridZone=(function () {
 
     var __toogleOrientation= function (orientation){
 
-        //return ((orientation+90)%360);
         if (orientation==0)
-            return 90
+            return 90;
         else if (orientation==90)
-            return 180
+            return 180;
         else if (orientation==180)
-            return 270
+            return 270;
         else if (orientation==270)
-            return 360
+            return 360;
     };
 
     //------------------------------------public method----------------------------------------//
@@ -129,22 +60,24 @@ var moduleGridZone=(function () {
     var addClassPlaced= function ($cursor,shipDim,orientation) {
         console.log("add placed at: "+$cursor.attr("id"));
         $cursor.addClass( "placed ui-state-highlight " );
-        $cursor=__nextCursor($cursor,orientation);
+        $cursor=moduleCursor.getNextCursor($cursor,orientation);
 
         for (var i=0;i<shipDim-2;i++)
         {
             console.log("add placed at: "+$cursor.attr("id"));
             $cursor.addClass( "placed ui-state-highlight noBorder-left" );
-            $cursor=__nextCursor($cursor,orientation);
+            $cursor=moduleCursor.getNextCursor($cursor,orientation);
         }
 
         if (orientation==0)
         {
-            $cursor.append('<span class="glyphicon glyphicon-repeat pull-right rotateIcon" aria-hidden="true"></span>');
+            $cursor.append('<span class="rot'+$cursor.attr("id")+' glyphicon glyphicon-repeat pull-right rotateIcon" aria-hidden="true" ></span>');
             $cursor.attr("data-dim",shipDim).attr("data-orientation",0);
         }
         console.log("add placed at: "+$cursor.attr("id"));
         $cursor.addClass("placed ui-state-highlight noBorder-left");
+
+
 
 
     };
@@ -154,7 +87,7 @@ var moduleGridZone=(function () {
         for (var i=0;i<shipDim;i++)
         {
             $cursor.addClass( "over" );
-            $cursor=__nextCursor($cursor,orientation);
+            $cursor=moduleCursor.getNextCursor($cursor,orientation);
         }
 
     };
@@ -164,7 +97,7 @@ var moduleGridZone=(function () {
             for (var i=0;i<shipDim;i++)
             {
                 $cursor.removeClass("over");
-                $cursor=__nextCursor($cursor,orientation);
+                $cursor=moduleCursor.getNextCursor($cursor,orientation);
             }
 
 
@@ -177,16 +110,19 @@ var moduleGridZone=(function () {
         {
             console.log("remove placed at :"+$cursor.attr("id"));
             $cursor.removeClass("placed ui-state-highlight noBorder-left");
-            $cursor=__prevCursor($cursor,orientation);
+            $cursor=moduleCursor.getPrevCursor($cursor,orientation);
 
         }
     };
 
-    var setRotateShipEvent=function () {
+    var setRotateShipEvent=function ($cursor,dim) {
 
-        $('.rotateIcon').click(function () {
+        var $lastCursor=moduleCursor.getLastCursor($cursor,dim);
+        var id=$lastCursor.attr("id");
+        $('.rot'+id).click(function () {
 
             var $cursor=$(this).parent();
+            console.log($cursor.attr("id"));
             var shipDim= $cursor.attr("data-dim");
             var orientation= $cursor.attr("data-orientation");
             var toogledOrientation=__toogleOrientation($cursor.attr("data-orientation"));
@@ -199,7 +135,6 @@ var moduleGridZone=(function () {
                 addClassPlaced($cursor,shipDim,toogledOrientation);
                 if (toogledOrientation==360)
                 {
-                    console.log("ciao");
                     $cursor.attr("data-orientation",0);
                 }
                 else

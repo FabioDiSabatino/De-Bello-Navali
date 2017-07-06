@@ -4,6 +4,9 @@
 
 var moduleShipListPlayGame=(function () {
 
+
+    //------------------------------------private method----------------------------------------//
+
     var __templateBox="BoxShipList";
     var __templateWeapon='weaponShipList';
 
@@ -12,14 +15,10 @@ var moduleShipListPlayGame=(function () {
         return $.get('module/moduleShipList/'+template+'.tpl')
     };
 
-    //------------------------------------private method----------------------------------------//
-
-
-
     var __init= function(){
             var numberShip= GeneralShip.numberOfShip;
             var divider= 100/numberShip;
-            //chiedere al net comunicator di farsi dare questo template
+
             $.when(__getTemplate(__templateBox),__getTemplate(__templateWeapon)).
                 done(function(tplBox,tplWeapon){
                     for (var i=0;i<GeneralShip.Ship.length;i++)
