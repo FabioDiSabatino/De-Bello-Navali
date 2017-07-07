@@ -8,8 +8,6 @@ var moduleCursor=(function () {
     //------------------------------------private method----------------------------------------//
 
     __nextCursor=function ($cursor,orientation) {
-
-
         if (orientation==0 )
         {
             return $cursor.next();
@@ -87,11 +85,15 @@ var moduleCursor=(function () {
 
 
 
+    var __init=function () {
+
+    };
 
     //------------------------------------public method----------------------------------------//
 
     return{
 
+        initModule:__init,
         getNextCursor:__nextCursor,
         getPrevCursor:__prevCursor,
         getLastCursor:__getLast

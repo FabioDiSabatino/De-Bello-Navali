@@ -74,6 +74,7 @@ var moduleShipList=(function () {
 
                         //Place the ship in horizontal position
                         moduleGridZone.addClassPlaced($cursor,dim,0);
+                        //set rotate event on rotateIcon
                         moduleGridZone.setRotateEvent($cursor,dim);
                         //aggiorna il fleet weight
                         moduleGridZone.updateWeight(actualWeight,shipWeight);
@@ -111,7 +112,7 @@ var moduleShipList=(function () {
                         shipWeight: metaData.shipWeight[i],
                         shipDim: metaData.ship[i].substring(0, 1)
 
-                    }
+                    };
                     var tpl = Mustache.to_html(template, data);
                     $(".listShip").append(tpl);
                 }

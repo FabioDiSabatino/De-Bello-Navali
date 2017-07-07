@@ -58,13 +58,11 @@ var moduleGridZone=(function () {
     };
 
     var addClassPlaced= function ($cursor,shipDim,orientation) {
-        console.log("add placed at: "+$cursor.attr("id"));
         $cursor.addClass( "placed ui-state-highlight " );
         $cursor=moduleCursor.getNextCursor($cursor,orientation);
 
         for (var i=0;i<shipDim-2;i++)
         {
-            console.log("add placed at: "+$cursor.attr("id"));
             $cursor.addClass( "placed ui-state-highlight noBorder-left" );
             $cursor=moduleCursor.getNextCursor($cursor,orientation);
         }
@@ -74,7 +72,6 @@ var moduleGridZone=(function () {
             $cursor.append('<span class="rot'+$cursor.attr("id")+' glyphicon glyphicon-repeat pull-right rotateIcon" aria-hidden="true" ></span>');
             $cursor.attr("data-dim",shipDim).attr("data-orientation",0);
         }
-        console.log("add placed at: "+$cursor.attr("id"));
         $cursor.addClass("placed ui-state-highlight noBorder-left");
 
 
@@ -122,7 +119,6 @@ var moduleGridZone=(function () {
         $('.rot'+id).click(function () {
 
             var $cursor=$(this).parent();
-            console.log($cursor.attr("id"));
             var shipDim= $cursor.attr("data-dim");
             var orientation= $cursor.attr("data-orientation");
             var toogledOrientation=__toogleOrientation($cursor.attr("data-orientation"));

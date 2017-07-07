@@ -15,12 +15,11 @@ var GeneralShip={
             "Istance":[
                 {
                     "ShipID":1,
-                    "Dimension":3,
                     "Position":{
                         "x":3,
                         "y":5
                     },
-                    "Orientation":"Horizontal",
+                    "Orientation":0,
                     "Weapon":[
                         {
                             "WeaponName":"W1",
@@ -39,10 +38,10 @@ var GeneralShip={
                     "ShipID":2,
                     "Dimension":3,
                     "Position":{
-                        "x":1,
+                        "x":2,
                         "y":1
                     },
-                    "Orientation":"Vertical",
+                    "Orientation":270,
                     "Weapon":[
                         {
                             "WeaponName":"W1",
@@ -61,10 +60,10 @@ var GeneralShip={
                     "ShipID":3,
                     "Dimension":3,
                     "Position":{
-                        "x":3,
-                        "y":5
+                        "x":5,
+                        "y":1
                     },
-                    "Orientation":"Horizontal",
+                    "Orientation":0,
                     "Weapon":[
                         {
                             "WeaponName":"W1",
@@ -95,7 +94,7 @@ var GeneralShip={
                         "x":7,
                         "y":7
                     },
-                    "Orientation":"Vertical",
+                    "Orientation":90,
                     "Weapon":[
                         {
                             "WeaponName":"W3",
