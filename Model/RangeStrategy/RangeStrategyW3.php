@@ -33,7 +33,7 @@ class RangeStrategyW3 extends AbstractRangeStrategy implements IRangeStrategy {
      * @param $y int The y coordinate of the center of the attack
      * @return array int[] A list of Square objects hit by the attack
      */
-    public function attack($x, $y) {
+    public function getInvolvedSquares($x, $y) {
         $squaresHit = array();
         $dimX = $this->getDimensionX();
         $dimY = $this->getDimensionY();

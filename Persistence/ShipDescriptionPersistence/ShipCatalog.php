@@ -24,7 +24,9 @@ class ShipCatalog {
     }
 
     public function getShipDescriptionByShipname($shipName) {
-        return self::$shipDescriptionQuery->findOneByShipName($shipName);
+        $desc =  self::$shipDescriptionQuery->findOneByShipName($shipName);
+        self::$shipDescriptionQuery->clear();
+        return $desc;
     }
 
     /**

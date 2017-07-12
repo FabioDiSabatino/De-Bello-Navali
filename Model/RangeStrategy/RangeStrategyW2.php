@@ -28,7 +28,7 @@ class RangeStrategyW2 extends AbstractRangeStrategy implements IRangeStrategy {
     /** @var IRangeStrategy Our RangeStrategy Singleton instance  */
     private static $instance = null;
 
-    public function attack($x, $y) {
+    public function getInvolvedSquares($x, $y) {
         $squaresHit = array();
         $dimX = $this->getDimensionX();
 

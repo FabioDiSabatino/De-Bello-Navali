@@ -22,17 +22,17 @@ class WeaponFactory {
      * @param string $weaponName
      * @return Weapon
      */
-    function createWeapon($weaponName) {
+    public function createWeapon($weaponName) {
 
         $weaponCatalog = WeaponCatalog::getInstance();
         $weaponDescription = $weaponCatalog->getWeaponDescription($weaponName);
 
         $weaponRangeName = $weaponDescription->getRangeName();
         $weaponReloadTime = $weaponDescription->getReloadTime();
+        $weaponName = $weaponDescription->getWeaponName();
 
-        //TODO: Comunicare con l'ammostorage e inserire informazioni relative alle munizioni (se non sono già presenti)
+        $weapon = new Weapon($weaponName, $weaponRangeName, $weaponReloadTime);
 
-        $weapon = new Weapon($weaponRangeName, $weaponReloadTime);
         $weapon->setWeaponID(self::getWeaponID());
         self::incrementWeaponID();
 

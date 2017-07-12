@@ -20,20 +20,21 @@
 //    Persistence\WeaponDescriptionPersistence\WeaponDescriptionQuery::create()->doDeleteAll();
 
     //startup
-    $battlefield = new Battlefield();
+    $battlefield = GameFactory::getInstance()->createBattlefield();
     $fleetFactory = GameFactory::getInstance()->createFleetFactory('Galli');
+    $ammoStorage = GameFactory::getInstance()->createAmmoStorage();
 
+    $battlefield->setAmmoStorage($ammoStorage);
     $battlefield->setFleetFactory($fleetFactory);
 
+
     $battlefield->addShipToField('Nave McBattelly', 0, 0, 'horizontal');
-
     $battlefield->addShipToField('Nave McBattelly', 1, 1, 'vertical');
-
     $battlefield->addShipToField('Nave McBattelly', 2, 5, 'vertical');
-
     $battlefield->addShipToField('Nave McBattelly', 4, 6, 'horizontal');
 
-$battlefield->placeShips();
+
+    $battlefield->placeShips();
 
     $battlefield->disegnaCampo();
 

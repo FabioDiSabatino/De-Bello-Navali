@@ -13,6 +13,7 @@ class Ship {
 
     private $shipID = null;         // Identifies the single Ship Object
     private $integrity = null;      // The integrity of the ship, used to establish whether the ship can or cannot use its special weapon
+    /** @var Weapon[] */
     private $weaponList = null;  // A list of Weapons on the Ship
 
 
@@ -22,6 +23,9 @@ class Ship {
         $this->setIntegrity($integrity);
     }
 
+    /**
+     * @return Weapon[]
+     */
     public function getWeaponList() {
         return $this->weaponList;
     }

@@ -33,7 +33,6 @@ class GalliFleetFactory extends FleetFactory {
         $shipDescription = $shipCatalog->getShipDescriptionByShipname($shipName);
         $dimension = $shipDescription->getDimension();
         $functionName = "createShip$dimension";
-
         if(method_exists(self::class, $functionName)) {
             return call_user_func(array(self::class, $functionName), $shipDescription);
         }
@@ -65,7 +64,6 @@ class GalliFleetFactory extends FleetFactory {
         $ship = new Ship();
         $ship->setWeaponList($weaponList);
         return $ship;
-        // TODO: Implement createShip3() method.
     }
 
     protected function createShip4($shipDescription) {

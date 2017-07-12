@@ -26,6 +26,8 @@ use Model\RangeStrategy\IRangeStrategy;
  */
 class Weapon {
 
+    /** @var string The name of the Weapon */
+    private $weaponName;
     /** @var int The identifier of the Weapon object */
     private $weaponID;
     /** @var int The current remaining reload time of the Weapon object */
@@ -45,11 +47,11 @@ class Weapon {
      * Weapon constructor.
      * @param $maxReload
      */
-    public function __construct($rangeName, $maxReload = 0, $reloadTime = 0) {
+    public function __construct($weaponName, $rangeName, $maxReload = 0, $reloadTime = 0) {
         $this->setMaxReloadTime($maxReload);
         $this->setRangeName($rangeName);
         $this->setReloadTime($reloadTime);
-
+        $this->setWeaponName($weaponName);
         $rangeStrategyFactory = RangeStrategyFactory::getInstance();
         $this->setRange($rangeStrategyFactory->createStrategyRange($this->rangeName));
     }
@@ -57,7 +59,19 @@ class Weapon {
 
     /* -- Getter & Setter Methods -- */
 
+    /** Returns the name of thw Weapon object
+     * @return string The name of the Weapon object
+     */
+    public function getWeaponName() {
+        return $this->weaponName;
+    }
 
+    /** Sets the name of the Weapon object to the given parameter
+     * @param string $weaponName The Weapon name to be set on the Weapon object
+     */
+    public function setWeaponName($weaponName) {
+        $this->weaponName = $weaponName;
+    }
     /** Returns the identifier of the Weapon object
      * @return int The Weapon ID of the Weapon object
      */
@@ -144,7 +158,7 @@ class Weapon {
      */
     public function attack($x, $y) {
 
-        return $this->getRange()->attack($x, $y); // by Strategy pattern
+        return $this->getRange()->getInvolvedSquares($x, $y); // by Strategy pattern
     }
 
 

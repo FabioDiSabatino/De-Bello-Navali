@@ -15,25 +15,21 @@ use Persistence\ShipDescriptionPersistence\ShipCatalog;
 class Battlefield {
 
     /** @var int Used to initialize new ships' IDs */
-    private static $shipIdCounter = 1;
-
+    private $shipIdCounter = 1;
     /** @var  Ship[] Contains already created Ship objects */
     private $fleet;
-
     /** @var  Square[][] The actual battlefield made of Square objects */
     private $field;
-
     /** @var  int The remaining amount of Ship weight available for new Ship objects */
     private $fleetWeight;
-
     /** @var  int The combined actual amount of Ship weights */
     private $shipWeight;    //?
-
     /** @var  FleetFactory The FleetFactory that will create the Ship objects */
     private $fleetFactory;
-
     /** @var  array(int, string) An array used to store information regarding Ship objects that are to be still created */
     private $supportFleet;
+    /** @var  AmmoStorage A container used to keep track of the ammo usage of the Weapons */
+    private $ammoStorage;
 
     public function __construct($fleetWeight = 70) {
 
@@ -113,17 +109,21 @@ class Battlefield {
                     }
                 }
             }
+            else {
+                echo "Posizione non consentita";
+                return false;
+            }
             /* FINE CONTROLLO POSIZIONE */
 
             // Se arrivo a questo punto vuol dire che i due check sono andati a buon fine. Ora posso aggiungere la Ship al gruppo di ship da piazzare.
             // Modifico gli attributi di ogni Square su cui è stata posizionata la nave
-            $shipID = self::$shipIdCounter;
+            $shipID = $this->shipIdCounter;
             foreach ($squaresToBePlaced as $square) {
                 $square->setEmpty(false);
                 $square->setShipReference($shipID);
             }
         }
-        $this->supportFleet[self::$shipIdCounter] = $shipName;
+        $this->supportFleet[$this->shipIdCounter] = $shipName;
         $this->increaseShipCounter();
         return true;
     }
@@ -137,13 +137,25 @@ class Battlefield {
 
             $ship = $this->getFleetFactory()->createShip($shipName);
             $ship->setShipID($shipID);
-
             array_push($this->fleet, $ship);
-        }
 
+            $weaponList = $ship->getWeaponList();
+            foreach ($weaponList as $weapon) {
+                $weaponName = $weapon->getWeaponName();
+                $this->ammoStorage->insertAmmo($weaponName);
+            }
+        }
+        // Svuota l'array di supporto usato per creare tutti gli oggetti Ship
         $this->setSupportFleet(array());
     }
 
+    public function updateShip($shipID) {
+
+    }
+
+    public function deleteShip($shipID) {
+        unset($this->getSupportFleet()[$shipID]);
+    }
 
     public function addShipWeight($shipWeight) {
         $this->setShipWeight($this->getShipWeight() + $shipWeight);
@@ -154,7 +166,7 @@ class Battlefield {
      * @param int $weaponID
      * @param Square $position
      */
-    public function attack($shipId, $weaponID, $position) {
+    public function getInvolvedSquares($shipId, $weaponID, $position) {
 
     }
 
@@ -164,69 +176,68 @@ class Battlefield {
     public function receiveAttack($position) {
 
     }
-    /* Getter */
 
+    /* Getter */
     /**
      * @return Ship[]
      */
     public function getFleet() { return $this->fleet; }
-
     /**
      * @return Square[][]
      */
     public function getField() { return $this->field;}
-
     /**
      * @return int
      */
     public function getFleetWeight() { return $this->fleetWeight; }
-
     /**
      * @return int
      */
     public function getShipWeight() { return $this->shipWeight; }
-
     /**
      * @return FleetFactory
      */
     public function getFleetFactory() { return $this->fleetFactory; }
-
     /**
      * @return array
      */
     public function getSupportFleet() { return $this->supportFleet; }
+    /**
+     * @return AmmoStorage
+     */
+    public function getAmmoStorage() { return $this->ammoStorage; }
 
     /* Setter */
-
     /**
      * @param Ship[] $fleet
      */
     public function setFleet($fleet) { $this->fleet = $fleet; }
-
     /**
      * @param Square[] $field
      */
     public function setField($field) { $this->field = $field; }
-
     /**
      * @param int $fleetWeight
      */
     public function setFleetWeight($fleetWeight) { $this->fleetWeight = $fleetWeight; }
-
     /**
      * @param int $shipWeight
      */
     public function setShipWeight($shipWeight) { $this->shipWeight = $shipWeight; }
-
     /**
      * @param $fleetFactory
      */
     public function setFleetFactory($fleetFactory) { $this->fleetFactory = $fleetFactory; }
-
     /**
      * @param $supportFleet
      */
     public function setSupportFleet($supportFleet) { $this->supportFleet = $supportFleet; }
+    /**
+     * @param $ammoStorage
+     */
+    public function setAmmoStorage($ammoStorage) { $this->ammoStorage = $ammoStorage; }
+
+    /* Class methods */
 
     /** Builds a matrix made of 64 Squares, which represents the battlefield
      * @return array A matrix made of 64 Squares
@@ -260,7 +271,7 @@ class Battlefield {
     }
 
 
-    private function increaseShipCounter() { $this::$shipIdCounter++; }
+    private function increaseShipCounter() { $this->shipIdCounter++; }
 
 
 }

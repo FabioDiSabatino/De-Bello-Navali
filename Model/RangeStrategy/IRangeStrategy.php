@@ -9,8 +9,6 @@
 namespace Model\RangeStrategy;
 
 
-use Model\Square;
-
 interface IRangeStrategy {
 
     /** Computes which Squares are hit by the attack
@@ -18,7 +16,7 @@ interface IRangeStrategy {
      * @param $y int The y coordinate of the center of  attack
      * @return int[] A list of coordinates of Squares hit by the attack
      */
-    public function attack($x, $y);
+    public function getInvolvedSquares($x, $y);
 
     public static function getInstance($dimensionX, $dimensionY);
 

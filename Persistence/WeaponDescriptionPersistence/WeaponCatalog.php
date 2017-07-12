@@ -21,7 +21,9 @@ class WeaponCatalog {
     }
 
     public function getWeaponDescription($weaponName) {
-        return self::$weaponDescriptionQuery->findPk($weaponName);
+        $desc =  self::$weaponDescriptionQuery->findPk($weaponName);
+        self::$weaponDescriptionQuery->clear();
+        return $desc;
     }
 
     /**

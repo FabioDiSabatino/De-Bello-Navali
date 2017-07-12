@@ -9,19 +9,17 @@
 namespace Model;
 
 
-use Model\Catalogs\WeaponCatalog;
-use Model\Catalogs\WeaponDescription;
+use \Persistence\WeaponDescriptionPersistence\WeaponCatalog;
+use \Persistence\WeaponDescriptionPersistence\WeaponDescription;
 
 class AmmoStorage {
 
-    private static $instance = null;
-    /**
-     * @var WeaponCatalog
-     */
-    private $weaponCatalog; // riferimento all'oggetto WeaponCatalog (in singleton)
+    /** @var WeaponCatalog A WeaponCatalog reference */
+    private $weaponCatalog;
+    /** @var array The list of ammunitions for the Weapon of the Ships in the Battlefield */
     private $ammo;
 
-    private function __construct() {
+    public function __construct() {
         $this->setWeaponCatalog(WeaponCatalog::getInstance());
         $this->ammo = array();
     }
@@ -30,7 +28,7 @@ class AmmoStorage {
         return $this->ammo;
     }
 
-    public function isFirable($weaponName) {
+    public function isFireable($weaponName) {
         return $this->ammo[$weaponName] > 0;
     }
 
@@ -63,16 +61,6 @@ class AmmoStorage {
         $this->weaponCatalog = $weaponCatalog;
     }
 
-
-    public static function getInstance() {
-
-        $class = __CLASS__;
-        if(self::$instance == null) {
-            self::$instance = new $class;
-        }
-
-        return self::$instance;
-    }
 
 
 }

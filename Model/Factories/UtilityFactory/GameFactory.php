@@ -10,21 +10,52 @@ namespace Model\Factories\UtilityFactory;
 
 
 use Model\AmmoStorage;
+use Model\Battlefield;
+use Model\DeBelloGame;
 use Model\Factories\FleetFactory\BretoniFleetFactory;
 use Model\Factories\FleetFactory\FleetFactory;
 use Model\Factories\FleetFactory\GalliFleetFactory;
 use Model\Factories\FleetFactory\RomaniFleetFactory;
+use Controller\PlaceShipMediator;
+use Controller\PlayGameMediator;
 
 class GameFactory {
 
     private static $instance = null;
 
+    /** Creates and returns a DeBelloGame object that represents the specific Game
+     * @return DeBelloGame
+     */
+    public function createDeBelloGame() {
+        return new DeBelloGame();
+    }
+
+    /** Creates and returns a Battlefield object to be used in the specific Game
+     * @return Battlefield
+     */
+    public function createBattlefield() {
+        return new Battlefield();
+    }
+
     /** Creates and returns an AmmoStorage object to be used in the specific Game
      * @return AmmoStorage
      */
     public function createAmmoStorage() {
+        return new AmmoStorage();
+    }
 
-        return AmmoStorage::getInstance();
+    /** Creates and returns a PlaceShipMediator which is a Mediator object in the placement phase of the Game
+     * @return PlaceShipMediator
+     */
+    public function createPlaceShipMediator() {
+        return new PlaceShipMediator();
+    }
+
+    /** Creates and returns a PlayGameMediator which is a Mediator object in the battle phase of the Game
+     * @return PlayGameMediator
+     */
+    public function createPlayGameMediator() {
+        return new PlayGameMediator();
     }
 
     /**
@@ -39,6 +70,7 @@ class GameFactory {
         }
         return null;
     }
+
 
     /* FleetFactory creators */
 
@@ -65,6 +97,9 @@ class GameFactory {
 
         return BretoniFleetFactory::getInstance();
     }
+
+
+    /* Singleton creator */
 
     /** Returns an (unique) instance of this class
      * @return GameFactory
