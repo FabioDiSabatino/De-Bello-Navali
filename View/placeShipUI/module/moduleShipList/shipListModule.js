@@ -34,15 +34,10 @@ var moduleShipList=(function () {
                 if($cursor.prev().hasClass("over"))
                 {
                     //spostamento a sx
-                    var dim=$(ui.draggable).attr("data-dim");
                     for( var i=1;i<dim;i++) {
                         $cursor = $cursor.next();
                     }
-
-                        $cursor.removeClass( "over" );
-
-
-
+                    $cursor.removeClass( "over" );
                 }
                 else
                 {

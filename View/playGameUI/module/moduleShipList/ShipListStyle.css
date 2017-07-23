@@ -49,6 +49,11 @@
     height:100%;
     border-right: 1px solid;
 }
+
+.weaponItemRow{
+    text-align: center;
+}
+
 .weapons{
     border-bottom: 1px solid black;
     border-right:1px solid;
@@ -70,10 +75,11 @@
     height: 50%;
 }
 
-
-
-
-
 .fleetList{
     height: calc(100% - 40px);
+}
+
+.imgWeapon{
+    width: 30px;
+    height: 30px;
 }

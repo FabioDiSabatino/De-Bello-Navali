@@ -6,14 +6,14 @@ var moduleGridZone=(function () {
 
     var __isPlaceable= function ($cursor,actualWeight,shipWeight,shipDim,orientation){
 
-        var $cursor=moduleCursor.getNextCursor($cursor,orientation);
+        var $cursor=cursorModule.getNextCursor($cursor,orientation);
         for(var i=0;i<shipDim-1;i++){
             if ($cursor.hasClass("placed ui-state-highlight") || $cursor.attr("id")==undefined )
             {
                 return false
             }
 
-            $cursor=moduleCursor.getNextCursor($cursor,orientation);
+            $cursor=cursorModule.getNextCursor($cursor,orientation);
         }
 
         if(actualWeight+shipWeight<=100)
@@ -59,12 +59,12 @@ var moduleGridZone=(function () {
 
     var addClassPlaced= function ($cursor,shipDim,orientation) {
         $cursor.addClass( "placed ui-state-highlight " );
-        $cursor=moduleCursor.getNextCursor($cursor,orientation);
+        $cursor=cursorModule.getNextCursor($cursor,orientation);
 
         for (var i=0;i<shipDim-2;i++)
         {
             $cursor.addClass( "placed ui-state-highlight noBorder-left" );
-            $cursor=moduleCursor.getNextCursor($cursor,orientation);
+            $cursor=cursorModule.getNextCursor($cursor,orientation);
         }
 
         if (orientation==0)
@@ -84,7 +84,7 @@ var moduleGridZone=(function () {
         for (var i=0;i<shipDim;i++)
         {
             $cursor.addClass( "over" );
-            $cursor=moduleCursor.getNextCursor($cursor,orientation);
+            $cursor=cursorModule.getNextCursor($cursor,orientation);
         }
 
     };
@@ -94,7 +94,7 @@ var moduleGridZone=(function () {
             for (var i=0;i<shipDim;i++)
             {
                 $cursor.removeClass("over");
-                $cursor=moduleCursor.getNextCursor($cursor,orientation);
+                $cursor=cursorModule.getNextCursor($cursor,orientation);
             }
 
 
@@ -107,14 +107,14 @@ var moduleGridZone=(function () {
         {
             console.log("remove placed at :"+$cursor.attr("id"));
             $cursor.removeClass("placed ui-state-highlight noBorder-left");
-            $cursor=moduleCursor.getPrevCursor($cursor,orientation);
+            $cursor=cursorModule.getPrevCursor($cursor,orientation);
 
         }
     };
 
     var setRotateShipEvent=function ($cursor,dim) {
 
-        var $lastCursor=moduleCursor.getLastCursor($cursor,dim);
+        var $lastCursor=cursorModule.getLastCursor($cursor,dim);
         var id=$lastCursor.attr("id");
         $('.rot'+id).click(function () {
 

@@ -16,7 +16,6 @@ var moduleUserField=(function () {
         var col=position.y;
         var $row=$userField.find("#"+row);
         var $cursor=$row.find("#"+row+col);
-        console.log($cursor.attr("id"));
 
         for(var i=0;i<dim;i++){
             $cursor.addClass("shipHealty");
@@ -58,8 +57,7 @@ var moduleUserField=(function () {
                     }
                 }
             }
-            $cursor= moduleCursor.getNextCursor($cursor,orientation);
-            console.log($cursor.attr("id"));
+            $cursor= cursorModule.getNextCursor($cursor,orientation);
 
 
 

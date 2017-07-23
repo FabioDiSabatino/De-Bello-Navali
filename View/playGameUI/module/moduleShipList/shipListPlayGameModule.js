@@ -4,6 +4,7 @@
 
 var moduleShipListPlayGame=(function () {
 
+    var __$squaresInvolvedPreview=[];
 
     //------------------------------------private method----------------------------------------//
 
@@ -13,6 +14,49 @@ var moduleShipListPlayGame=(function () {
     var __getTemplate=function (template) {
 
         return $.get('module/moduleShipList/'+template+'.tpl')
+    };
+
+    var __initDragable=function () {
+
+
+        $(".imgWeapon").draggable({
+            addClasses: false,
+            revert:true
+        });
+
+        $(".cellEnemy").droppable({
+            over:function (event,ui) {
+                $(".cellEnemy").removeClass("overAttack");
+                var $cursor=$(this);
+                var weaponName=$(ui.draggable).attr("data-name");
+                __$squaresInvolvedPreview=rangeModule.getSquareInvolved(weaponName,$cursor);
+                for (var i=0;i<__$squaresInvolvedPreview.length;i++){
+                    $square=__$squaresInvolvedPreview[i];
+                    console.log("add :"+$square.attr("id"));
+                    $square.addClass("overAttack");
+
+                }
+
+            },
+            out:function (event,ui) {
+
+            },
+            drop:function (event,ui) {
+
+                $(".cellEnemy").removeClass("overAttack");
+                alert("wait response to the attack...");
+                /*
+                  far partire chiamata ajax al server attack(shipID, weaponID, position) e
+                  aspettare array di square hit
+                 */
+
+
+
+
+            }
+
+
+        })
     };
 
     var __init= function(){
@@ -48,7 +92,8 @@ var moduleShipListPlayGame=(function () {
                                     var weapon={
                                         WeaponName:shipXWeapon[y].WeaponName,
                                         TimeReload:shipXWeapon[y].TimeReload,
-                                        Ammo:shipXWeapon[y].Ammo
+                                        Ammo:shipXWeapon[y].Ammo,
+                                        Img:shipXWeapon[y].Img
                                     };
 
 
@@ -59,11 +104,10 @@ var moduleShipListPlayGame=(function () {
                                 var dividerWeapon=100/shipXWeapon.length;
                                 $(".rowWeapon").css("height",dividerWeapon+"%");
 
+                                var height=parseInt($(".weaponItem").css("height"));
+                                var marginTop= (height-20)/2;
 
-
-
-
-
+                                $(".weaponItemRow").css("margin-top",marginTop);
 
 
                             }
@@ -74,8 +118,15 @@ var moduleShipListPlayGame=(function () {
 
                     }
 
+                        //init dragable
+                        __initDragable();
+                });
 
-                })
+
+
+
+
+
 
 
     };

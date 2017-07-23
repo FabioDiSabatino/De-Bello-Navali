@@ -24,12 +24,15 @@ var GeneralShip={
                         {
                             "WeaponName":"W1",
                             "TimeReload":0,
-                            "Ammo":"infinity"
+                            "Ammo":"infinity",
+                            "Img":"../playGameUI/img/w1.png"
                         },
                         {
                             "WeaponName":"W2",
                             "TimeReload":2,
-                            "Ammo":3
+                            "Ammo":3,
+                            "Img":"../playGameUI/img/w2.png"
+
                         }
                     ]
 
@@ -46,12 +49,16 @@ var GeneralShip={
                         {
                             "WeaponName":"W1",
                             "TimeReload":0,
-                            "Ammo":"infinity"
+                            "Ammo":"infinity",
+                            "Img":"../playGameUI/img/w1.png"
+
                         },
                         {
-                            "WeaponName":"W5",
+                            "WeaponName":"W2",
                             "TimeReload":3,
-                            "Ammo":2
+                            "Ammo":2,
+                            "Img":"../playGameUI/img/w2.png"
+
                         }
                     ]
 
@@ -68,12 +75,16 @@ var GeneralShip={
                         {
                             "WeaponName":"W1",
                             "TimeReload":0,
-                            "Ammo":"infinity"
+                            "Ammo":"infinity",
+                            "Img":"../playGameUI/img/w1.png"
+
                         },
                         {
                             "WeaponName":"W2",
                             "TimeReload":2,
-                            "Ammo":3
+                            "Ammo":3,
+                            "Img":"../playGameUI/img/w2.png"
+
                         }
                     ]
 
@@ -99,12 +110,16 @@ var GeneralShip={
                         {
                             "WeaponName":"W3",
                             "TimeReload":0,
-                            "Ammo":"infinity"
+                            "Ammo":"infinity",
+                            "Img":"../playGameUI/img/w3.png"
+
                         },
                         {
                             "WeaponName":"W4",
                             "TimeReload":3,
-                            "Ammo":2
+                            "Ammo":2,
+                            "Img":"../playGameUI/img/w3.png"
+
                         }
                     ]
                 }

@@ -9,7 +9,7 @@
             target: $("body")
         });
         setTimerZone();
-        moduleCursor.initModule();
+        cursorModule.initModule();
         moduleShipListPlayGame.initModule();
         moduleUserField.initModule();
 

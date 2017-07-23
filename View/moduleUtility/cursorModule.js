@@ -3,7 +3,7 @@
  */
 
 
-var moduleCursor=(function () {
+var cursorModule=(function () {
 
     //------------------------------------private method----------------------------------------//
 
