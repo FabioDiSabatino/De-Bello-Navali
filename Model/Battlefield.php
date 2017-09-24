@@ -30,6 +30,10 @@ class Battlefield {
     private $supportFleet;
     /** @var  AmmoStorage A container used to keep track of the ammo usage of the Weapons */
     private $ammoStorage;
+    /**@var array(int, int) An array which contains integrity of Ships placed on Battlefield */
+    private $integrityList;
+    /**@var weapon[] Contains weapons existing on the Battlefield */
+    private $weaponList;
 
     public function __construct($fleetWeight = 70) {
 
@@ -139,8 +143,11 @@ class Battlefield {
             $ship->setShipID($shipID);
             array_push($this->fleet, $ship);
 
-            $weaponList = $ship->getWeaponList();
-            foreach ($weaponList as $weapon) {
+            $this->integrityList[$shipID]=$ship->getIntegrity();
+
+
+            array_push($this->weaponList,$ship->getWeaponList());
+            foreach ($this->weaponList as $weapon) {
                 $weaponName = $weapon->getWeaponName();
                 $this->ammoStorage->insertAmmo($weaponName);
             }
@@ -274,4 +281,18 @@ class Battlefield {
     private function increaseShipCounter() { $this->shipIdCounter++; }
 
 
+    public function attack($shipID, $weaponName, $positionX, $positionY){
+
+
+        $shipIntegrity=$this->integrityList[$shipID];
+        $ammunitions=$this->ammoStorage->getAmmoByWeaponName($weaponName);
+
+        //se l'arma è normale l'integrita della nave deve essere maggiore di 0
+        //se l'arma è speciale l'integrità della nave deve essere maggiore del 50% e devono esserci le munizioni
+        if($weaponName=='arma normale' && $shipIntegrity>0 || $weaponName=='arma speciale' && $shipIntegrity>50 && $ammunitions>0 ){
+
+            $this->weaponList[$weaponName]->attack($positionX,$positionY);
+
+        }
+    }
 }

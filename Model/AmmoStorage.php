@@ -57,6 +57,14 @@ class AmmoStorage {
         }
     }
 
+    public function getAmmoByWeaponName($weaponName) {
+        if(array_key_exists($weaponName,$this->ammo)){
+            $ammunitions=$this->ammo[$weaponName];
+            return $ammunitions;
+        }
+        else return 0;
+    }
+
     private function setWeaponCatalog($weaponCatalog) {
         $this->weaponCatalog = $weaponCatalog;
     }
