@@ -25,13 +25,13 @@ use Propel\Runtime\Map\TableMap;
 use Propel\Runtime\Parser\AbstractParser;
 
 /**
- * Base class that represents a row from the 'weaponDescription' table.
+ * Base class that represents a row from the 'weapondescription' table.
  *
- * 
  *
- * @package    propel.generator.Persistence.WeaponDescriptionPersistence.Base
+ *
+ * @package    propel.generator.Persistence\WeaponDescriptionPersistence.Base
  */
-abstract class WeaponDescription implements ActiveRecordInterface 
+abstract class WeaponDescription implements ActiveRecordInterface
 {
     /**
      * TableMap class name
@@ -67,28 +67,28 @@ abstract class WeaponDescription implements ActiveRecordInterface
 
     /**
      * The value for the weaponname field.
-     * 
+     *
      * @var        string
      */
     protected $weaponname;
 
     /**
      * The value for the rangename field.
-     * 
+     *
      * @var        string
      */
     protected $rangename;
 
     /**
      * The value for the ammo field.
-     * 
+     *
      * @var        int
      */
     protected $ammo;
 
     /**
      * The value for the reloadtime field.
-     * 
+     *
      * @var        int
      */
     protected $reloadtime;
@@ -354,17 +354,17 @@ abstract class WeaponDescription implements ActiveRecordInterface
         $cls = new \ReflectionClass($this);
         $propertyNames = [];
         $serializableProperties = array_diff($cls->getProperties(), $cls->getProperties(\ReflectionProperty::IS_STATIC));
-        
+
         foreach($serializableProperties as $property) {
             $propertyNames[] = $property->getName();
         }
-        
+
         return $propertyNames;
     }
 
     /**
      * Get the [weaponname] column value.
-     * 
+     *
      * @return string
      */
     public function getWeaponName()
@@ -374,17 +374,17 @@ abstract class WeaponDescription implements ActiveRecordInterface
 
     /**
      * Get the [rangename] column value.
-     * 
+     *
      * @return string
      */
-    public function getRangeName()
+    public function getRangename()
     {
         return $this->rangename;
     }
 
     /**
      * Get the [ammo] column value.
-     * 
+     *
      * @return int
      */
     public function getAmmo()
@@ -394,17 +394,17 @@ abstract class WeaponDescription implements ActiveRecordInterface
 
     /**
      * Get the [reloadtime] column value.
-     * 
+     *
      * @return int
      */
-    public function getReloadTime()
+    public function getReloadtime()
     {
         return $this->reloadtime;
     }
 
     /**
      * Set the value of [weaponname] column.
-     * 
+     *
      * @param string $v new value
      * @return $this|\Persistence\WeaponDescriptionPersistence\WeaponDescription The current object (for fluent API support)
      */
@@ -424,11 +424,11 @@ abstract class WeaponDescription implements ActiveRecordInterface
 
     /**
      * Set the value of [rangename] column.
-     * 
+     *
      * @param string $v new value
      * @return $this|\Persistence\WeaponDescriptionPersistence\WeaponDescription The current object (for fluent API support)
      */
-    public function setRangeName($v)
+    public function setRangename($v)
     {
         if ($v !== null) {
             $v = (string) $v;
@@ -440,11 +440,11 @@ abstract class WeaponDescription implements ActiveRecordInterface
         }
 
         return $this;
-    } // setRangeName()
+    } // setRangename()
 
     /**
      * Set the value of [ammo] column.
-     * 
+     *
      * @param int $v new value
      * @return $this|\Persistence\WeaponDescriptionPersistence\WeaponDescription The current object (for fluent API support)
      */
@@ -464,11 +464,11 @@ abstract class WeaponDescription implements ActiveRecordInterface
 
     /**
      * Set the value of [reloadtime] column.
-     * 
+     *
      * @param int $v new value
      * @return $this|\Persistence\WeaponDescriptionPersistence\WeaponDescription The current object (for fluent API support)
      */
-    public function setReloadTime($v)
+    public function setReloadtime($v)
     {
         if ($v !== null) {
             $v = (int) $v;
@@ -480,7 +480,7 @@ abstract class WeaponDescription implements ActiveRecordInterface
         }
 
         return $this;
-    } // setReloadTime()
+    } // setReloadtime()
 
     /**
      * Indicates whether the columns in this object are only set to default values.
@@ -521,13 +521,13 @@ abstract class WeaponDescription implements ActiveRecordInterface
             $col = $row[TableMap::TYPE_NUM == $indexType ? 0 + $startcol : WeaponDescriptionTableMap::translateFieldName('WeaponName', TableMap::TYPE_PHPNAME, $indexType)];
             $this->weaponname = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 1 + $startcol : WeaponDescriptionTableMap::translateFieldName('RangeName', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 1 + $startcol : WeaponDescriptionTableMap::translateFieldName('Rangename', TableMap::TYPE_PHPNAME, $indexType)];
             $this->rangename = (null !== $col) ? (string) $col : null;
 
             $col = $row[TableMap::TYPE_NUM == $indexType ? 2 + $startcol : WeaponDescriptionTableMap::translateFieldName('Ammo', TableMap::TYPE_PHPNAME, $indexType)];
             $this->ammo = (null !== $col) ? (int) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 3 + $startcol : WeaponDescriptionTableMap::translateFieldName('ReloadTime', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 3 + $startcol : WeaponDescriptionTableMap::translateFieldName('Reloadtime', TableMap::TYPE_PHPNAME, $indexType)];
             $this->reloadtime = (null !== $col) ? (int) $col : null;
             $this->resetModified();
 
@@ -660,7 +660,7 @@ abstract class WeaponDescription implements ActiveRecordInterface
         if ($this->alreadyInSave) {
             return 0;
         }
- 
+
         if ($con === null) {
             $con = Propel::getServiceContainer()->getWriteConnection(WeaponDescriptionTableMap::DATABASE_NAME);
         }
@@ -720,9 +720,10 @@ abstract class WeaponDescription implements ActiveRecordInterface
 
             if ($this->shipDescriptionsRelatedByWeapon1ScheduledForDeletion !== null) {
                 if (!$this->shipDescriptionsRelatedByWeapon1ScheduledForDeletion->isEmpty()) {
-                    \Persistence\ShipDescriptionPersistence\ShipDescriptionQuery::create()
-                        ->filterByPrimaryKeys($this->shipDescriptionsRelatedByWeapon1ScheduledForDeletion->getPrimaryKeys(false))
-                        ->delete($con);
+                    foreach ($this->shipDescriptionsRelatedByWeapon1ScheduledForDeletion as $shipDescriptionRelatedByWeapon1) {
+                        // need to save related object because we set the relation to null
+                        $shipDescriptionRelatedByWeapon1->save($con);
+                    }
                     $this->shipDescriptionsRelatedByWeapon1ScheduledForDeletion = null;
                 }
             }
@@ -803,11 +804,11 @@ abstract class WeaponDescription implements ActiveRecordInterface
             $modifiedColumns[':p' . $index++]  = 'ammo';
         }
         if ($this->isColumnModified(WeaponDescriptionTableMap::COL_RELOADTIME)) {
-            $modifiedColumns[':p' . $index++]  = 'reloadTime';
+            $modifiedColumns[':p' . $index++]  = 'reloadtime';
         }
 
         $sql = sprintf(
-            'INSERT INTO weaponDescription (%s) VALUES (%s)',
+            'INSERT INTO weapondescription (%s) VALUES (%s)',
             implode(', ', $modifiedColumns),
             implode(', ', array_keys($modifiedColumns))
         );
@@ -816,16 +817,16 @@ abstract class WeaponDescription implements ActiveRecordInterface
             $stmt = $con->prepare($sql);
             foreach ($modifiedColumns as $identifier => $columnName) {
                 switch ($columnName) {
-                    case 'weaponName':                        
+                    case 'weaponName':
                         $stmt->bindValue($identifier, $this->weaponname, PDO::PARAM_STR);
                         break;
-                    case 'rangeName':                        
+                    case 'rangeName':
                         $stmt->bindValue($identifier, $this->rangename, PDO::PARAM_STR);
                         break;
-                    case 'ammo':                        
+                    case 'ammo':
                         $stmt->bindValue($identifier, $this->ammo, PDO::PARAM_INT);
                         break;
-                    case 'reloadTime':                        
+                    case 'reloadtime':
                         $stmt->bindValue($identifier, $this->reloadtime, PDO::PARAM_INT);
                         break;
                 }
@@ -887,13 +888,13 @@ abstract class WeaponDescription implements ActiveRecordInterface
                 return $this->getWeaponName();
                 break;
             case 1:
-                return $this->getRangeName();
+                return $this->getRangename();
                 break;
             case 2:
                 return $this->getAmmo();
                 break;
             case 3:
-                return $this->getReloadTime();
+                return $this->getReloadtime();
                 break;
             default:
                 return null;
@@ -926,59 +927,59 @@ abstract class WeaponDescription implements ActiveRecordInterface
         $keys = WeaponDescriptionTableMap::getFieldNames($keyType);
         $result = array(
             $keys[0] => $this->getWeaponName(),
-            $keys[1] => $this->getRangeName(),
+            $keys[1] => $this->getRangename(),
             $keys[2] => $this->getAmmo(),
-            $keys[3] => $this->getReloadTime(),
+            $keys[3] => $this->getReloadtime(),
         );
         $virtualColumns = $this->virtualColumns;
         foreach ($virtualColumns as $key => $virtualColumn) {
             $result[$key] = $virtualColumn;
         }
-        
+
         if ($includeForeignObjects) {
             if (null !== $this->collShipDescriptionsRelatedByWeapon1) {
-                
+
                 switch ($keyType) {
                     case TableMap::TYPE_CAMELNAME:
                         $key = 'shipDescriptions';
                         break;
                     case TableMap::TYPE_FIELDNAME:
-                        $key = 'shipDescriptions';
+                        $key = 'ShipDescriptions';
                         break;
                     default:
                         $key = 'ShipDescriptions';
                 }
-        
+
                 $result[$key] = $this->collShipDescriptionsRelatedByWeapon1->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
             if (null !== $this->collShipDescriptionsRelatedByWeapon2) {
-                
+
                 switch ($keyType) {
                     case TableMap::TYPE_CAMELNAME:
                         $key = 'shipDescriptions';
                         break;
                     case TableMap::TYPE_FIELDNAME:
-                        $key = 'shipDescriptions';
+                        $key = 'ShipDescriptions';
                         break;
                     default:
                         $key = 'ShipDescriptions';
                 }
-        
+
                 $result[$key] = $this->collShipDescriptionsRelatedByWeapon2->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
             if (null !== $this->collShipDescriptionsRelatedByWeapon3) {
-                
+
                 switch ($keyType) {
                     case TableMap::TYPE_CAMELNAME:
                         $key = 'shipDescriptions';
                         break;
                     case TableMap::TYPE_FIELDNAME:
-                        $key = 'shipDescriptions';
+                        $key = 'ShipDescriptions';
                         break;
                     default:
                         $key = 'ShipDescriptions';
                 }
-        
+
                 $result[$key] = $this->collShipDescriptionsRelatedByWeapon3->toArray(null, false, $keyType, $includeLazyLoadColumns, $alreadyDumpedObjects);
             }
         }
@@ -1019,13 +1020,13 @@ abstract class WeaponDescription implements ActiveRecordInterface
                 $this->setWeaponName($value);
                 break;
             case 1:
-                $this->setRangeName($value);
+                $this->setRangename($value);
                 break;
             case 2:
                 $this->setAmmo($value);
                 break;
             case 3:
-                $this->setReloadTime($value);
+                $this->setReloadtime($value);
                 break;
         } // switch()
 
@@ -1057,13 +1058,13 @@ abstract class WeaponDescription implements ActiveRecordInterface
             $this->setWeaponName($arr[$keys[0]]);
         }
         if (array_key_exists($keys[1], $arr)) {
-            $this->setRangeName($arr[$keys[1]]);
+            $this->setRangename($arr[$keys[1]]);
         }
         if (array_key_exists($keys[2], $arr)) {
             $this->setAmmo($arr[$keys[2]]);
         }
         if (array_key_exists($keys[3], $arr)) {
-            $this->setReloadTime($arr[$keys[3]]);
+            $this->setReloadtime($arr[$keys[3]]);
         }
     }
 
@@ -1161,7 +1162,7 @@ abstract class WeaponDescription implements ActiveRecordInterface
 
         return spl_object_hash($this);
     }
-        
+
     /**
      * Returns the primary key for this object (row).
      * @return string
@@ -1205,9 +1206,9 @@ abstract class WeaponDescription implements ActiveRecordInterface
     public function copyInto($copyObj, $deepCopy = false, $makeNew = true)
     {
         $copyObj->setWeaponName($this->getWeaponName());
-        $copyObj->setRangeName($this->getRangeName());
+        $copyObj->setRangename($this->getRangename());
         $copyObj->setAmmo($this->getAmmo());
-        $copyObj->setReloadTime($this->getReloadTime());
+        $copyObj->setReloadtime($this->getReloadtime());
 
         if ($deepCopy) {
             // important: temporarily setNew(false) because this affects the behavior of
@@ -1273,13 +1274,16 @@ abstract class WeaponDescription implements ActiveRecordInterface
     public function initRelation($relationName)
     {
         if ('ShipDescriptionRelatedByWeapon1' == $relationName) {
-            return $this->initShipDescriptionsRelatedByWeapon1();
+            $this->initShipDescriptionsRelatedByWeapon1();
+            return;
         }
         if ('ShipDescriptionRelatedByWeapon2' == $relationName) {
-            return $this->initShipDescriptionsRelatedByWeapon2();
+            $this->initShipDescriptionsRelatedByWeapon2();
+            return;
         }
         if ('ShipDescriptionRelatedByWeapon3' == $relationName) {
-            return $this->initShipDescriptionsRelatedByWeapon3();
+            $this->initShipDescriptionsRelatedByWeapon3();
+            return;
         }
     }
 
@@ -1352,7 +1356,7 @@ abstract class WeaponDescription implements ActiveRecordInterface
                 $this->initShipDescriptionsRelatedByWeapon1();
             } else {
                 $collShipDescriptionsRelatedByWeapon1 = ShipDescriptionQuery::create(null, $criteria)
-                    ->filterByWeaponDescriptionRelatedByWeapon1($this)
+                    ->filterByFirstWeapon($this)
                     ->find($con);
 
                 if (null !== $criteria) {
@@ -1402,11 +1406,11 @@ abstract class WeaponDescription implements ActiveRecordInterface
         /** @var ShipDescription[] $shipDescriptionsRelatedByWeapon1ToDelete */
         $shipDescriptionsRelatedByWeapon1ToDelete = $this->getShipDescriptionsRelatedByWeapon1(new Criteria(), $con)->diff($shipDescriptionsRelatedByWeapon1);
 
-        
+
         $this->shipDescriptionsRelatedByWeapon1ScheduledForDeletion = $shipDescriptionsRelatedByWeapon1ToDelete;
 
         foreach ($shipDescriptionsRelatedByWeapon1ToDelete as $shipDescriptionRelatedByWeapon1Removed) {
-            $shipDescriptionRelatedByWeapon1Removed->setWeaponDescriptionRelatedByWeapon1(null);
+            $shipDescriptionRelatedByWeapon1Removed->setFirstWeapon(null);
         }
 
         $this->collShipDescriptionsRelatedByWeapon1 = null;
@@ -1447,7 +1451,7 @@ abstract class WeaponDescription implements ActiveRecordInterface
             }
 
             return $query
-                ->filterByWeaponDescriptionRelatedByWeapon1($this)
+                ->filterByFirstWeapon($this)
                 ->count($con);
         }
 
@@ -1485,7 +1489,7 @@ abstract class WeaponDescription implements ActiveRecordInterface
     protected function doAddShipDescriptionRelatedByWeapon1(ShipDescription $shipDescriptionRelatedByWeapon1)
     {
         $this->collShipDescriptionsRelatedByWeapon1[]= $shipDescriptionRelatedByWeapon1;
-        $shipDescriptionRelatedByWeapon1->setWeaponDescriptionRelatedByWeapon1($this);
+        $shipDescriptionRelatedByWeapon1->setFirstWeapon($this);
     }
 
     /**
@@ -1501,8 +1505,8 @@ abstract class WeaponDescription implements ActiveRecordInterface
                 $this->shipDescriptionsRelatedByWeapon1ScheduledForDeletion = clone $this->collShipDescriptionsRelatedByWeapon1;
                 $this->shipDescriptionsRelatedByWeapon1ScheduledForDeletion->clear();
             }
-            $this->shipDescriptionsRelatedByWeapon1ScheduledForDeletion[]= clone $shipDescriptionRelatedByWeapon1;
-            $shipDescriptionRelatedByWeapon1->setWeaponDescriptionRelatedByWeapon1(null);
+            $this->shipDescriptionsRelatedByWeapon1ScheduledForDeletion[]= $shipDescriptionRelatedByWeapon1;
+            $shipDescriptionRelatedByWeapon1->setFirstWeapon(null);
         }
 
         return $this;
@@ -1577,7 +1581,7 @@ abstract class WeaponDescription implements ActiveRecordInterface
                 $this->initShipDescriptionsRelatedByWeapon2();
             } else {
                 $collShipDescriptionsRelatedByWeapon2 = ShipDescriptionQuery::create(null, $criteria)
-                    ->filterByWeaponDescriptionRelatedByWeapon2($this)
+                    ->filterBySecondWeapon($this)
                     ->find($con);
 
                 if (null !== $criteria) {
@@ -1627,11 +1631,11 @@ abstract class WeaponDescription implements ActiveRecordInterface
         /** @var ShipDescription[] $shipDescriptionsRelatedByWeapon2ToDelete */
         $shipDescriptionsRelatedByWeapon2ToDelete = $this->getShipDescriptionsRelatedByWeapon2(new Criteria(), $con)->diff($shipDescriptionsRelatedByWeapon2);
 
-        
+
         $this->shipDescriptionsRelatedByWeapon2ScheduledForDeletion = $shipDescriptionsRelatedByWeapon2ToDelete;
 
         foreach ($shipDescriptionsRelatedByWeapon2ToDelete as $shipDescriptionRelatedByWeapon2Removed) {
-            $shipDescriptionRelatedByWeapon2Removed->setWeaponDescriptionRelatedByWeapon2(null);
+            $shipDescriptionRelatedByWeapon2Removed->setSecondWeapon(null);
         }
 
         $this->collShipDescriptionsRelatedByWeapon2 = null;
@@ -1672,7 +1676,7 @@ abstract class WeaponDescription implements ActiveRecordInterface
             }
 
             return $query
-                ->filterByWeaponDescriptionRelatedByWeapon2($this)
+                ->filterBySecondWeapon($this)
                 ->count($con);
         }
 
@@ -1710,7 +1714,7 @@ abstract class WeaponDescription implements ActiveRecordInterface
     protected function doAddShipDescriptionRelatedByWeapon2(ShipDescription $shipDescriptionRelatedByWeapon2)
     {
         $this->collShipDescriptionsRelatedByWeapon2[]= $shipDescriptionRelatedByWeapon2;
-        $shipDescriptionRelatedByWeapon2->setWeaponDescriptionRelatedByWeapon2($this);
+        $shipDescriptionRelatedByWeapon2->setSecondWeapon($this);
     }
 
     /**
@@ -1727,7 +1731,7 @@ abstract class WeaponDescription implements ActiveRecordInterface
                 $this->shipDescriptionsRelatedByWeapon2ScheduledForDeletion->clear();
             }
             $this->shipDescriptionsRelatedByWeapon2ScheduledForDeletion[]= $shipDescriptionRelatedByWeapon2;
-            $shipDescriptionRelatedByWeapon2->setWeaponDescriptionRelatedByWeapon2(null);
+            $shipDescriptionRelatedByWeapon2->setSecondWeapon(null);
         }
 
         return $this;
@@ -1802,7 +1806,7 @@ abstract class WeaponDescription implements ActiveRecordInterface
                 $this->initShipDescriptionsRelatedByWeapon3();
             } else {
                 $collShipDescriptionsRelatedByWeapon3 = ShipDescriptionQuery::create(null, $criteria)
-                    ->filterByWeaponDescriptionRelatedByWeapon3($this)
+                    ->filterByThirdWeapon($this)
                     ->find($con);
 
                 if (null !== $criteria) {
@@ -1852,11 +1856,11 @@ abstract class WeaponDescription implements ActiveRecordInterface
         /** @var ShipDescription[] $shipDescriptionsRelatedByWeapon3ToDelete */
         $shipDescriptionsRelatedByWeapon3ToDelete = $this->getShipDescriptionsRelatedByWeapon3(new Criteria(), $con)->diff($shipDescriptionsRelatedByWeapon3);
 
-        
+
         $this->shipDescriptionsRelatedByWeapon3ScheduledForDeletion = $shipDescriptionsRelatedByWeapon3ToDelete;
 
         foreach ($shipDescriptionsRelatedByWeapon3ToDelete as $shipDescriptionRelatedByWeapon3Removed) {
-            $shipDescriptionRelatedByWeapon3Removed->setWeaponDescriptionRelatedByWeapon3(null);
+            $shipDescriptionRelatedByWeapon3Removed->setThirdWeapon(null);
         }
 
         $this->collShipDescriptionsRelatedByWeapon3 = null;
@@ -1897,7 +1901,7 @@ abstract class WeaponDescription implements ActiveRecordInterface
             }
 
             return $query
-                ->filterByWeaponDescriptionRelatedByWeapon3($this)
+                ->filterByThirdWeapon($this)
                 ->count($con);
         }
 
@@ -1935,7 +1939,7 @@ abstract class WeaponDescription implements ActiveRecordInterface
     protected function doAddShipDescriptionRelatedByWeapon3(ShipDescription $shipDescriptionRelatedByWeapon3)
     {
         $this->collShipDescriptionsRelatedByWeapon3[]= $shipDescriptionRelatedByWeapon3;
-        $shipDescriptionRelatedByWeapon3->setWeaponDescriptionRelatedByWeapon3($this);
+        $shipDescriptionRelatedByWeapon3->setThirdWeapon($this);
     }
 
     /**
@@ -1952,7 +1956,7 @@ abstract class WeaponDescription implements ActiveRecordInterface
                 $this->shipDescriptionsRelatedByWeapon3ScheduledForDeletion->clear();
             }
             $this->shipDescriptionsRelatedByWeapon3ScheduledForDeletion[]= $shipDescriptionRelatedByWeapon3;
-            $shipDescriptionRelatedByWeapon3->setWeaponDescriptionRelatedByWeapon3(null);
+            $shipDescriptionRelatedByWeapon3->setThirdWeapon(null);
         }
 
         return $this;

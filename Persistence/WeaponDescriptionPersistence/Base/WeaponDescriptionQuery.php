@@ -17,19 +17,19 @@ use Propel\Runtime\Connection\ConnectionInterface;
 use Propel\Runtime\Exception\PropelException;
 
 /**
- * Base class that represents a query for the 'weaponDescription' table.
+ * Base class that represents a query for the 'weapondescription' table.
  *
- * 
+ *
  *
  * @method     ChildWeaponDescriptionQuery orderByWeaponName($order = Criteria::ASC) Order by the weaponName column
- * @method     ChildWeaponDescriptionQuery orderByRangeName($order = Criteria::ASC) Order by the rangeName column
+ * @method     ChildWeaponDescriptionQuery orderByRangename($order = Criteria::ASC) Order by the rangeName column
  * @method     ChildWeaponDescriptionQuery orderByAmmo($order = Criteria::ASC) Order by the ammo column
- * @method     ChildWeaponDescriptionQuery orderByReloadTime($order = Criteria::ASC) Order by the reloadTime column
+ * @method     ChildWeaponDescriptionQuery orderByReloadtime($order = Criteria::ASC) Order by the reloadtime column
  *
  * @method     ChildWeaponDescriptionQuery groupByWeaponName() Group by the weaponName column
- * @method     ChildWeaponDescriptionQuery groupByRangeName() Group by the rangeName column
+ * @method     ChildWeaponDescriptionQuery groupByRangename() Group by the rangeName column
  * @method     ChildWeaponDescriptionQuery groupByAmmo() Group by the ammo column
- * @method     ChildWeaponDescriptionQuery groupByReloadTime() Group by the reloadTime column
+ * @method     ChildWeaponDescriptionQuery groupByReloadtime() Group by the reloadtime column
  *
  * @method     ChildWeaponDescriptionQuery leftJoin($relation) Adds a LEFT JOIN clause to the query
  * @method     ChildWeaponDescriptionQuery rightJoin($relation) Adds a RIGHT JOIN clause to the query
@@ -75,23 +75,23 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildWeaponDescription findOneOrCreate(ConnectionInterface $con = null) Return the first ChildWeaponDescription matching the query, or a new ChildWeaponDescription object populated from the query conditions when no match is found
  *
  * @method     ChildWeaponDescription findOneByWeaponName(string $weaponName) Return the first ChildWeaponDescription filtered by the weaponName column
- * @method     ChildWeaponDescription findOneByRangeName(string $rangeName) Return the first ChildWeaponDescription filtered by the rangeName column
+ * @method     ChildWeaponDescription findOneByRangename(string $rangeName) Return the first ChildWeaponDescription filtered by the rangeName column
  * @method     ChildWeaponDescription findOneByAmmo(int $ammo) Return the first ChildWeaponDescription filtered by the ammo column
- * @method     ChildWeaponDescription findOneByReloadTime(int $reloadTime) Return the first ChildWeaponDescription filtered by the reloadTime column *
+ * @method     ChildWeaponDescription findOneByReloadtime(int $reloadtime) Return the first ChildWeaponDescription filtered by the reloadtime column *
 
  * @method     ChildWeaponDescription requirePk($key, ConnectionInterface $con = null) Return the ChildWeaponDescription by primary key and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildWeaponDescription requireOne(ConnectionInterface $con = null) Return the first ChildWeaponDescription matching the query and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  *
  * @method     ChildWeaponDescription requireOneByWeaponName(string $weaponName) Return the first ChildWeaponDescription filtered by the weaponName column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
- * @method     ChildWeaponDescription requireOneByRangeName(string $rangeName) Return the first ChildWeaponDescription filtered by the rangeName column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildWeaponDescription requireOneByRangename(string $rangeName) Return the first ChildWeaponDescription filtered by the rangeName column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildWeaponDescription requireOneByAmmo(int $ammo) Return the first ChildWeaponDescription filtered by the ammo column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
- * @method     ChildWeaponDescription requireOneByReloadTime(int $reloadTime) Return the first ChildWeaponDescription filtered by the reloadTime column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildWeaponDescription requireOneByReloadtime(int $reloadtime) Return the first ChildWeaponDescription filtered by the reloadtime column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  *
  * @method     ChildWeaponDescription[]|ObjectCollection find(ConnectionInterface $con = null) Return ChildWeaponDescription objects based on current ModelCriteria
  * @method     ChildWeaponDescription[]|ObjectCollection findByWeaponName(string $weaponName) Return ChildWeaponDescription objects filtered by the weaponName column
- * @method     ChildWeaponDescription[]|ObjectCollection findByRangeName(string $rangeName) Return ChildWeaponDescription objects filtered by the rangeName column
+ * @method     ChildWeaponDescription[]|ObjectCollection findByRangename(string $rangeName) Return ChildWeaponDescription objects filtered by the rangeName column
  * @method     ChildWeaponDescription[]|ObjectCollection findByAmmo(int $ammo) Return ChildWeaponDescription objects filtered by the ammo column
- * @method     ChildWeaponDescription[]|ObjectCollection findByReloadTime(int $reloadTime) Return ChildWeaponDescription objects filtered by the reloadTime column
+ * @method     ChildWeaponDescription[]|ObjectCollection findByReloadtime(int $reloadtime) Return ChildWeaponDescription objects filtered by the reloadtime column
  * @method     ChildWeaponDescription[]|\Propel\Runtime\Util\PropelModelPager paginate($page = 1, $maxPerPage = 10, ConnectionInterface $con = null) Issue a SELECT query based on the current ModelCriteria and uses a page and a maximum number of results per page to compute an offset and a limit
  *
  */
@@ -190,9 +190,9 @@ abstract class WeaponDescriptionQuery extends ModelCriteria
      */
     protected function findPkSimple($key, ConnectionInterface $con)
     {
-        $sql = 'SELECT weaponName, rangeName, ammo, reloadTime FROM weaponDescription WHERE weaponName = :p0';
+        $sql = 'SELECT weaponName, rangeName, ammo, reloadtime FROM weapondescription WHERE weaponName = :p0';
         try {
-            $stmt = $con->prepare($sql);            
+            $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_STR);
             $stmt->execute();
         } catch (Exception $e) {
@@ -310,24 +310,24 @@ abstract class WeaponDescriptionQuery extends ModelCriteria
      *
      * Example usage:
      * <code>
-     * $query->filterByRangeName('fooValue');   // WHERE rangeName = 'fooValue'
-     * $query->filterByRangeName('%fooValue%', Criteria::LIKE); // WHERE rangeName LIKE '%fooValue%'
+     * $query->filterByRangename('fooValue');   // WHERE rangeName = 'fooValue'
+     * $query->filterByRangename('%fooValue%', Criteria::LIKE); // WHERE rangeName LIKE '%fooValue%'
      * </code>
      *
-     * @param     string $rangeName The value to use as filter.
+     * @param     string $rangename The value to use as filter.
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return $this|ChildWeaponDescriptionQuery The current query, for fluid interface
      */
-    public function filterByRangeName($rangeName = null, $comparison = null)
+    public function filterByRangename($rangename = null, $comparison = null)
     {
         if (null === $comparison) {
-            if (is_array($rangeName)) {
+            if (is_array($rangename)) {
                 $comparison = Criteria::IN;
             }
         }
 
-        return $this->addUsingAlias(WeaponDescriptionTableMap::COL_RANGENAME, $rangeName, $comparison);
+        return $this->addUsingAlias(WeaponDescriptionTableMap::COL_RANGENAME, $rangename, $comparison);
     }
 
     /**
@@ -372,16 +372,16 @@ abstract class WeaponDescriptionQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the reloadTime column
+     * Filter the query on the reloadtime column
      *
      * Example usage:
      * <code>
-     * $query->filterByReloadTime(1234); // WHERE reloadTime = 1234
-     * $query->filterByReloadTime(array(12, 34)); // WHERE reloadTime IN (12, 34)
-     * $query->filterByReloadTime(array('min' => 12)); // WHERE reloadTime > 12
+     * $query->filterByReloadtime(1234); // WHERE reloadtime = 1234
+     * $query->filterByReloadtime(array(12, 34)); // WHERE reloadtime IN (12, 34)
+     * $query->filterByReloadtime(array('min' => 12)); // WHERE reloadtime > 12
      * </code>
      *
-     * @param     mixed $reloadTime The value to use as filter.
+     * @param     mixed $reloadtime The value to use as filter.
      *              Use scalar values for equality.
      *              Use array values for in_array() equivalent.
      *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
@@ -389,16 +389,16 @@ abstract class WeaponDescriptionQuery extends ModelCriteria
      *
      * @return $this|ChildWeaponDescriptionQuery The current query, for fluid interface
      */
-    public function filterByReloadTime($reloadTime = null, $comparison = null)
+    public function filterByReloadtime($reloadtime = null, $comparison = null)
     {
-        if (is_array($reloadTime)) {
+        if (is_array($reloadtime)) {
             $useMinMax = false;
-            if (isset($reloadTime['min'])) {
-                $this->addUsingAlias(WeaponDescriptionTableMap::COL_RELOADTIME, $reloadTime['min'], Criteria::GREATER_EQUAL);
+            if (isset($reloadtime['min'])) {
+                $this->addUsingAlias(WeaponDescriptionTableMap::COL_RELOADTIME, $reloadtime['min'], Criteria::GREATER_EQUAL);
                 $useMinMax = true;
             }
-            if (isset($reloadTime['max'])) {
-                $this->addUsingAlias(WeaponDescriptionTableMap::COL_RELOADTIME, $reloadTime['max'], Criteria::LESS_EQUAL);
+            if (isset($reloadtime['max'])) {
+                $this->addUsingAlias(WeaponDescriptionTableMap::COL_RELOADTIME, $reloadtime['max'], Criteria::LESS_EQUAL);
                 $useMinMax = true;
             }
             if ($useMinMax) {
@@ -409,7 +409,7 @@ abstract class WeaponDescriptionQuery extends ModelCriteria
             }
         }
 
-        return $this->addUsingAlias(WeaponDescriptionTableMap::COL_RELOADTIME, $reloadTime, $comparison);
+        return $this->addUsingAlias(WeaponDescriptionTableMap::COL_RELOADTIME, $reloadtime, $comparison);
     }
 
     /**
@@ -443,7 +443,7 @@ abstract class WeaponDescriptionQuery extends ModelCriteria
      *
      * @return $this|ChildWeaponDescriptionQuery The current query, for fluid interface
      */
-    public function joinShipDescriptionRelatedByWeapon1($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function joinShipDescriptionRelatedByWeapon1($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         $tableMap = $this->getTableMap();
         $relationMap = $tableMap->getRelation('ShipDescriptionRelatedByWeapon1');
@@ -478,7 +478,7 @@ abstract class WeaponDescriptionQuery extends ModelCriteria
      *
      * @return \Persistence\ShipDescriptionPersistence\ShipDescriptionQuery A secondary query class using the current class as primary query
      */
-    public function useShipDescriptionRelatedByWeapon1Query($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function useShipDescriptionRelatedByWeapon1Query($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         return $this
             ->joinShipDescriptionRelatedByWeapon1($relationAlias, $joinType)
@@ -648,7 +648,7 @@ abstract class WeaponDescriptionQuery extends ModelCriteria
     }
 
     /**
-     * Deletes all rows from the weaponDescription table.
+     * Deletes all rows from the weapondescription table.
      *
      * @param ConnectionInterface $con the connection to use
      * @return int The number of affected rows (if supported by underlying database driver).
@@ -698,9 +698,9 @@ abstract class WeaponDescriptionQuery extends ModelCriteria
         // for more than one table or we could emulating ON DELETE CASCADE, etc.
         return $con->transaction(function () use ($con, $criteria) {
             $affectedRows = 0; // initialize var to track total num of affected rows
-            
+
             WeaponDescriptionTableMap::removeInstanceFromPool($criteria);
-        
+
             $affectedRows += ModelCriteria::delete($con);
             WeaponDescriptionTableMap::clearRelatedInstancePool();
 

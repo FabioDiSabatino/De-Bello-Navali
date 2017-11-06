@@ -17,22 +17,22 @@ use Propel\Runtime\Connection\ConnectionInterface;
 use Propel\Runtime\Exception\PropelException;
 
 /**
- * Base class that represents a query for the 'shipDescription' table.
+ * Base class that represents a query for the 'ShipDescription' table.
  *
- * 
+ *
  *
  * @method     ChildShipDescriptionQuery orderByCivilization($order = Criteria::ASC) Order by the civilization column
  * @method     ChildShipDescriptionQuery orderByDimension($order = Criteria::ASC) Order by the dimension column
- * @method     ChildShipDescriptionQuery orderByShipName($order = Criteria::ASC) Order by the shipName column
- * @method     ChildShipDescriptionQuery orderByShipWeight($order = Criteria::ASC) Order by the shipWeight column
+ * @method     ChildShipDescriptionQuery orderByShipname($order = Criteria::ASC) Order by the shipname column
+ * @method     ChildShipDescriptionQuery orderByShipweight($order = Criteria::ASC) Order by the shipweight column
  * @method     ChildShipDescriptionQuery orderByWeapon1($order = Criteria::ASC) Order by the weapon1 column
  * @method     ChildShipDescriptionQuery orderByWeapon2($order = Criteria::ASC) Order by the weapon2 column
  * @method     ChildShipDescriptionQuery orderByWeapon3($order = Criteria::ASC) Order by the weapon3 column
  *
  * @method     ChildShipDescriptionQuery groupByCivilization() Group by the civilization column
  * @method     ChildShipDescriptionQuery groupByDimension() Group by the dimension column
- * @method     ChildShipDescriptionQuery groupByShipName() Group by the shipName column
- * @method     ChildShipDescriptionQuery groupByShipWeight() Group by the shipWeight column
+ * @method     ChildShipDescriptionQuery groupByShipname() Group by the shipname column
+ * @method     ChildShipDescriptionQuery groupByShipweight() Group by the shipweight column
  * @method     ChildShipDescriptionQuery groupByWeapon1() Group by the weapon1 column
  * @method     ChildShipDescriptionQuery groupByWeapon2() Group by the weapon2 column
  * @method     ChildShipDescriptionQuery groupByWeapon3() Group by the weapon3 column
@@ -45,35 +45,35 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildShipDescriptionQuery rightJoinWith($relation) Adds a RIGHT JOIN clause and with to the query
  * @method     ChildShipDescriptionQuery innerJoinWith($relation) Adds a INNER JOIN clause and with to the query
  *
- * @method     ChildShipDescriptionQuery leftJoinWeaponDescriptionRelatedByWeapon1($relationAlias = null) Adds a LEFT JOIN clause to the query using the WeaponDescriptionRelatedByWeapon1 relation
- * @method     ChildShipDescriptionQuery rightJoinWeaponDescriptionRelatedByWeapon1($relationAlias = null) Adds a RIGHT JOIN clause to the query using the WeaponDescriptionRelatedByWeapon1 relation
- * @method     ChildShipDescriptionQuery innerJoinWeaponDescriptionRelatedByWeapon1($relationAlias = null) Adds a INNER JOIN clause to the query using the WeaponDescriptionRelatedByWeapon1 relation
+ * @method     ChildShipDescriptionQuery leftJoinFirstWeapon($relationAlias = null) Adds a LEFT JOIN clause to the query using the FirstWeapon relation
+ * @method     ChildShipDescriptionQuery rightJoinFirstWeapon($relationAlias = null) Adds a RIGHT JOIN clause to the query using the FirstWeapon relation
+ * @method     ChildShipDescriptionQuery innerJoinFirstWeapon($relationAlias = null) Adds a INNER JOIN clause to the query using the FirstWeapon relation
  *
- * @method     ChildShipDescriptionQuery joinWithWeaponDescriptionRelatedByWeapon1($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the WeaponDescriptionRelatedByWeapon1 relation
+ * @method     ChildShipDescriptionQuery joinWithFirstWeapon($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the FirstWeapon relation
  *
- * @method     ChildShipDescriptionQuery leftJoinWithWeaponDescriptionRelatedByWeapon1() Adds a LEFT JOIN clause and with to the query using the WeaponDescriptionRelatedByWeapon1 relation
- * @method     ChildShipDescriptionQuery rightJoinWithWeaponDescriptionRelatedByWeapon1() Adds a RIGHT JOIN clause and with to the query using the WeaponDescriptionRelatedByWeapon1 relation
- * @method     ChildShipDescriptionQuery innerJoinWithWeaponDescriptionRelatedByWeapon1() Adds a INNER JOIN clause and with to the query using the WeaponDescriptionRelatedByWeapon1 relation
+ * @method     ChildShipDescriptionQuery leftJoinWithFirstWeapon() Adds a LEFT JOIN clause and with to the query using the FirstWeapon relation
+ * @method     ChildShipDescriptionQuery rightJoinWithFirstWeapon() Adds a RIGHT JOIN clause and with to the query using the FirstWeapon relation
+ * @method     ChildShipDescriptionQuery innerJoinWithFirstWeapon() Adds a INNER JOIN clause and with to the query using the FirstWeapon relation
  *
- * @method     ChildShipDescriptionQuery leftJoinWeaponDescriptionRelatedByWeapon2($relationAlias = null) Adds a LEFT JOIN clause to the query using the WeaponDescriptionRelatedByWeapon2 relation
- * @method     ChildShipDescriptionQuery rightJoinWeaponDescriptionRelatedByWeapon2($relationAlias = null) Adds a RIGHT JOIN clause to the query using the WeaponDescriptionRelatedByWeapon2 relation
- * @method     ChildShipDescriptionQuery innerJoinWeaponDescriptionRelatedByWeapon2($relationAlias = null) Adds a INNER JOIN clause to the query using the WeaponDescriptionRelatedByWeapon2 relation
+ * @method     ChildShipDescriptionQuery leftJoinSecondWeapon($relationAlias = null) Adds a LEFT JOIN clause to the query using the SecondWeapon relation
+ * @method     ChildShipDescriptionQuery rightJoinSecondWeapon($relationAlias = null) Adds a RIGHT JOIN clause to the query using the SecondWeapon relation
+ * @method     ChildShipDescriptionQuery innerJoinSecondWeapon($relationAlias = null) Adds a INNER JOIN clause to the query using the SecondWeapon relation
  *
- * @method     ChildShipDescriptionQuery joinWithWeaponDescriptionRelatedByWeapon2($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the WeaponDescriptionRelatedByWeapon2 relation
+ * @method     ChildShipDescriptionQuery joinWithSecondWeapon($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the SecondWeapon relation
  *
- * @method     ChildShipDescriptionQuery leftJoinWithWeaponDescriptionRelatedByWeapon2() Adds a LEFT JOIN clause and with to the query using the WeaponDescriptionRelatedByWeapon2 relation
- * @method     ChildShipDescriptionQuery rightJoinWithWeaponDescriptionRelatedByWeapon2() Adds a RIGHT JOIN clause and with to the query using the WeaponDescriptionRelatedByWeapon2 relation
- * @method     ChildShipDescriptionQuery innerJoinWithWeaponDescriptionRelatedByWeapon2() Adds a INNER JOIN clause and with to the query using the WeaponDescriptionRelatedByWeapon2 relation
+ * @method     ChildShipDescriptionQuery leftJoinWithSecondWeapon() Adds a LEFT JOIN clause and with to the query using the SecondWeapon relation
+ * @method     ChildShipDescriptionQuery rightJoinWithSecondWeapon() Adds a RIGHT JOIN clause and with to the query using the SecondWeapon relation
+ * @method     ChildShipDescriptionQuery innerJoinWithSecondWeapon() Adds a INNER JOIN clause and with to the query using the SecondWeapon relation
  *
- * @method     ChildShipDescriptionQuery leftJoinWeaponDescriptionRelatedByWeapon3($relationAlias = null) Adds a LEFT JOIN clause to the query using the WeaponDescriptionRelatedByWeapon3 relation
- * @method     ChildShipDescriptionQuery rightJoinWeaponDescriptionRelatedByWeapon3($relationAlias = null) Adds a RIGHT JOIN clause to the query using the WeaponDescriptionRelatedByWeapon3 relation
- * @method     ChildShipDescriptionQuery innerJoinWeaponDescriptionRelatedByWeapon3($relationAlias = null) Adds a INNER JOIN clause to the query using the WeaponDescriptionRelatedByWeapon3 relation
+ * @method     ChildShipDescriptionQuery leftJoinThirdWeapon($relationAlias = null) Adds a LEFT JOIN clause to the query using the ThirdWeapon relation
+ * @method     ChildShipDescriptionQuery rightJoinThirdWeapon($relationAlias = null) Adds a RIGHT JOIN clause to the query using the ThirdWeapon relation
+ * @method     ChildShipDescriptionQuery innerJoinThirdWeapon($relationAlias = null) Adds a INNER JOIN clause to the query using the ThirdWeapon relation
  *
- * @method     ChildShipDescriptionQuery joinWithWeaponDescriptionRelatedByWeapon3($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the WeaponDescriptionRelatedByWeapon3 relation
+ * @method     ChildShipDescriptionQuery joinWithThirdWeapon($joinType = Criteria::INNER_JOIN) Adds a join clause and with to the query using the ThirdWeapon relation
  *
- * @method     ChildShipDescriptionQuery leftJoinWithWeaponDescriptionRelatedByWeapon3() Adds a LEFT JOIN clause and with to the query using the WeaponDescriptionRelatedByWeapon3 relation
- * @method     ChildShipDescriptionQuery rightJoinWithWeaponDescriptionRelatedByWeapon3() Adds a RIGHT JOIN clause and with to the query using the WeaponDescriptionRelatedByWeapon3 relation
- * @method     ChildShipDescriptionQuery innerJoinWithWeaponDescriptionRelatedByWeapon3() Adds a INNER JOIN clause and with to the query using the WeaponDescriptionRelatedByWeapon3 relation
+ * @method     ChildShipDescriptionQuery leftJoinWithThirdWeapon() Adds a LEFT JOIN clause and with to the query using the ThirdWeapon relation
+ * @method     ChildShipDescriptionQuery rightJoinWithThirdWeapon() Adds a RIGHT JOIN clause and with to the query using the ThirdWeapon relation
+ * @method     ChildShipDescriptionQuery innerJoinWithThirdWeapon() Adds a INNER JOIN clause and with to the query using the ThirdWeapon relation
  *
  * @method     \Persistence\WeaponDescriptionPersistence\WeaponDescriptionQuery endUse() Finalizes a secondary criteria and merges it with its primary Criteria
  *
@@ -82,8 +82,8 @@ use Propel\Runtime\Exception\PropelException;
  *
  * @method     ChildShipDescription findOneByCivilization(string $civilization) Return the first ChildShipDescription filtered by the civilization column
  * @method     ChildShipDescription findOneByDimension(int $dimension) Return the first ChildShipDescription filtered by the dimension column
- * @method     ChildShipDescription findOneByShipName(string $shipName) Return the first ChildShipDescription filtered by the shipName column
- * @method     ChildShipDescription findOneByShipWeight(string $shipWeight) Return the first ChildShipDescription filtered by the shipWeight column
+ * @method     ChildShipDescription findOneByShipname(string $shipname) Return the first ChildShipDescription filtered by the shipname column
+ * @method     ChildShipDescription findOneByShipweight(int $shipweight) Return the first ChildShipDescription filtered by the shipweight column
  * @method     ChildShipDescription findOneByWeapon1(string $weapon1) Return the first ChildShipDescription filtered by the weapon1 column
  * @method     ChildShipDescription findOneByWeapon2(string $weapon2) Return the first ChildShipDescription filtered by the weapon2 column
  * @method     ChildShipDescription findOneByWeapon3(string $weapon3) Return the first ChildShipDescription filtered by the weapon3 column *
@@ -93,8 +93,8 @@ use Propel\Runtime\Exception\PropelException;
  *
  * @method     ChildShipDescription requireOneByCivilization(string $civilization) Return the first ChildShipDescription filtered by the civilization column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildShipDescription requireOneByDimension(int $dimension) Return the first ChildShipDescription filtered by the dimension column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
- * @method     ChildShipDescription requireOneByShipName(string $shipName) Return the first ChildShipDescription filtered by the shipName column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
- * @method     ChildShipDescription requireOneByShipWeight(string $shipWeight) Return the first ChildShipDescription filtered by the shipWeight column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildShipDescription requireOneByShipname(string $shipname) Return the first ChildShipDescription filtered by the shipname column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildShipDescription requireOneByShipweight(int $shipweight) Return the first ChildShipDescription filtered by the shipweight column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildShipDescription requireOneByWeapon1(string $weapon1) Return the first ChildShipDescription filtered by the weapon1 column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildShipDescription requireOneByWeapon2(string $weapon2) Return the first ChildShipDescription filtered by the weapon2 column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildShipDescription requireOneByWeapon3(string $weapon3) Return the first ChildShipDescription filtered by the weapon3 column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
@@ -102,8 +102,8 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildShipDescription[]|ObjectCollection find(ConnectionInterface $con = null) Return ChildShipDescription objects based on current ModelCriteria
  * @method     ChildShipDescription[]|ObjectCollection findByCivilization(string $civilization) Return ChildShipDescription objects filtered by the civilization column
  * @method     ChildShipDescription[]|ObjectCollection findByDimension(int $dimension) Return ChildShipDescription objects filtered by the dimension column
- * @method     ChildShipDescription[]|ObjectCollection findByShipName(string $shipName) Return ChildShipDescription objects filtered by the shipName column
- * @method     ChildShipDescription[]|ObjectCollection findByShipWeight(string $shipWeight) Return ChildShipDescription objects filtered by the shipWeight column
+ * @method     ChildShipDescription[]|ObjectCollection findByShipname(string $shipname) Return ChildShipDescription objects filtered by the shipname column
+ * @method     ChildShipDescription[]|ObjectCollection findByShipweight(int $shipweight) Return ChildShipDescription objects filtered by the shipweight column
  * @method     ChildShipDescription[]|ObjectCollection findByWeapon1(string $weapon1) Return ChildShipDescription objects filtered by the weapon1 column
  * @method     ChildShipDescription[]|ObjectCollection findByWeapon2(string $weapon2) Return ChildShipDescription objects filtered by the weapon2 column
  * @method     ChildShipDescription[]|ObjectCollection findByWeapon3(string $weapon3) Return ChildShipDescription objects filtered by the weapon3 column
@@ -205,10 +205,10 @@ abstract class ShipDescriptionQuery extends ModelCriteria
      */
     protected function findPkSimple($key, ConnectionInterface $con)
     {
-        $sql = 'SELECT civilization, dimension, shipName, shipWeight, weapon1, weapon2, weapon3 FROM shipDescription WHERE civilization = :p0 AND dimension = :p1';
+        $sql = 'SELECT civilization, dimension, shipname, shipweight, weapon1, weapon2, weapon3 FROM ShipDescription WHERE civilization = :p0 AND dimension = :p1';
         try {
-            $stmt = $con->prepare($sql);            
-            $stmt->bindValue(':p0', $key[0], PDO::PARAM_STR);            
+            $stmt = $con->prepare($sql);
+            $stmt->bindValue(':p0', $key[0], PDO::PARAM_STR);
             $stmt->bindValue(':p1', $key[1], PDO::PARAM_INT);
             $stmt->execute();
         } catch (Exception $e) {
@@ -374,53 +374,69 @@ abstract class ShipDescriptionQuery extends ModelCriteria
     }
 
     /**
-     * Filter the query on the shipName column
+     * Filter the query on the shipname column
      *
      * Example usage:
      * <code>
-     * $query->filterByShipName('fooValue');   // WHERE shipName = 'fooValue'
-     * $query->filterByShipName('%fooValue%', Criteria::LIKE); // WHERE shipName LIKE '%fooValue%'
+     * $query->filterByShipname('fooValue');   // WHERE shipname = 'fooValue'
+     * $query->filterByShipname('%fooValue%', Criteria::LIKE); // WHERE shipname LIKE '%fooValue%'
      * </code>
      *
-     * @param     string $shipName The value to use as filter.
+     * @param     string $shipname The value to use as filter.
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return $this|ChildShipDescriptionQuery The current query, for fluid interface
      */
-    public function filterByShipName($shipName = null, $comparison = null)
+    public function filterByShipname($shipname = null, $comparison = null)
     {
         if (null === $comparison) {
-            if (is_array($shipName)) {
+            if (is_array($shipname)) {
                 $comparison = Criteria::IN;
             }
         }
 
-        return $this->addUsingAlias(ShipDescriptionTableMap::COL_SHIPNAME, $shipName, $comparison);
+        return $this->addUsingAlias(ShipDescriptionTableMap::COL_SHIPNAME, $shipname, $comparison);
     }
 
     /**
-     * Filter the query on the shipWeight column
+     * Filter the query on the shipweight column
      *
      * Example usage:
      * <code>
-     * $query->filterByShipWeight('fooValue');   // WHERE shipWeight = 'fooValue'
-     * $query->filterByShipWeight('%fooValue%', Criteria::LIKE); // WHERE shipWeight LIKE '%fooValue%'
+     * $query->filterByShipweight(1234); // WHERE shipweight = 1234
+     * $query->filterByShipweight(array(12, 34)); // WHERE shipweight IN (12, 34)
+     * $query->filterByShipweight(array('min' => 12)); // WHERE shipweight > 12
      * </code>
      *
-     * @param     string $shipWeight The value to use as filter.
+     * @param     mixed $shipweight The value to use as filter.
+     *              Use scalar values for equality.
+     *              Use array values for in_array() equivalent.
+     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return $this|ChildShipDescriptionQuery The current query, for fluid interface
      */
-    public function filterByShipWeight($shipWeight = null, $comparison = null)
+    public function filterByShipweight($shipweight = null, $comparison = null)
     {
-        if (null === $comparison) {
-            if (is_array($shipWeight)) {
+        if (is_array($shipweight)) {
+            $useMinMax = false;
+            if (isset($shipweight['min'])) {
+                $this->addUsingAlias(ShipDescriptionTableMap::COL_SHIPWEIGHT, $shipweight['min'], Criteria::GREATER_EQUAL);
+                $useMinMax = true;
+            }
+            if (isset($shipweight['max'])) {
+                $this->addUsingAlias(ShipDescriptionTableMap::COL_SHIPWEIGHT, $shipweight['max'], Criteria::LESS_EQUAL);
+                $useMinMax = true;
+            }
+            if ($useMinMax) {
+                return $this;
+            }
+            if (null === $comparison) {
                 $comparison = Criteria::IN;
             }
         }
 
-        return $this->addUsingAlias(ShipDescriptionTableMap::COL_SHIPWEIGHT, $shipWeight, $comparison);
+        return $this->addUsingAlias(ShipDescriptionTableMap::COL_SHIPWEIGHT, $shipweight, $comparison);
     }
 
     /**
@@ -508,7 +524,7 @@ abstract class ShipDescriptionQuery extends ModelCriteria
      *
      * @return ChildShipDescriptionQuery The current query, for fluid interface
      */
-    public function filterByWeaponDescriptionRelatedByWeapon1($weaponDescription, $comparison = null)
+    public function filterByFirstWeapon($weaponDescription, $comparison = null)
     {
         if ($weaponDescription instanceof \Persistence\WeaponDescriptionPersistence\WeaponDescription) {
             return $this
@@ -521,22 +537,22 @@ abstract class ShipDescriptionQuery extends ModelCriteria
             return $this
                 ->addUsingAlias(ShipDescriptionTableMap::COL_WEAPON1, $weaponDescription->toKeyValue('PrimaryKey', 'WeaponName'), $comparison);
         } else {
-            throw new PropelException('filterByWeaponDescriptionRelatedByWeapon1() only accepts arguments of type \Persistence\WeaponDescriptionPersistence\WeaponDescription or Collection');
+            throw new PropelException('filterByFirstWeapon() only accepts arguments of type \Persistence\WeaponDescriptionPersistence\WeaponDescription or Collection');
         }
     }
 
     /**
-     * Adds a JOIN clause to the query using the WeaponDescriptionRelatedByWeapon1 relation
+     * Adds a JOIN clause to the query using the FirstWeapon relation
      *
      * @param     string $relationAlias optional alias for the relation
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
      * @return $this|ChildShipDescriptionQuery The current query, for fluid interface
      */
-    public function joinWeaponDescriptionRelatedByWeapon1($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function joinFirstWeapon($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('WeaponDescriptionRelatedByWeapon1');
+        $relationMap = $tableMap->getRelation('FirstWeapon');
 
         // create a ModelJoin object for this join
         $join = new ModelJoin();
@@ -551,14 +567,14 @@ abstract class ShipDescriptionQuery extends ModelCriteria
             $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
             $this->addJoinObject($join, $relationAlias);
         } else {
-            $this->addJoinObject($join, 'WeaponDescriptionRelatedByWeapon1');
+            $this->addJoinObject($join, 'FirstWeapon');
         }
 
         return $this;
     }
 
     /**
-     * Use the WeaponDescriptionRelatedByWeapon1 relation WeaponDescription object
+     * Use the FirstWeapon relation WeaponDescription object
      *
      * @see useQuery()
      *
@@ -568,11 +584,11 @@ abstract class ShipDescriptionQuery extends ModelCriteria
      *
      * @return \Persistence\WeaponDescriptionPersistence\WeaponDescriptionQuery A secondary query class using the current class as primary query
      */
-    public function useWeaponDescriptionRelatedByWeapon1Query($relationAlias = null, $joinType = Criteria::INNER_JOIN)
+    public function useFirstWeaponQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         return $this
-            ->joinWeaponDescriptionRelatedByWeapon1($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'WeaponDescriptionRelatedByWeapon1', '\Persistence\WeaponDescriptionPersistence\WeaponDescriptionQuery');
+            ->joinFirstWeapon($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'FirstWeapon', '\Persistence\WeaponDescriptionPersistence\WeaponDescriptionQuery');
     }
 
     /**
@@ -585,7 +601,7 @@ abstract class ShipDescriptionQuery extends ModelCriteria
      *
      * @return ChildShipDescriptionQuery The current query, for fluid interface
      */
-    public function filterByWeaponDescriptionRelatedByWeapon2($weaponDescription, $comparison = null)
+    public function filterBySecondWeapon($weaponDescription, $comparison = null)
     {
         if ($weaponDescription instanceof \Persistence\WeaponDescriptionPersistence\WeaponDescription) {
             return $this
@@ -598,22 +614,22 @@ abstract class ShipDescriptionQuery extends ModelCriteria
             return $this
                 ->addUsingAlias(ShipDescriptionTableMap::COL_WEAPON2, $weaponDescription->toKeyValue('PrimaryKey', 'WeaponName'), $comparison);
         } else {
-            throw new PropelException('filterByWeaponDescriptionRelatedByWeapon2() only accepts arguments of type \Persistence\WeaponDescriptionPersistence\WeaponDescription or Collection');
+            throw new PropelException('filterBySecondWeapon() only accepts arguments of type \Persistence\WeaponDescriptionPersistence\WeaponDescription or Collection');
         }
     }
 
     /**
-     * Adds a JOIN clause to the query using the WeaponDescriptionRelatedByWeapon2 relation
+     * Adds a JOIN clause to the query using the SecondWeapon relation
      *
      * @param     string $relationAlias optional alias for the relation
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
      * @return $this|ChildShipDescriptionQuery The current query, for fluid interface
      */
-    public function joinWeaponDescriptionRelatedByWeapon2($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function joinSecondWeapon($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('WeaponDescriptionRelatedByWeapon2');
+        $relationMap = $tableMap->getRelation('SecondWeapon');
 
         // create a ModelJoin object for this join
         $join = new ModelJoin();
@@ -628,14 +644,14 @@ abstract class ShipDescriptionQuery extends ModelCriteria
             $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
             $this->addJoinObject($join, $relationAlias);
         } else {
-            $this->addJoinObject($join, 'WeaponDescriptionRelatedByWeapon2');
+            $this->addJoinObject($join, 'SecondWeapon');
         }
 
         return $this;
     }
 
     /**
-     * Use the WeaponDescriptionRelatedByWeapon2 relation WeaponDescription object
+     * Use the SecondWeapon relation WeaponDescription object
      *
      * @see useQuery()
      *
@@ -645,11 +661,11 @@ abstract class ShipDescriptionQuery extends ModelCriteria
      *
      * @return \Persistence\WeaponDescriptionPersistence\WeaponDescriptionQuery A secondary query class using the current class as primary query
      */
-    public function useWeaponDescriptionRelatedByWeapon2Query($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function useSecondWeaponQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         return $this
-            ->joinWeaponDescriptionRelatedByWeapon2($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'WeaponDescriptionRelatedByWeapon2', '\Persistence\WeaponDescriptionPersistence\WeaponDescriptionQuery');
+            ->joinSecondWeapon($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'SecondWeapon', '\Persistence\WeaponDescriptionPersistence\WeaponDescriptionQuery');
     }
 
     /**
@@ -662,7 +678,7 @@ abstract class ShipDescriptionQuery extends ModelCriteria
      *
      * @return ChildShipDescriptionQuery The current query, for fluid interface
      */
-    public function filterByWeaponDescriptionRelatedByWeapon3($weaponDescription, $comparison = null)
+    public function filterByThirdWeapon($weaponDescription, $comparison = null)
     {
         if ($weaponDescription instanceof \Persistence\WeaponDescriptionPersistence\WeaponDescription) {
             return $this
@@ -675,22 +691,22 @@ abstract class ShipDescriptionQuery extends ModelCriteria
             return $this
                 ->addUsingAlias(ShipDescriptionTableMap::COL_WEAPON3, $weaponDescription->toKeyValue('PrimaryKey', 'WeaponName'), $comparison);
         } else {
-            throw new PropelException('filterByWeaponDescriptionRelatedByWeapon3() only accepts arguments of type \Persistence\WeaponDescriptionPersistence\WeaponDescription or Collection');
+            throw new PropelException('filterByThirdWeapon() only accepts arguments of type \Persistence\WeaponDescriptionPersistence\WeaponDescription or Collection');
         }
     }
 
     /**
-     * Adds a JOIN clause to the query using the WeaponDescriptionRelatedByWeapon3 relation
+     * Adds a JOIN clause to the query using the ThirdWeapon relation
      *
      * @param     string $relationAlias optional alias for the relation
      * @param     string $joinType Accepted values are null, 'left join', 'right join', 'inner join'
      *
      * @return $this|ChildShipDescriptionQuery The current query, for fluid interface
      */
-    public function joinWeaponDescriptionRelatedByWeapon3($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function joinThirdWeapon($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         $tableMap = $this->getTableMap();
-        $relationMap = $tableMap->getRelation('WeaponDescriptionRelatedByWeapon3');
+        $relationMap = $tableMap->getRelation('ThirdWeapon');
 
         // create a ModelJoin object for this join
         $join = new ModelJoin();
@@ -705,14 +721,14 @@ abstract class ShipDescriptionQuery extends ModelCriteria
             $this->addAlias($relationAlias, $relationMap->getRightTable()->getName());
             $this->addJoinObject($join, $relationAlias);
         } else {
-            $this->addJoinObject($join, 'WeaponDescriptionRelatedByWeapon3');
+            $this->addJoinObject($join, 'ThirdWeapon');
         }
 
         return $this;
     }
 
     /**
-     * Use the WeaponDescriptionRelatedByWeapon3 relation WeaponDescription object
+     * Use the ThirdWeapon relation WeaponDescription object
      *
      * @see useQuery()
      *
@@ -722,11 +738,11 @@ abstract class ShipDescriptionQuery extends ModelCriteria
      *
      * @return \Persistence\WeaponDescriptionPersistence\WeaponDescriptionQuery A secondary query class using the current class as primary query
      */
-    public function useWeaponDescriptionRelatedByWeapon3Query($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
+    public function useThirdWeaponQuery($relationAlias = null, $joinType = Criteria::LEFT_JOIN)
     {
         return $this
-            ->joinWeaponDescriptionRelatedByWeapon3($relationAlias, $joinType)
-            ->useQuery($relationAlias ? $relationAlias : 'WeaponDescriptionRelatedByWeapon3', '\Persistence\WeaponDescriptionPersistence\WeaponDescriptionQuery');
+            ->joinThirdWeapon($relationAlias, $joinType)
+            ->useQuery($relationAlias ? $relationAlias : 'ThirdWeapon', '\Persistence\WeaponDescriptionPersistence\WeaponDescriptionQuery');
     }
 
     /**
@@ -748,7 +764,7 @@ abstract class ShipDescriptionQuery extends ModelCriteria
     }
 
     /**
-     * Deletes all rows from the shipDescription table.
+     * Deletes all rows from the ShipDescription table.
      *
      * @param ConnectionInterface $con the connection to use
      * @return int The number of affected rows (if supported by underlying database driver).
@@ -798,9 +814,9 @@ abstract class ShipDescriptionQuery extends ModelCriteria
         // for more than one table or we could emulating ON DELETE CASCADE, etc.
         return $con->transaction(function () use ($con, $criteria) {
             $affectedRows = 0; // initialize var to track total num of affected rows
-            
+
             ShipDescriptionTableMap::removeInstanceFromPool($criteria);
-        
+
             $affectedRows += ModelCriteria::delete($con);
             ShipDescriptionTableMap::clearRelatedInstancePool();
 

@@ -16,7 +16,7 @@ use Propel\Runtime\Map\TableMapTrait;
 
 
 /**
- * This class defines the structure of the 'shipDescription' table.
+ * This class defines the structure of the 'ShipDescription' table.
  *
  *
  *
@@ -34,7 +34,7 @@ class ShipDescriptionTableMap extends TableMap
     /**
      * The (dot-path) name of this class
      */
-    const CLASS_NAME = 'Persistence.ShipDescriptionPersistence.Map.ShipDescriptionTableMap';
+    const CLASS_NAME = 'Persistence\ShipDescriptionPersistence.Map.ShipDescriptionTableMap';
 
     /**
      * The default database name for this class
@@ -44,7 +44,7 @@ class ShipDescriptionTableMap extends TableMap
     /**
      * The table name for this class
      */
-    const TABLE_NAME = 'shipDescription';
+    const TABLE_NAME = 'ShipDescription';
 
     /**
      * The related Propel class for this table
@@ -54,7 +54,7 @@ class ShipDescriptionTableMap extends TableMap
     /**
      * A class that can be returned by this tableMap
      */
-    const CLASS_DEFAULT = 'Persistence.ShipDescriptionPersistence.ShipDescription';
+    const CLASS_DEFAULT = 'Persistence\ShipDescriptionPersistence.ShipDescription';
 
     /**
      * The total number of columns
@@ -74,37 +74,37 @@ class ShipDescriptionTableMap extends TableMap
     /**
      * the column name for the civilization field
      */
-    const COL_CIVILIZATION = 'shipDescription.civilization';
+    const COL_CIVILIZATION = 'ShipDescription.civilization';
 
     /**
      * the column name for the dimension field
      */
-    const COL_DIMENSION = 'shipDescription.dimension';
+    const COL_DIMENSION = 'ShipDescription.dimension';
 
     /**
-     * the column name for the shipName field
+     * the column name for the shipname field
      */
-    const COL_SHIPNAME = 'shipDescription.shipName';
+    const COL_SHIPNAME = 'ShipDescription.shipname';
 
     /**
-     * the column name for the shipWeight field
+     * the column name for the shipweight field
      */
-    const COL_SHIPWEIGHT = 'shipDescription.shipWeight';
+    const COL_SHIPWEIGHT = 'ShipDescription.shipweight';
 
     /**
      * the column name for the weapon1 field
      */
-    const COL_WEAPON1 = 'shipDescription.weapon1';
+    const COL_WEAPON1 = 'ShipDescription.weapon1';
 
     /**
      * the column name for the weapon2 field
      */
-    const COL_WEAPON2 = 'shipDescription.weapon2';
+    const COL_WEAPON2 = 'ShipDescription.weapon2';
 
     /**
      * the column name for the weapon3 field
      */
-    const COL_WEAPON3 = 'shipDescription.weapon3';
+    const COL_WEAPON3 = 'ShipDescription.weapon3';
 
     /**
      * The default string format for model objects of the related table
@@ -118,10 +118,10 @@ class ShipDescriptionTableMap extends TableMap
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        self::TYPE_PHPNAME       => array('Civilization', 'Dimension', 'ShipName', 'ShipWeight', 'Weapon1', 'Weapon2', 'Weapon3', ),
-        self::TYPE_CAMELNAME     => array('civilization', 'dimension', 'shipName', 'shipWeight', 'weapon1', 'weapon2', 'weapon3', ),
+        self::TYPE_PHPNAME       => array('Civilization', 'Dimension', 'Shipname', 'Shipweight', 'Weapon1', 'Weapon2', 'Weapon3', ),
+        self::TYPE_CAMELNAME     => array('civilization', 'dimension', 'shipname', 'shipweight', 'weapon1', 'weapon2', 'weapon3', ),
         self::TYPE_COLNAME       => array(ShipDescriptionTableMap::COL_CIVILIZATION, ShipDescriptionTableMap::COL_DIMENSION, ShipDescriptionTableMap::COL_SHIPNAME, ShipDescriptionTableMap::COL_SHIPWEIGHT, ShipDescriptionTableMap::COL_WEAPON1, ShipDescriptionTableMap::COL_WEAPON2, ShipDescriptionTableMap::COL_WEAPON3, ),
-        self::TYPE_FIELDNAME     => array('civilization', 'dimension', 'shipName', 'shipWeight', 'weapon1', 'weapon2', 'weapon3', ),
+        self::TYPE_FIELDNAME     => array('civilization', 'dimension', 'shipname', 'shipweight', 'weapon1', 'weapon2', 'weapon3', ),
         self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, )
     );
 
@@ -132,10 +132,10 @@ class ShipDescriptionTableMap extends TableMap
      * e.g. self::$fieldKeys[self::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        self::TYPE_PHPNAME       => array('Civilization' => 0, 'Dimension' => 1, 'ShipName' => 2, 'ShipWeight' => 3, 'Weapon1' => 4, 'Weapon2' => 5, 'Weapon3' => 6, ),
-        self::TYPE_CAMELNAME     => array('civilization' => 0, 'dimension' => 1, 'shipName' => 2, 'shipWeight' => 3, 'weapon1' => 4, 'weapon2' => 5, 'weapon3' => 6, ),
+        self::TYPE_PHPNAME       => array('Civilization' => 0, 'Dimension' => 1, 'Shipname' => 2, 'Shipweight' => 3, 'Weapon1' => 4, 'Weapon2' => 5, 'Weapon3' => 6, ),
+        self::TYPE_CAMELNAME     => array('civilization' => 0, 'dimension' => 1, 'shipname' => 2, 'shipweight' => 3, 'weapon1' => 4, 'weapon2' => 5, 'weapon3' => 6, ),
         self::TYPE_COLNAME       => array(ShipDescriptionTableMap::COL_CIVILIZATION => 0, ShipDescriptionTableMap::COL_DIMENSION => 1, ShipDescriptionTableMap::COL_SHIPNAME => 2, ShipDescriptionTableMap::COL_SHIPWEIGHT => 3, ShipDescriptionTableMap::COL_WEAPON1 => 4, ShipDescriptionTableMap::COL_WEAPON2 => 5, ShipDescriptionTableMap::COL_WEAPON3 => 6, ),
-        self::TYPE_FIELDNAME     => array('civilization' => 0, 'dimension' => 1, 'shipName' => 2, 'shipWeight' => 3, 'weapon1' => 4, 'weapon2' => 5, 'weapon3' => 6, ),
+        self::TYPE_FIELDNAME     => array('civilization' => 0, 'dimension' => 1, 'shipname' => 2, 'shipweight' => 3, 'weapon1' => 4, 'weapon2' => 5, 'weapon3' => 6, ),
         self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, )
     );
 
@@ -149,21 +149,20 @@ class ShipDescriptionTableMap extends TableMap
     public function initialize()
     {
         // attributes
-        $this->setName('shipDescription');
+        $this->setName('ShipDescription');
         $this->setPhpName('ShipDescription');
         $this->setIdentifierQuoting(false);
         $this->setClassName('\\Persistence\\ShipDescriptionPersistence\\ShipDescription');
-        $this->setPackage('Persistence.ShipDescriptionPersistence');
+        $this->setPackage('Persistence\ShipDescriptionPersistence');
         $this->setUseIdGenerator(false);
-        $this->setIsCrossRef(true);
         // columns
-        $this->addPrimaryKey('civilization', 'Civilization', 'VARCHAR', true, 255, null);
+        $this->addPrimaryKey('civilization', 'Civilization', 'VARCHAR', true, 30, null);
         $this->addPrimaryKey('dimension', 'Dimension', 'INTEGER', true, null, null);
-        $this->addColumn('shipName', 'ShipName', 'VARCHAR', true, 255, null);
-        $this->addColumn('shipWeight', 'ShipWeight', 'VARCHAR', true, 255, null);
-        $this->addForeignKey('weapon1', 'Weapon1', 'VARCHAR', 'weaponDescription', 'weaponName', true, 255, null);
-        $this->addForeignKey('weapon2', 'Weapon2', 'VARCHAR', 'weaponDescription', 'weaponName', false, 255, null);
-        $this->addForeignKey('weapon3', 'Weapon3', 'VARCHAR', 'weaponDescription', 'weaponName', false, 255, null);
+        $this->addColumn('shipname', 'Shipname', 'VARCHAR', true, 30, null);
+        $this->addColumn('shipweight', 'Shipweight', 'INTEGER', true, null, null);
+        $this->addForeignKey('weapon1', 'Weapon1', 'VARCHAR', 'weapondescription', 'weaponName', false, 30, null);
+        $this->addForeignKey('weapon2', 'Weapon2', 'VARCHAR', 'weapondescription', 'weaponName', false, 30, null);
+        $this->addForeignKey('weapon3', 'Weapon3', 'VARCHAR', 'weapondescription', 'weaponName', false, 30, null);
     } // initialize()
 
     /**
@@ -171,21 +170,21 @@ class ShipDescriptionTableMap extends TableMap
      */
     public function buildRelations()
     {
-        $this->addRelation('WeaponDescriptionRelatedByWeapon1', '\\Persistence\\WeaponDescriptionPersistence\\WeaponDescription', RelationMap::MANY_TO_ONE, array (
+        $this->addRelation('FirstWeapon', '\\Persistence\\WeaponDescriptionPersistence\\WeaponDescription', RelationMap::MANY_TO_ONE, array (
   0 =>
   array (
     0 => ':weapon1',
     1 => ':weaponName',
   ),
 ), null, null, null, false);
-        $this->addRelation('WeaponDescriptionRelatedByWeapon2', '\\Persistence\\WeaponDescriptionPersistence\\WeaponDescription', RelationMap::MANY_TO_ONE, array (
+        $this->addRelation('SecondWeapon', '\\Persistence\\WeaponDescriptionPersistence\\WeaponDescription', RelationMap::MANY_TO_ONE, array (
   0 =>
   array (
     0 => ':weapon2',
     1 => ':weaponName',
   ),
 ), null, null, null, false);
-        $this->addRelation('WeaponDescriptionRelatedByWeapon3', '\\Persistence\\WeaponDescriptionPersistence\\WeaponDescription', RelationMap::MANY_TO_ONE, array (
+        $this->addRelation('ThirdWeapon', '\\Persistence\\WeaponDescriptionPersistence\\WeaponDescription', RelationMap::MANY_TO_ONE, array (
   0 =>
   array (
     0 => ':weapon3',
@@ -285,7 +284,7 @@ class ShipDescriptionTableMap extends TableMap
     public static function getPrimaryKeyFromRow($row, $offset = 0, $indexType = TableMap::TYPE_NUM)
     {
             $pks = [];
-            
+
         $pks[] = (string) $row[
             $indexType == TableMap::TYPE_NUM
                 ? 0 + $offset
@@ -299,7 +298,7 @@ class ShipDescriptionTableMap extends TableMap
 
         return $pks;
     }
-    
+
     /**
      * The class that the tableMap will make instances of.
      *
@@ -360,7 +359,7 @@ class ShipDescriptionTableMap extends TableMap
     public static function populateObjects(DataFetcherInterface $dataFetcher)
     {
         $results = array();
-    
+
         // set the class once to avoid overhead in the loop
         $cls = static::getOMClass(false);
         // populate the object(s)
@@ -407,8 +406,8 @@ class ShipDescriptionTableMap extends TableMap
         } else {
             $criteria->addSelectColumn($alias . '.civilization');
             $criteria->addSelectColumn($alias . '.dimension');
-            $criteria->addSelectColumn($alias . '.shipName');
-            $criteria->addSelectColumn($alias . '.shipWeight');
+            $criteria->addSelectColumn($alias . '.shipname');
+            $criteria->addSelectColumn($alias . '.shipweight');
             $criteria->addSelectColumn($alias . '.weapon1');
             $criteria->addSelectColumn($alias . '.weapon2');
             $criteria->addSelectColumn($alias . '.weapon3');
@@ -490,7 +489,7 @@ class ShipDescriptionTableMap extends TableMap
     }
 
     /**
-     * Deletes all rows from the shipDescription table.
+     * Deletes all rows from the ShipDescription table.
      *
      * @param ConnectionInterface $con the connection to use
      * @return int The number of affected rows (if supported by underlying database driver).

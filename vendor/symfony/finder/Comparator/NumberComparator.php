@@ -23,7 +23,7 @@ namespace Symfony\Component\Finder\Comparator;
  * with an i use the appropriate 2**n version in accordance with the
  * IEC standard: http://physics.nist.gov/cuu/Units/binary.html
  *
- * Based on the Perl Number::Compare moduleShipList.
+ * Based on the Perl Number::Compare module.
  *
  * @author    Fabien Potencier <fabien@symfony.com> PHP port
  * @author    Richard Clamp <richardc@unixbeard.net> Perl version
@@ -35,8 +35,6 @@ namespace Symfony\Component\Finder\Comparator;
 class NumberComparator extends Comparator
 {
     /**
-     * Constructor.
-     *
      * @param string|int $test A comparison string or an integer
      *
      * @throws \InvalidArgumentException If the test is not understood

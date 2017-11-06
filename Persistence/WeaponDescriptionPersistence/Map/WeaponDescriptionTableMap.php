@@ -16,7 +16,7 @@ use Propel\Runtime\Map\TableMapTrait;
 
 
 /**
- * This class defines the structure of the 'weaponDescription' table.
+ * This class defines the structure of the 'weapondescription' table.
  *
  *
  *
@@ -34,7 +34,7 @@ class WeaponDescriptionTableMap extends TableMap
     /**
      * The (dot-path) name of this class
      */
-    const CLASS_NAME = 'Persistence.WeaponDescriptionPersistence.Map.WeaponDescriptionTableMap';
+    const CLASS_NAME = 'Persistence\WeaponDescriptionPersistence.Map.WeaponDescriptionTableMap';
 
     /**
      * The default database name for this class
@@ -44,7 +44,7 @@ class WeaponDescriptionTableMap extends TableMap
     /**
      * The table name for this class
      */
-    const TABLE_NAME = 'weaponDescription';
+    const TABLE_NAME = 'weapondescription';
 
     /**
      * The related Propel class for this table
@@ -54,7 +54,7 @@ class WeaponDescriptionTableMap extends TableMap
     /**
      * A class that can be returned by this tableMap
      */
-    const CLASS_DEFAULT = 'Persistence.WeaponDescriptionPersistence.WeaponDescription';
+    const CLASS_DEFAULT = 'Persistence\WeaponDescriptionPersistence.WeaponDescription';
 
     /**
      * The total number of columns
@@ -74,22 +74,22 @@ class WeaponDescriptionTableMap extends TableMap
     /**
      * the column name for the weaponName field
      */
-    const COL_WEAPONNAME = 'weaponDescription.weaponName';
+    const COL_WEAPONNAME = 'weapondescription.weaponName';
 
     /**
      * the column name for the rangeName field
      */
-    const COL_RANGENAME = 'weaponDescription.rangeName';
+    const COL_RANGENAME = 'weapondescription.rangeName';
 
     /**
      * the column name for the ammo field
      */
-    const COL_AMMO = 'weaponDescription.ammo';
+    const COL_AMMO = 'weapondescription.ammo';
 
     /**
-     * the column name for the reloadTime field
+     * the column name for the reloadtime field
      */
-    const COL_RELOADTIME = 'weaponDescription.reloadTime';
+    const COL_RELOADTIME = 'weapondescription.reloadtime';
 
     /**
      * The default string format for model objects of the related table
@@ -103,10 +103,10 @@ class WeaponDescriptionTableMap extends TableMap
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        self::TYPE_PHPNAME       => array('WeaponName', 'RangeName', 'Ammo', 'ReloadTime', ),
-        self::TYPE_CAMELNAME     => array('weaponName', 'rangeName', 'ammo', 'reloadTime', ),
+        self::TYPE_PHPNAME       => array('WeaponName', 'Rangename', 'Ammo', 'Reloadtime', ),
+        self::TYPE_CAMELNAME     => array('weaponName', 'rangename', 'ammo', 'reloadtime', ),
         self::TYPE_COLNAME       => array(WeaponDescriptionTableMap::COL_WEAPONNAME, WeaponDescriptionTableMap::COL_RANGENAME, WeaponDescriptionTableMap::COL_AMMO, WeaponDescriptionTableMap::COL_RELOADTIME, ),
-        self::TYPE_FIELDNAME     => array('weaponName', 'rangeName', 'ammo', 'reloadTime', ),
+        self::TYPE_FIELDNAME     => array('weaponName', 'rangeName', 'ammo', 'reloadtime', ),
         self::TYPE_NUM           => array(0, 1, 2, 3, )
     );
 
@@ -117,10 +117,10 @@ class WeaponDescriptionTableMap extends TableMap
      * e.g. self::$fieldKeys[self::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        self::TYPE_PHPNAME       => array('WeaponName' => 0, 'RangeName' => 1, 'Ammo' => 2, 'ReloadTime' => 3, ),
-        self::TYPE_CAMELNAME     => array('weaponName' => 0, 'rangeName' => 1, 'ammo' => 2, 'reloadTime' => 3, ),
+        self::TYPE_PHPNAME       => array('WeaponName' => 0, 'Rangename' => 1, 'Ammo' => 2, 'Reloadtime' => 3, ),
+        self::TYPE_CAMELNAME     => array('weaponName' => 0, 'rangename' => 1, 'ammo' => 2, 'reloadtime' => 3, ),
         self::TYPE_COLNAME       => array(WeaponDescriptionTableMap::COL_WEAPONNAME => 0, WeaponDescriptionTableMap::COL_RANGENAME => 1, WeaponDescriptionTableMap::COL_AMMO => 2, WeaponDescriptionTableMap::COL_RELOADTIME => 3, ),
-        self::TYPE_FIELDNAME     => array('weaponName' => 0, 'rangeName' => 1, 'ammo' => 2, 'reloadTime' => 3, ),
+        self::TYPE_FIELDNAME     => array('weaponName' => 0, 'rangeName' => 1, 'ammo' => 2, 'reloadtime' => 3, ),
         self::TYPE_NUM           => array(0, 1, 2, 3, )
     );
 
@@ -134,17 +134,17 @@ class WeaponDescriptionTableMap extends TableMap
     public function initialize()
     {
         // attributes
-        $this->setName('weaponDescription');
+        $this->setName('weapondescription');
         $this->setPhpName('WeaponDescription');
         $this->setIdentifierQuoting(false);
         $this->setClassName('\\Persistence\\WeaponDescriptionPersistence\\WeaponDescription');
-        $this->setPackage('Persistence.WeaponDescriptionPersistence');
+        $this->setPackage('Persistence\WeaponDescriptionPersistence');
         $this->setUseIdGenerator(false);
         // columns
-        $this->addPrimaryKey('weaponName', 'WeaponName', 'VARCHAR', true, 255, null);
-        $this->addColumn('rangeName', 'RangeName', 'VARCHAR', true, 255, null);
+        $this->addPrimaryKey('weaponName', 'WeaponName', 'VARCHAR', true, 30, null);
+        $this->addColumn('rangeName', 'Rangename', 'VARCHAR', true, 30, null);
         $this->addColumn('ammo', 'Ammo', 'INTEGER', true, null, null);
-        $this->addColumn('reloadTime', 'ReloadTime', 'INTEGER', true, null, null);
+        $this->addColumn('reloadtime', 'Reloadtime', 'INTEGER', true, null, null);
     } // initialize()
 
     /**
@@ -218,7 +218,7 @@ class WeaponDescriptionTableMap extends TableMap
                 : self::translateFieldName('WeaponName', TableMap::TYPE_PHPNAME, $indexType)
         ];
     }
-    
+
     /**
      * The class that the tableMap will make instances of.
      *
@@ -279,7 +279,7 @@ class WeaponDescriptionTableMap extends TableMap
     public static function populateObjects(DataFetcherInterface $dataFetcher)
     {
         $results = array();
-    
+
         // set the class once to avoid overhead in the loop
         $cls = static::getOMClass(false);
         // populate the object(s)
@@ -324,7 +324,7 @@ class WeaponDescriptionTableMap extends TableMap
             $criteria->addSelectColumn($alias . '.weaponName');
             $criteria->addSelectColumn($alias . '.rangeName');
             $criteria->addSelectColumn($alias . '.ammo');
-            $criteria->addSelectColumn($alias . '.reloadTime');
+            $criteria->addSelectColumn($alias . '.reloadtime');
         }
     }
 
@@ -393,7 +393,7 @@ class WeaponDescriptionTableMap extends TableMap
     }
 
     /**
-     * Deletes all rows from the weaponDescription table.
+     * Deletes all rows from the weapondescription table.
      *
      * @param ConnectionInterface $con the connection to use
      * @return int The number of affected rows (if supported by underlying database driver).

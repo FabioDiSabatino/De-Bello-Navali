@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit70102cae54ab16453ddbb05d66ef0bff
+class ComposerStaticInitc37145650c04a071c172de102a72ec17
 {
     public static $files = array (
         '0e6d7bf4a5811bfa5cf40c5ccd6fae6a' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/bootstrap.php',
@@ -82,31 +82,12 @@ class ComposerStaticInit70102cae54ab16453ddbb05d66ef0bff
         ),
     );
 
-    public static $classMap = array (
-        'Author' => __DIR__ . '/../..' . '/generated-classes/Author.php',
-        'AuthorQuery' => __DIR__ . '/../..' . '/generated-classes/AuthorQuery.php',
-        'Base\\Author' => __DIR__ . '/../..' . '/generated-classes/Base/Author.php',
-        'Base\\AuthorQuery' => __DIR__ . '/../..' . '/generated-classes/Base/AuthorQuery.php',
-        'Base\\Book' => __DIR__ . '/../..' . '/generated-classes/Base/Book.php',
-        'Base\\BookQuery' => __DIR__ . '/../..' . '/generated-classes/Base/BookQuery.php',
-        'Base\\Publisher' => __DIR__ . '/../..' . '/generated-classes/Base/Publisher.php',
-        'Base\\PublisherQuery' => __DIR__ . '/../..' . '/generated-classes/Base/PublisherQuery.php',
-        'Book' => __DIR__ . '/../..' . '/generated-classes/Book.php',
-        'BookQuery' => __DIR__ . '/../..' . '/generated-classes/BookQuery.php',
-        'Map\\AuthorTableMap' => __DIR__ . '/../..' . '/generated-classes/Map/AuthorTableMap.php',
-        'Map\\BookTableMap' => __DIR__ . '/../..' . '/generated-classes/Map/BookTableMap.php',
-        'Map\\PublisherTableMap' => __DIR__ . '/../..' . '/generated-classes/Map/PublisherTableMap.php',
-        'Publisher' => __DIR__ . '/../..' . '/generated-classes/Publisher.php',
-        'PublisherQuery' => __DIR__ . '/../..' . '/generated-classes/PublisherQuery.php',
-    );
-
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit70102cae54ab16453ddbb05d66ef0bff::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit70102cae54ab16453ddbb05d66ef0bff::$prefixDirsPsr4;
-            $loader->prefixesPsr0 = ComposerStaticInit70102cae54ab16453ddbb05d66ef0bff::$prefixesPsr0;
-            $loader->classMap = ComposerStaticInit70102cae54ab16453ddbb05d66ef0bff::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitc37145650c04a071c172de102a72ec17::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitc37145650c04a071c172de102a72ec17::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitc37145650c04a071c172de102a72ec17::$prefixesPsr0;
 
         }, null, ClassLoader::class);
     }
