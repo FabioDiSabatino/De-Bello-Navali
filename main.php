@@ -14,54 +14,48 @@
     use Persistence\ShipDescriptionPersistence\ShipDescription;
     use Persistence\WeaponDescriptionPersistence\WeaponDescription;
     use Model\Battlefield;
+    use Persistence\WeaponDescriptionPersistence\WeaponCatalog;
 
-    Persistence\WeaponDescriptionPersistence\WeaponDescriptionQuery::create()->doDeleteAll();
-    Persistence\ShipDescriptionPersistence\ShipDescriptionQuery::create()->doDeleteAll();
+//    Persistence\WeaponDescriptionPersistence\WeaponDescriptionQuery::create()->doDeleteAll();
+//    Persistence\ShipDescriptionPersistence\ShipDescriptionQuery::create()->doDeleteAll();
 
     //startup
-//    $battlefield = GameFactory::getInstance()->createBattlefield();
-//    $fleetFactory = GameFactory::getInstance()->createFleetFactory('Galli');
-//    $ammoStorage = GameFactory::getInstance()->createAmmoStorage();
+    $battlefield = GameFactory::getInstance()->createBattlefield();
+    $fleetFactory = GameFactory::getInstance()->createFleetFactory('Galli');
+    $ammoStorage = GameFactory::getInstance()->createAmmoStorage();
+
+    $battlefield->setAmmoStorage($ammoStorage);
+    $battlefield->setFleetFactory($fleetFactory);
+
+
+    $battlefield->addShipToField('Nave McBattelly', 0, 0, 'horizontal');
+    $battlefield->addShipToField('Nave McBattelly', 1, 1, 'vertical');
+    $battlefield->addShipToField('Nave McBattelly', 2, 5, 'vertical');
+    $battlefield->addShipToField('Nave McBattelly', 4, 6, 'horizontal');
+
+
+    $battlefield->placeShips();
+
+    $battlefield->disegnaCampo();
+
+
+//    $weaponDescription = new WeaponDescription();
+//    $weaponDescription->setWeaponName('Colpo singolo');
+//    $weaponDescription->setRangeName('W1');
+//    $weaponDescription->setReloadTime(3);
+//    $weaponDescription->setAmmo(99);
+//    $weaponDescription->save();
+
+//    $shipDescription = new ShipDescription();
+//    $shipDescription->setCivilization("Bretoni");
+//    $shipDescription->setShipName('Nave McBattelly');
+//    $shipDescription->setDimension(3);
+//    $shipDescription->setShipWeight(16);
+//    $shipDescription->setWeapon1($weaponDescription->getWeaponName());
+//    $shipDescription->setSecondWeapon(null);
+//    $shipDescription->setThirdWeapon(null);
 //
-//    $battlefield->setAmmoStorage($ammoStorage);
-//    $battlefield->setFleetFactory($fleetFactory);
-
-
-//    $battlefield->addShipToField('Nave McBattelly', 0, 0, 'horizontal');
-//    $battlefield->addShipToField('Nave McBattelly', 1, 1, 'vertical');
-//    $battlefield->addShipToField('Nave McBattelly', 2, 5, 'vertical');
-//    $battlefield->addShipToField('Nave McBattelly', 4, 6, 'horizontal');
-//
-//
-//    $battlefield->placeShips();
-//
-//    $battlefield->disegnaCampo();
-
-
-//    $battlefield->placeShip('Nave McBattelly', 2, 1, 'vertical');
-//    $battlefield->placeShip('Nave McBattelly', 0, 1, 'horizontal');
-//
-    $weaponDescription = new WeaponDescription();
-    $weaponDescription->setWeaponName('Colpo singolo');
-    $weaponDescription->setRangeName('W1');
-    $weaponDescription->setReloadTime(3);
-    $weaponDescription->setAmmo(99);
-    $weaponDescription->save();
-//
-    $shipDescription = new ShipDescription();
-    $shipDescription->setCivilization("Bretoni");
-    $shipDescription->setShipName('Nave McBattelly');
-    $shipDescription->setDimension(3);
-    $shipDescription->setShipWeight(16);
-    $shipDescription->setWeapon1($weaponDescription->getWeaponName());
-    $shipDescription->setSecondWeapon(null);
-    $shipDescription->setThirdWeapon(null);
-
-    $shipDescription->save();
-
-
-
-
+//    $shipDescription->save();
 
 
 ?>
