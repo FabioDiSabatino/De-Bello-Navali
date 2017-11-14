@@ -145,10 +145,11 @@ class Weapon {
 
     /* -- Class Specific Methods -- */
 
+    /**
+     * @param AmmoStorage $ammoStorage
+     */
     public function isFirable() {
-        // Questa funzione dovrebbe stabilire se l'arma è pronta a sparare: dovrebbe perciò vedere se è pronta
-        // (reloadTime > 0) e se ci sono colpi disponibili (chiedere all'AmmoStorage)
-
+        return ($this->reloadTime == 0);
     }
 
     /** Performs an attack

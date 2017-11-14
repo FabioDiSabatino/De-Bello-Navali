@@ -31,13 +31,21 @@
     $battlefield->addShipToField('Nave McBattelly', 0, 0, 'horizontal');
     $battlefield->addShipToField('Nave McBattelly', 1, 1, 'vertical');
     $battlefield->addShipToField('Nave McBattelly', 2, 5, 'vertical');
-    $battlefield->addShipToField('Nave McBattelly', 4, 6, 'horizontal');
-
+    $battlefield->addShipToField('SuperNave', 4, 6, 'horizontal');
 
     $battlefield->placeShips();
 
     $battlefield->disegnaCampo();
 
+    $battlefield->attack(3, "Quadrato", 1,1);
+    $battlefield->attack(2, "Colpo singolo", 6, 5);
+    var_dump($battlefield->getField()[1][1]);
+
+    echo("<br/>");
+    echo("<br/>");
+    echo("<br/>");
+
+    $battlefield->disegnaCampo();
 
 //    $weaponDescription = new WeaponDescription();
 //    $weaponDescription->setWeaponName('Colpo singolo');
@@ -45,6 +53,8 @@
 //    $weaponDescription->setReloadTime(3);
 //    $weaponDescription->setAmmo(99);
 //    $weaponDescription->save();
+
+
 
 //    $shipDescription = new ShipDescription();
 //    $shipDescription->setCivilization("Bretoni");

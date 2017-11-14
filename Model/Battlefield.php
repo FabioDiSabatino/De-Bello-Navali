@@ -10,7 +10,9 @@ namespace Model;
 
 
 use Model\Factories\FleetFactory\FleetFactory;
+use Model\Factories\WeaponFactory\WeaponFactory;
 use Persistence\ShipDescriptionPersistence\ShipCatalog;
+use function PHPSTORM_META\elementType;
 
 class Battlefield {
 
@@ -261,22 +263,70 @@ class Battlefield {
 
         for($i = 0; $i<8; $i++) {
             for($j = 0; $j<8; $j++) {
-                if($campo[$i][$j]->isEmpty()) {
-                    print '0';
+//                if($campo[$i][$j]->isEmpty()) {
+//                    print '0';
+//                }
+//                else {
+                    if($campo[$i][$j]->isHit() ==  true)
+                        print "<b style='color:red'>".$campo[$i][$j]->getShipReference()."</b>";
+                    else
+                        print "<b>".$campo[$i][$j]->getShipReference()."</b>";
+
                 }
-                else {
-                    print "<b>".$campo[$i][$j]->getShipReference()."</b>";
-                }
-            }
             print "<br>";
         }
     }
 
 
+
     private function increaseShipCounter() { $this->shipIdCounter++; }
 
 
-    public function attack($shipID, $weaponName, $positionX, $positionY){
+    public function attack($shipID, $weaponName, $positionX, $positionY)
+    {
+
+        $ship = $this->fleet[$shipID];
+
+        if($weaponName == "Colpo singolo" || $ship->getIntegrity() > 50) {         // La nave può sparare
+
+            $weaponList = $ship->getWeaponList();
+            $weaponNames = array();
+            foreach ($weaponList as $weapon) {
+                array_push($weaponNames, $weapon->getWeaponName());
+            }
+            $weapon = WeaponFactory::getInstance()->createWeapon($weaponName);
+            if (in_array($weaponName, $weaponNames)) {
+
+                if ($this->getAmmoStorage()->isFireable($weaponName)) {
+
+                    if ($weapon->isFirable()) {
+
+                        $squareList = $weapon->attack($positionX, $positionY);
+
+                        var_dump($squareList);
+                        /** @var Square $square */
+                        foreach($squareList as $square) {
+                            $squareX = $square["x"];
+                            $squareY = $square["y"];
+                            $square = $this->getField()[$squareX][$squareY];
+                            $square->setHit(true);
+                        }
+                        $this->getAmmoStorage()->decreaseAmmo($weaponName);
+
+                    } else {
+                        echo("Arma non pronta!");
+                        var_dump($weapon->getReloadTime());
+                    }
+                } else {
+                    echo("Niente munizioni!");
+                }
+            } else {
+                echo("La nave con la quale sto cercando di sparare non ha l'arma selezionata");
+            }
+        }
+    }
+
+
 
 
 //        $ammunitions=$this->ammoStorage->getAmmoByWeaponName($weaponName);
@@ -288,5 +338,5 @@ class Battlefield {
 //            $this->weaponList[$weaponName]->attack($positionX,$positionY);
 //
 //        }
-    }
+
 }

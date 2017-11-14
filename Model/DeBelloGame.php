@@ -11,5 +11,6 @@ namespace Model;
 
 class DeBelloGame {
 
+    private $gameId;
 
 }
